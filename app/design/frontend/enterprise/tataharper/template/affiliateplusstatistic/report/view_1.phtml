@@ -1,0 +1,165 @@
+<?php 
+    $report_type = $this->getRequest()->getParam('report_type');
+    $group_by = $this->getRequest()->getParam('group_by');
+    $itemspans = $this->getRowspans();
+    Zend_Debug::dump($itemspans);
+?>
+<div id="csv-download">
+    <a style="float:right" href="<?php echo $this->getUrl('affiliateplusstatistic/statistic/exportSalesCsv',array('report_type'=>$report_type,'group_by'=>$group_by));?>"><?php echo $this->__('Download CSV') ?></a>
+</div>
+<?php $collection = $this->getCollection();?>
+<?php $columns = $this->getColumns() ?>
+<?php if ($collection->getSize()): ?>
+    <table class="data-table" id="<?php echo $this->getNameInLayout(); ?>">
+        <colgroup>
+        <?php foreach ($columns as $id => $column): ?>
+            <col class="<?php echo $id ?>" style="<?php if ($column['align']): ?>align:<?php echo $column['align'] ?>;<?php endif ?><?php if ($column['width']): ?>width:<?php echo $column['width'] ?><?php endif ?>" />
+        <?php endforeach ?>
+        </colgroup>
+        <thead>
+            <tr>
+            <?php foreach ($columns as $id => $column): ?>
+                <th><?php echo $column['header'] ?></th>
+            <?php endforeach ?>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr class="totals">
+            <?php foreach ($columns as $id=>$_column): ?>
+                <?php $total = $_column['total'] ? $_column['total']:'';?>
+                <?php if($total && $_column['type']=='baseprice') $total = Mage::app()->getStore()->formatPrice($total);?>
+                <th class=""><?php echo ($_column['total_label']) ? $_column['total_label']:$total;?></th>
+            <?php endforeach; ?>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php foreach($itemspans as $id=>$itemspan): ?>
+            <?php $item = Mage::getModel('affiliateplus/action')->load($id); ?>
+            <tr>
+            <?php if($itemspan == 1): ?>
+                <?php foreach ($columns as $id => $column): ?>
+                <td>
+                    <?php if (isset($column['render']) && $column['render']): ?>
+                
+                        <?php echo $this->fetchRender($column['render'],$item) ?>
+                    <?php else: ?>
+                        <?php $type = isset($column['type']) ? $column['type'] : '' ?>
+                        <?php switch ($type): case 'action': ?>
+                            <?php $action = $column['action'] ?>
+                            <a href="<?php echo $this->getUrl($action['url'],array( $action['name'] => $item->getData($action['field']) )) ?>" title="<?php echo $action['label'] ?>"><?php echo $action['label'] ?></a>
+                        <?php break; case 'options': ?>
+                            <?php echo $column['options'][$item->getData($column['index'])] ?>
+                        <?php break; case 'date': ?>
+                            <?php echo $this->formatDate($item->getData($column['index']), $column['format'], false) ?>
+                        <?php break; case 'datetime': ?>
+                            <?php echo $this->formatDate($item->getData($column['index']), $column['format'], true) ?>
+                        <?php break; case 'price': ?>
+                            <?php echo Mage::app()->getStore()->formatPrice($item->getData($column['index'])) ?>
+                        <?php break; case 'baseprice': ?>
+                            <?php echo Mage::helper('core')->currency($item->getData($column['index']))//Mage::app()->getStore()->getBaseCurrency()->format($item->getData($column['index'])) ?>
+                        <?php break; default: ?>
+                            <?php echo $item->getData($column['index']) ?>
+                        <?php endswitch ?>
+                    <?php endif ?>
+                </td>
+                <?php endforeach;?>
+            <?php else: ?>
+                
+                <?php foreach ($columns as $id => $column): ?>
+                <?php if($this->isGroupBy($id)) $span = $itemspan; else $span = 1;?>
+                 <td rowspan="<?php echo $span?>">
+                    <?php if (isset($column['render']) && $column['render']): ?>
+                
+                        <?php echo $this->fetchRender($column['render'],$item) ?>
+                    <?php else: ?>
+                        <?php $type = isset($column['type']) ? $column['type'] : '' ?>
+                        <?php switch ($type): case 'action': ?>
+                            <?php $action = $column['action'] ?>
+                            <a href="<?php echo $this->getUrl($action['url'],array( $action['name'] => $item->getData($action['field']) )) ?>" title="<?php echo $action['label'] ?>"><?php echo $action['label'] ?></a>
+                        <?php break; case 'options': ?>
+                            <?php echo $column['options'][$item->getData($column['index'])] ?>
+                        <?php break; case 'date': ?>
+                            <?php echo $this->formatDate($item->getData($column['index']), $column['format'], false) ?>
+                        <?php break; case 'datetime': ?>
+                            <?php echo $this->formatDate($item->getData($column['index']), $column['format'], true) ?>
+                        <?php break; case 'price': ?>
+                            <?php echo Mage::app()->getStore()->formatPrice($item->getData($column['index'])) ?>
+                        <?php break; case 'baseprice': ?>
+                            <?php echo Mage::helper('core')->currency($item->getData($column['index']))//Mage::app()->getStore()->getBaseCurrency()->format($item->getData($column['index'])) ?>
+                        <?php break; default: ?>
+                            <?php echo $item->getData($column['index']) ?>
+                        <?php endswitch ?>
+                    <?php endif ?>
+                </td>
+                <?php endforeach; ?>
+            </tr>
+                <?php 
+                    $clone = $this->getActionCollection();
+                    
+                    if($clone && $clone->getSize())
+                        $clone->addFieldToFilter('action_id',array('neq'=>$item->getId()));
+                    
+                    $col = reset($columns);
+                    $group_by = $this->getRequest()->getParam('group_by');
+                    if($group_by == 1){
+                        $period = $this->getRequest()->getParam('period');
+                        
+                        if($period == 'month'){
+                            $data = date("m",strtotime($item->getData($col['index'])));
+                            $col['index'] = 'DATE_FORMAT(created_date, "%Y-%m")';
+                        }else if($period == 'year'){
+                            $data = date("Y",strtotime($item->getData($col['index'])));
+                            $col['index'] = 'year(created_date)';
+                        }else{
+                            $data = $item->getData($col['index']);
+                        }
+                    }else{
+                        $data = $item->getData($col['index']);
+                    }
+                    if($clone && $clone->getSize())
+                        $subCollection = $clone->addFieldToFilter($col['index'],$data);
+                    //Zend_Debug::dump($subCollection->getAllIds());
+                    foreach($subCollection as $item){
+                        
+                        ?>
+                        <tr>
+                             <?php foreach ($columns as $id => $column): ?>
+                            <?php if(!$this->isGroupBy($id)):?>
+                             <td>
+                                <?php if (isset($column['render']) && $column['render']): ?>
+
+                                    <?php echo $this->fetchRender($column['render'],$item) ?>
+                                <?php else: ?>
+                                    <?php $type = isset($column['type']) ? $column['type'] : '' ?>
+                                    <?php switch ($type): case 'action': ?>
+                                        <?php $action = $column['action'] ?>
+                                        <a href="<?php echo $this->getUrl($action['url'],array( $action['name'] => $item->getData($action['field']) )) ?>" title="<?php echo $action['label'] ?>"><?php echo $action['label'] ?></a>
+                                    <?php break; case 'options': ?>
+                                        <?php echo $column['options'][$item->getData($column['index'])] ?>
+                                    <?php break; case 'date': ?>
+                                        <?php echo $this->formatDate($item->getData($column['index']), $column['format'], false) ?>
+                                    <?php break; case 'datetime': ?>
+                                        <?php echo $this->formatDate($item->getData($column['index']), $column['format'], true) ?>
+                                    <?php break; case 'price': ?>
+                                        <?php echo Mage::app()->getStore()->formatPrice($item->getData($column['index'])) ?>
+                                    <?php break; case 'baseprice': ?>
+                                        <?php echo Mage::helper('core')->currency($item->getData($column['index']))//Mage::app()->getStore()->getBaseCurrency()->format($item->getData($column['index'])) ?>
+                                    <?php break; default: ?>
+                                        <?php echo $item->getData($column['index']) ?>
+                                    <?php endswitch ?>
+                                <?php endif ?>
+                            </td>
+                            <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php
+                    }
+                ?>
+            <?php endif; ?>
+            <!--/tr-->
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif;?>
+
+

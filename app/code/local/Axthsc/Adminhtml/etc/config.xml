@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Axthsc_Adminhtml>
+            <version>0.1.0</version>
+        </Axthsc_Adminhtml>
+    </modules>
+    <global>
+		<blocks>
+		    <review>
+		        <rewrite>
+		            <edit_form>Axthsc_Adminhtml_Block_Review_Edit_Form</edit_form>
+		        </rewrite>
+		    </review>
+		</blocks>
+	</global>
+</config>

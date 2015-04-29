@@ -1,0 +1,18 @@
+<?php
+
+$base = "";
+
+$src = "/blasts/scentstory/scentstory.jpg";
+
+$_product = $this->getProduct();
+
+if (!is_null($_product->getScentstory())) {
+	$src = $_product->getScentstory();
+
+	$base = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+
+	echo "<img src='" . $base . "catalog/product" . $src . "' />";
+} else {
+	echo "<img src='" . $src . "' />";
+}
+

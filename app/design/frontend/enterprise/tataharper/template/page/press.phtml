@@ -1,0 +1,208 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<script type="text/javascript" src="http://fast.fonts.net/jsapi/55222375-0ea5-4ca5-bc1b-11874820c8ae.js"></script>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<?php $classes = $this->getBodyClass();
+$urlKey = Mage::getSingleton('cms/page')->getIdentifier();
+if (($urlKey == 'apricot-mask-landing-page') || ($urlKey == 'program-countdown')) {
+    $classes .= " cms-blog-contest";
+    // echo "classes: " . $classes;
+} ?>
+
+<body<?php echo $this->getBodyClass()?' class="'.$classes.'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php 
+        if ($urlKey == "thank-you") {
+            $sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+            $oOrder = Mage::getModel('sales/order')->load($sOrderId);
+            $oTotal = floatval($oOrder->getGrandTotal());
+            // $oTotal = 39.44;
+
+            // echo "<span class='hide-tracker'>" . $oTotal . "</span>";
+            // echo "<span class='hide-tracker'>" . $oTotal . "</span>";
+        }
+     ?>
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="header-custom">
+            <?php echo "<img src='http://tataharperskincare.com/skin/frontend/enterprise/default/images/" . $customfields[custom_image_url] . "' />"; ?>
+        </div>
+        <?php echo $this->getChildHtml('breadcrumbsContainer') ?>
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                
+                <!-- Main Content Box -->
+                <div class="generic_box_full">
+
+                <?php //echo $blockObj->renderDefaultTabContent($this->getChildHtml('content')); ?>
+                
+                <div class="awards"><a class="allure" href="#">&nbsp;</a><a class="elle" href="#">&nbsp;</a><a class="spacenk" href="#">&nbsp;</a></div>
+
+                <div class="top-shelf">
+                    <img src="/blasts/presspage/topshelf.jpg" alt="" />
+                
+                    <div class="gal">
+                        <a href="/press-view?a=58"><img src="/blasts/presspage/arch-1.jpg" alt="" /></a>
+                        <a href="/press-view?a=56"><img src="/blasts/presspage/arch-2.jpg" alt="" /></a>
+                        <a href="/press-view?a=54"><img src="/blasts/presspage/arch-3.jpg" alt="" /></a>
+                        <a href="/press-view?a=53"><img src="/blasts/presspage/arch-4.jpg" alt="" /></a>
+                    </div>
+                </div>
+                <div class="archive">
+                    <img src="/blasts/presspage/archive.jpg" alt="" /> 
+                    <!-- <a class="sort-by" href="#"><img src="/blasts/presspage/sortby.jpg" alt="" /></a> -->
+                    <ul class="press-nav">
+                        <li class="beauty-and-fashion">Beauty &amp; Fashion <span>&bull;</span></li>
+                        <li class="lifestyle">Lifestyle <span>&bull;</span></li>
+                        <li class="news">News <span>&bull;</span></li>
+                        <a href="/videos"><li class="videos">Video</li></a>
+                    </ul>
+                </div>
+                
+                <div class="gal main">
+
+                <a class="beauty" href="/press-view?a=76"><img src="/blasts/presspage/pressimages/76.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=75"><img src="/blasts/presspage/pressimages/75.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=74"><img src="/blasts/presspage/pressimages/74.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=73"><img src="/blasts/presspage/pressimages/73.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=72"><img src="/blasts/presspage/pressimages/72.jpg" alt="" /></a>
+
+                <a class="beauty" href="/press-view?a=71"><img src="/blasts/presspage/pressimages/71.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=70"><img src="/blasts/presspage/pressimages/70.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=69"><img src="/blasts/presspage/pressimages/69.jpg" alt="" /></a>
+                <!-- <a class="" href="/press-view?a=68"><img src="/blasts/presspage/pressimages/68.jpg" alt="" /></a> -->
+                <a class="lifestyle" href="/press-view?a=67"><img src="/blasts/presspage/pressimages/67.jpg" alt="" /></a>
+                <!-- <a class="" href="/press-view?a=66"><img src="/blasts/presspage/pressimages/66.jpg" alt="" /></a> -->
+                <a class="lifestyle" href="/press-view?a=65"><img src="/blasts/presspage/pressimages/65.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=64"><img src="/blasts/presspage/pressimages/64.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=63"><img src="/blasts/presspage/pressimages/63.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=62"><img src="/blasts/presspage/pressimages/62.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=61"><img src="/blasts/presspage/pressimages/61.jpg" alt="" /></a>
+
+                <a class="lifestyle" href="/press-view?a=60"><img src="/blasts/presspage/pressimages/60.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=59"><img src="/blasts/presspage/pressimages/59.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=58"><img src="/blasts/presspage/pressimages/58.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=57"><img src="/blasts/presspage/pressimages/57.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=56"><img src="/blasts/presspage/pressimages/56.jpg" alt="" /></a>
+                <!-- <a class="" href="/press-view?a=54"><img src="/blasts/presspage/pressimages/55.jpg" alt="" /></a> -->
+                <a class="lifestyle" href="/press-view?a=54"><img src="/blasts/presspage/pressimages/54.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=53"><img src="/blasts/presspage/pressimages/53.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=52"><img src="/blasts/presspage/pressimages/52.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=51"><img src="/blasts/presspage/pressimages/51.jpg" alt="" /></a>
+
+                <a class="beauty" href="/press-view?a=50"><img src="/blasts/presspage/pressimages/50.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=49"><img src="/blasts/presspage/pressimages/49.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=48"><img src="/blasts/presspage/pressimages/48.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=47"><img src="/blasts/presspage/pressimages/47.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=46"><img src="/blasts/presspage/pressimages/46.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=45"><img src="/blasts/presspage/pressimages/45.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=44"><img src="/blasts/presspage/pressimages/44.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=43"><img src="/blasts/presspage/pressimages/43.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=42"><img src="/blasts/presspage/pressimages/42.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=41"><img src="/blasts/presspage/pressimages/41.jpg" alt="" /></a>
+                
+                <a class="beauty" href="/press-view?a=40"><img src="/blasts/presspage/pressimages/40.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=39"><img src="/blasts/presspage/pressimages/39.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=38"><img src="/blasts/presspage/pressimages/38.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=37"><img src="/blasts/presspage/pressimages/37.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=36"><img src="/blasts/presspage/pressimages/36.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=35"><img src="/blasts/presspage/pressimages/35.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=34"><img src="/blasts/presspage/pressimages/34.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=33"><img src="/blasts/presspage/pressimages/33.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=32"><img src="/blasts/presspage/pressimages/32.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=31"><img src="/blasts/presspage/pressimages/31.jpg" alt="" /></a>
+
+                <a class="beauty" href="/press-view?a=30"><img src="/blasts/presspage/pressimages/30.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=29"><img src="/blasts/presspage/pressimages/29.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=28"><img src="/blasts/presspage/pressimages/28.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=27"><img src="/blasts/presspage/pressimages/27.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=26"><img src="/blasts/presspage/pressimages/26.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=25"><img src="/blasts/presspage/pressimages/25.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=24"><img src="/blasts/presspage/pressimages/24.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=23"><img src="/blasts/presspage/pressimages/23.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=22"><img src="/blasts/presspage/pressimages/22.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=21"><img src="/blasts/presspage/pressimages/21.jpg" alt="" /></a>
+
+                <a class="beauty news" href="/press-view?a=20"><img src="/blasts/presspage/pressimages/20.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=19"><img src="/blasts/presspage/pressimages/19.jpg" alt="" /></a>
+                <a class="news" href="/press-view?a=18"><img src="/blasts/presspage/pressimages/18.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=17"><img src="/blasts/presspage/pressimages/17.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=16"><img src="/blasts/presspage/pressimages/16.jpg" alt="" /></a>
+                <a class="news" href="/press-view?a=15"><img src="/blasts/presspage/pressimages/15.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=14"><img src="/blasts/presspage/pressimages/14.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=13"><img src="/blasts/presspage/pressimages/13.jpg" alt="" /></a>
+                <a class="" href="/press-view?a=12"><img src="/blasts/presspage/pressimages/12.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=11"><img src="/blasts/presspage/pressimages/11.jpg" alt="" /></a>
+
+                <!-- <a class="" href="/press-view?a=10"><img src="/blasts/presspage/pressimages/10.jpg" alt="" /></a> -->
+                <a class="beauty" href="/press-view?a=9"><img src="/blasts/presspage/pressimages/9.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=8"><img src="/blasts/presspage/pressimages/8.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=7"><img src="/blasts/presspage/pressimages/7.jpg" alt="" /></a>
+                <a class="lifestyle" href="/press-view?a=6"><img src="/blasts/presspage/pressimages/6.jpg" alt="" /></a>
+                <a class="news" href="/press-view?a=5"><img src="/blasts/presspage/pressimages/5.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=4"><img src="/blasts/presspage/pressimages/4.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=3"><img src="/blasts/presspage/pressimages/3.jpg" alt="" /></a>
+                <a class="beauty" href="/press-view?a=2"><img src="/blasts/presspage/pressimages/2.jpg" alt="" /></a>
+                <a class="beauty lifestyle" href="/press-view?a=1"><img src="/blasts/presspage/pressimages/1.jpg" alt="" /></a>
+
+                </div>
+
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

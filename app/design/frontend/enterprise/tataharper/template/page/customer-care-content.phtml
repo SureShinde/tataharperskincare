@@ -1,0 +1,176 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script src="//fast.fonts.net/jsapi/55222375-0ea5-4ca5-bc1b-11874820c8ae.js"></script>
+</head>
+<?php $classes = $this->getBodyClass(); ?>
+<body<?php echo $this->getBodyClass()?' class="customer-care-content '.$classes.'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+  
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+
+        <div class="header-custom">
+            <a href="/customer-care/"><?php echo "<img src='http://tataharperskincare.com/skin/frontend/enterprise/default/images/headers/customer-care-2.jpg' />"; ?></a>
+        </div>
+
+        <div class="sidebar menu">
+        <ul>
+            <span class="list ">
+                <li class="first"><a href="/customer-care/shipping">Shipping</a></li>
+                    <ul class="dropdown ship">
+                        <li><a href="/customer-care/shipping#usa">USA</a></li>
+                        <li><a href="/customer-care/shipping#international-shipping">International Shipping</a></li>
+                        <li><a href="/customer-care/shipping#track-your-package">Track Your Package</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/payment">Payment</a></li>
+                    <ul class="dropdown pay">
+                        <li><a href="/customer-care/payment#payment-options">Payment Options</a></li>
+                        <li><a href="/customer-care/payment#sales-tax">Sales Tax</a></li>
+                        <li><a href="/customer-care/payment#paypal">PayPal</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/samples">Samples</a></li>
+                    <ul class="dropdown sample">
+                        <li><a href="/customer-care/samples#tryme-kit">Try-Me Kit</a></li>
+                        <li><a href="/customer-care/samples#free-samples">Free Samples</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/product-info-and-care">Product Info &amp; Care</a></li>
+                    <ul class="dropdown info">
+                        <li><a href="/customer-care/product-info-and-care#shelf-life">Shelf Life</a></li>
+                        <li><a href="/customer-care/product-info-and-care#storage">Storage</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/returns">Returns</a></li>
+                    <ul class="dropdown return">
+                        <li><a href="/customer-care/returns#return-policy">Return Policy</a></li>
+                        <li><a href="/customer-care/returns#international-returns">International Returns</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/replenishment-service">Replenishment Service</a></li>
+                    <ul class="dropdown replen">
+                        <li><a href="/customer-care/replenishment-service#how-it-works">How it Works</a></li>
+                        <li><a href="/customer-care/replenishment-service#my-replenishment-service">My Replenishment Service</a></li>
+                        <li><a href="/customer-care/replenishment-service#cancellation">Cancellation</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/general-faq">General FAQ</a></li>
+                    <ul class="dropdown general">
+                        <li><a href="/customer-care/general-faq#spf">SPF</a></li>
+                        <li><a href="/customer-care/general-faq#organic">Organic</a></li>
+                        <li><a href="/customer-care/general-faq#recommended-regimens">Recommended Regimens</a></li>
+                        <li><a href="/customer-care/general-faq#professional-program">Professional Program</a></li>
+                        <li><a href="/customer-care/general-faq#visiting-the-farm">Visiting the Farm</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/get-in-touch">Get in Touch</a></li>
+                    <ul class="dropdown contact">
+                        <li><a href="/customer-care/get-in-touch#press-inquiries">Press Inquiries</a></li>
+                        <li><a href="/customer-care/get-in-touch#wholesale-inquiries">Wholesale Inquiries</a></li>
+                        <li><a href="/customer-care/get-in-touch#general-inquiries">General Inquiries</a></li>
+                    </ul>
+            </span>
+
+            <span class="list ">
+                <li><a href="/customer-care/careers">Careers</a></li>
+                    <ul class="dropdown contact">
+                        <li><a href="/customer-care/careers#jobs">Jobs</a></li>
+                        <li><a href="/customer-care/careers#internships">Internships</a></li>
+                        <li><a href="/customer-care/careers#general-career-inquiries">General Career Inquiries</a></li>
+                    </ul>
+            </span>
+        </ul>
+            
+        </div>
+
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                <div class="generic_box_full">
+                    <h1><?php echo Mage::getSingleton('cms/page')->getTitle();?></h1>
+                    <?php echo $blockObj->renderDefaultTabContent($this->getChildHtml('content')); ?>
+                </div>
+            </div>
+        </div>
+
+        <p class="clearfix">&nbsp;</p>
+
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+jQuery(function() {
+  jQuery('.sidebar a').each(function() {
+    if (jQuery(this).attr('href')  ===  window.location.pathname) {
+      jQuery(this).parent().parent().addClass('current');
+      // jQuery(".child", this);
+    }
+  });
+});  
+//]]>
+</script>
+</html>

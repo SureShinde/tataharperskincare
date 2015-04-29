@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script src="/skin/frontend/enterprise/tatamobile/js/galleria-1.3.6.min.js"></script>
+</head>
+
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+
+                <!-- Main Content Box -->
+                <div class="generic_box_full imgcenter">
+                    <div class="phantomvideo_contain">
+                        <img src="/skin/frontend/enterprise/default/images/ol/m/1-mobi.jpg" style="margin-bottom:3px;" />
+                        <div class="phantom"><a target="_blank" href="http://vimeo.com/102090009"><img src="/skin/frontend/enterprise/default/images/ol/m/vid_top-mobi.jpg" /></a></div>
+                    </div>
+                    <img src="/skin/frontend/enterprise/default/images/ol/m/2-mob.jpg" />
+                    <img src="/skin/frontend/enterprise/tatamobile/images/ol/barn-header.jpg" style="margin-bottom:1em;margin-top:1em;" />
+                </div>
+
+                <div class="generic_box_full farm">
+                    <div class="phantomvideo_contain">
+                        <img id="farm" src="/skin/frontend/enterprise/tatamobile/images/ol/barn-mobile.jpg"/>
+                    </div>
+                </div>
+
+                <div class="generic_box_full bts">
+                    <div class="hdrstuff">
+                        <h1>Behind the Scenes</h1>
+                        <p>Embark on a visual tour of our VT headquarters below. Swipe left and right to see more photos of our farm, facility, labs and offices!</p>
+                    </div>
+
+                    <div class="galleria">
+
+
+                        <?php 
+                            $images = glob($_SERVER['DOCUMENT_ROOT'] . '/skin/frontend/enterprise/default/images/ol/m/bts/*.jpg');
+
+                            $DB_NAME = '8ehdh84_devprod';
+                            $DB_HOST = '0ef549e90e0f270df4fa0fb70d424e21f53e78af.rackspaceclouddb.com';
+                            $DB_USER = 'YFmD5LZEU4Mk';
+                            $DB_PASS = 'RJXbmsJPc8AE';
+
+                            $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+                            $count = 0;
+
+                            foreach($images as $filename){
+
+                            	// if ($count == 3) {
+                            	// 	echo '<div class="gallery-row">';
+                            	// }
+
+                                $img = basename($filename);
+
+                                $num = str_replace('.jpg', '', $img);
+                                $caption = $mysqli->query("SELECT description FROM olphotocaptions WHERE photoid = $num");
+
+                                while ($result = $caption->fetch_assoc()) {
+                                
+                                    $description = $result['description'];
+                                }
+
+                                echo '<a href="/skin/frontend/enterprise/default/images/ol/m/bts/full/' . $img . '"><img src="/skin/frontend/enterprise/default/images/ol/m/bts/' . $img . '" data-title="' . $caption . '" alt="' . $caption . '" title="' . $caption . '" /></a>';
+
+                                // if ($count == 3) {
+                                // 	echo '</div>';
+                                // 	$count = 0;
+                                // }
+
+                                $count++;
+
+                            }
+
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+
+<script type='text/javascript'>
+    Galleria.loadTheme('/skin/frontend/enterprise/tatamobile/galleria/themes/classic/galleria.classic.min.js');
+    Galleria.run('.galleria');
+    Galleria.configure({
+    imageCrop: true,
+    wait: true,
+    height: 400,
+    dummy: '/skin/frontend/enterprise/default/images/ol/m/bts/full/01.jpg',
+    // showInfo: true,
+    showCounter: true,
+    debug: false
+});
+</script>
+
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

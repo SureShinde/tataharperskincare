@@ -1,0 +1,15 @@
+<?php 
+$_product = $this->getProduct();
+$sku = $_product->getSku();
+
+$base = '//www.tataharperskincare.com/blasts/percent/';
+
+$main = $base . $sku . '.jpg';	
+
+if (@getimagesize($main)) {
+	echo "<img src='" .  $main . "' />";
+} else {
+	echo "<img src='" . $base . "default.jpg' />";
+}
+
+?>

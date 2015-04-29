@@ -1,0 +1,148 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script type="text/javascript" src="http://fast.fonts.net/jsapi/55222375-0ea5-4ca5-bc1b-11874820c8ae.js"></script>
+</head>
+<body<?php echo $this->getBodyClass()?' class="mobile-site cms-new-mobile-home-build'.$this->getBodyClass().'"':'' ?>>
+<!--ewpagecache-no-cache-->
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <?php if($customfields[custom_image_url]) { ?>
+            <div class="header-custom">
+            <?php echo "<img src='http://tataharperskincare.com/skin/frontend/enterprise/default/images/" . $customfields[custom_image_url] . "' />"; ?>
+            </div>
+            <?php } else {
+
+            }; ?>
+        <?php echo $this->getChildHtml('breadcrumbsContainer') ?>
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                
+                <!-- Main Content Box -->
+                <!-- <div class="generic_box_full"> -->
+                <!-- <img src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/mobilehome_02.jpg" />  -->
+                <div id="slider" class="swipe homeslider">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('mob-slider')->toHtml() ?>
+                </div>
+
+                <div class="secondary-menu">
+                    <a href="/shop-all-skincare">Shop All Skincare</a>
+                    <a href="/online-exclusives">What's New</a>
+                    <a href="/best-sellers">Best Sellers</a>
+                    <a href="/antiage">Antiaging Treatments</a>
+                    <a href="beauty-and-gift-sets">Kits &amp; Gifts</a>
+                    <a href="/shop-all-skincare">Special Offers</a>
+                    <a href="/vintage">Open Lab</a>
+                </div>
+
+                <a href="/skin-care"> <img class="home-tile" src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/mobilehome_04.jpg" /> </a>
+
+                 <a href="https://vimeo.com/102090009" target="_blank"> <img class="home-tile" src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/mobilehome_06.jpg" /> </a>
+
+                 <!-- <a href="http://vimeo.com/112925517" target="_blank"><img class="home-tile" src="http://tataharperskincare.com/blasts/mobilehome/featured1.jpg" alt="" /></a> -->
+
+                  <!-- <div id="slider" class="swipe homeslider"> -->
+                <?php //echo $this->getLayout()->createBlock('cms/block')->setBlockId('mob-slider')->toHtml();
+
+                echo "<div class='our-best-sellers clearfix'>";
+
+                echo "<h2>Our Best Sellers</h2>";
+
+                echo $this->getLayout()->createBlock('cms/block')->setBlockId('mobile-home-our-best-sellers')->toHtml();
+
+                echo "</div>";
+
+                ?>
+
+                <div id="slider2" class="in-the-press swipe">
+                <div class="swipe-wrap">
+                    <div class="slide"><a href="/skin-care"><img src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/in-the-press_03.jpg" /></a></div>
+                    <div class="slide"><a href="/beautifying-face-oil"><img src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/in-the-press_03.jpg" /></a></div>
+                    <div class="slide"><a href="/m-tatas-mission"><img src="/skin/frontend/enterprise/tatamobile/images/new-mobile-home/in-the-press_03.jpg" /></a></div>
+                </div>
+                </div>
+
+                <!-- Addl Content Box(es) -->
+                    <?php if (!empty($customfields[tab_two_content])) {
+                        echo "<div class='generic_box_full ytsecondbox'>";
+                        $blockObj->renderListAll($customfields[tab_two_content]);
+                        echo "</div>";
+                    } ?>
+
+                    <?php if (!empty($customfields[tab_three_content])) {
+                        echo "<div class='generic_box_full thirdbox'>";
+                        $blockObj->renderListAll($customfields[tab_three_content]);
+                        echo "</div>";
+                    } ?>
+
+                    <?php if (!empty($customfields[tab_four_content])) {
+                        echo "<div class='generic_box_full'>";
+                        $blockObj->renderListAll($customfields[tab_four_content]);
+                        echo "</div>";
+                    } ?>
+
+                    <?php if (!empty($customfields[tab_five_content])) {
+                        echo "<div class='generic_box_full'>";
+                        $blockObj->renderListAll($customfields[tab_five_content]);
+                        echo "</div>";
+                    } ?>
+
+                    <?php if (!empty($customfields[tab_six_content])) {
+                        echo "<div class='generic_box_full'>";
+                        $blockObj->renderListAll($customfields[tab_six_content]);
+                        echo "</div>";
+                    } ?>
+
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

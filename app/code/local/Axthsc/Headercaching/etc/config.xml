@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Axthsc_Headercaching>
+            <version>0.1.0</version>
+        </Axthsc_Headercaching>
+    </modules>
+     <events>
+        <controller_action_predispatch>
+          <observers>
+            <disable_header_cache>
+              <class>Axthsc_Headercaching_Model_Observer</class>
+              <method>disableCache</method>
+            </disable_header_cache>
+          </observers>
+        </controller_action_predispatch>
+      </events>
+</config>

@@ -1,0 +1,63 @@
+<?php
+
+function csv_to_array($filename='batch6.csv', $delimiter=',')
+{
+    if(!file_exists($filename) || !is_readable($filename))
+        return FALSE;
+
+    $header = NULL;
+    $data = array();
+    if (($handle = fopen($filename, 'r')) !== FALSE)
+    {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+        {
+            if(!$header)
+                $header = $row;
+            else
+                $data[] = array_combine($header, $row);
+        }
+        fclose($handle);
+    }
+    return $data;
+}
+
+$data = csv_to_array();
+
+$DB_NAME = '8ehdh84_devprod';
+$DB_HOST = '0ef549e90e0f270df4fa0fb70d424e21f53e78af.rackspaceclouddb.com';
+$DB_USER = 'YFmD5LZEU4Mk';
+$DB_PASS = 'HEkHa4W2QaEg';
+
+$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+// $result = $mysqli->query('SELECT * FROM olbatches');
+
+
+//  while ($row = $result->fetch_row()) {
+//         printf ("%s, %s, %s, %s\n", $row[0], $row[1], $row[2], $row[3]);
+//         echo "<br />";
+//     }
+
+foreach ($data as $d) {
+
+    var_dump($d);
+
+    $num = $d['Batch #'];
+    $sku = $d['SKU #'];
+    $date = $d['Date Batched'];
+    $people = $d['Who Batched? '];
+
+    echo "DATE: " . $date . "<br />";
+    $timestamp = strtotime($date);
+    $date = date("Y-m-d", $timestamp);
+    echo "NEW: " . $date . "<br />";
+
+    $insert_row = $mysqli->query("INSERT INTO olbatches (batchnum, sku, batchdate, people) VALUES ('$num', '$sku', '$date', '$people')");
+
+    if($insert_row){
+        print 'Success! ID of last inserted record is : ' . $mysqli->insert_id .'<br />'; 
+    }else{
+        die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+    }
+
+}

@@ -1,0 +1,55 @@
+<?php
+
+function csv_to_array($filename='olcaptions.csv', $delimiter=',')
+{
+    if(!file_exists($filename) || !is_readable($filename))
+        return FALSE;
+
+    $header = NULL;
+    $data = array();
+    if (($handle = fopen($filename, 'r')) !== FALSE)
+    {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+        {
+            if(!$header)
+                $header = $row;
+            else
+                $data[] = array_combine($header, $row);
+        }
+        fclose($handle);
+    }
+    return $data;
+}
+
+$data = csv_to_array();
+
+
+$DB_NAME = '8ehdh84_devprod';
+$DB_HOST = '0ef549e90e0f270df4fa0fb70d424e21f53e78af.rackspaceclouddb.com';
+$DB_USER = 'YFmD5LZEU4Mk';
+$DB_PASS = 'RJXbmsJPc8AE';
+
+$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+
+// $mysqli->query("DELETE FROM olphotocaptions WHERE photoid > 1");
+
+foreach ($data as $d) {
+	if ($d['text'] != '') {
+		$id = $d['photoid'];
+		$text = $d['text'];
+
+        echo "<pre>";
+        var_dump($d);
+        echo "</pre>";
+
+		$insert_row = $mysqli->query("INSERT INTO olphotocaptions (photoid, description) VALUES ('$id', '$text')");
+
+		if($insert_row){
+		    print 'Success! ID of last inserted record is : ' .$mysqli->insert_id .'<br />'; 
+		}else{
+		    die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+		}
+
+	}
+}
+

@@ -1,0 +1,108 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+
+<!-- KISSmetrics tracking snippet -->
+<script type="text/javascript">var _kmq = _kmq || [];
+var _kmk = _kmk || 'b947327a15e0612ba67f8fd9ecbe6bf120727744';
+function _kms(u){
+  setTimeout(function(){
+    var d = document, f = d.getElementsByTagName('script')[0],
+    s = d.createElement('script');
+    s.type = 'text/javascript'; s.async = true; s.src = u;
+    f.parentNode.insertBefore(s, f);
+  }, 1);
+}
+_kms('//i.kissmetrics.com/i.js');
+_kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+</script>
+
+<div class="header-container">
+
+<div class="header-promo-container clearfix">
+    <div class="header-promo">
+        <p class="left"><a href="/vintage">Discover your product's origin with our Open Lab Program <span>GO</span></a></p>
+        <p class="right">Free shipping with all orders $40 &amp; up + 3 free samples with every US order.*</p>
+    </div>
+</div>
+<div class="headerwrap">
+    <div class="header">
+
+    <div class="extra_top_items">
+       
+        <div class='headeraccount'><?php if (! Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+<a href="<?php echo Mage::helper('customer')->getLoginUrl(); ?>"><span>&nbsp;</span>Login</a>
+<?php else: ?>
+<a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>"><span>&nbsp;</span>Logout</a>
+<?php endif; ?>&nbsp;|&nbsp;<a href='/customer/account/' title='My Account'>My Account</a></div>
+    </div>
+
+    <div class="overnav_container">
+        <div class="header_checkout">
+            <?php echo $this->getChildHtml('topCart') ?>
+        </div>
+        
+    </div>
+
+        <div class="branding">
+        <?php if ($this->getIsHomePage()):?>
+            <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+            <?php else:?>
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+            <?php endif?>
+            <?php echo $this->getChildHtml('headerCallout') ?>
+        </div>
+        
+    </div>
+
+</div>
+
+<div class="topdrop_container">
+<div class="todaysoffer">
+    Today's offer<span></span>
+</div>
+
+<div class="whatsfresh">
+    Get what’s fresh<span></span>
+</div>
+
+<div class="searcharea">
+    <?php echo $this->getChildHtml('topSearch') ?>
+</div>
+
+<div class="todaysoffer_hid"><span class="todaysoffer-seedetails">See Details >></span><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('todays_offer')->toHtml() ?></div>
+<div class="whatsfresh_hid"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('whats_fresh')->toHtml() ?></div>
+
+</div>
+<div class="quick-access">
+    <?php echo $this->getChildHtml('topMenu') ?>
+</div>
+
+    <?php echo $this->getChildHtml('header_links')?>
+</div>

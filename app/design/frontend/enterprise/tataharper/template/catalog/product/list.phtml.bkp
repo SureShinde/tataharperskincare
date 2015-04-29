@@ -1,0 +1,368 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+
+<?php
+function getPriceRange($productId) {
+
+    $product = Mage::getModel('catalog/product')->load($productId);
+    //load all children
+    $childProducts = Mage::getModel('catalog/product_type_configurable')
+               ->getUsedProducts(null,$product);
+    $childPrice = array();
+    foreach($childProducts as $child){
+        $_child = Mage::getModel('catalog/product')->load($child->getId());
+        $childPrice[] =  $_child->getPrice();
+    }
+
+    //If you want to maximum price of product use this
+    return max($childPrice);
+
+} 
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection()->addAttributeToSelect('price');;
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<?php echo $this->getToolbarHtml() ?>
+<?php echo $this->getAdditionalHtml() ?>
+<div class="category-products">
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <ol class="products-list" id="products-list">
+    <?php foreach ($_productCollection as $_product): ?>
+    <?php $sku = $_product->getSku(); ?>
+        <li data-sku="<?php echo $sku ?>" class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+            <?php // Product Image ?>
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(166); ?>" width="166" height="166" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop">
+                <div class="f-fix">
+                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+                    <?php if($_product->getRatingSummary()): ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                    <?php endif; ?>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                    <h2>.</h2>
+                    <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                    </div>
+                    <?php if($_product->isSaleable()): ?>
+                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+
+                    <?php else: ?>
+                        <?php if ($_product->getIsSalable()): ?>
+                            <p class="availability in-stock"><span><?php echo $this->__('In stock') ?></span></p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                        <ul class="add-to-links">
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                            <?php endif; ?>
+                            <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                <li><a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                            <?php endif; ?>
+                        </ul>
+                </div>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+<?php else: ?>
+<?php // Grid Mode ?>
+
+<?php $_collectionSize = $_productCollection->count() ?>
+
+<?php $_columnCount = $this->getColumnCount(); 
+    // manually force 2-colunn count 
+    $_columnCount = 2; ?>
+<?php $i=0; foreach ($_productCollection as $_product): ?>
+    <?php if ($i++%$_columnCount==0): ?>
+    <ul class="products-grid">
+    <?php endif ?>
+    <?php $sku = $_product->getSku(); ?>
+        <li data-sku="<?php echo $sku ?>" class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(270, 320); ?>" width="270" height="320" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <div class="prod-right">
+                <h2 class="productname"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                
+                <?php if($_helper->productAttribute($_product, $_product->getSubtitle(), 'subtitle')):
+                    echo '<div class="subtitle-snippet">' . $_helper->productAttribute($_product, $_product->getSubtitle(), 'subtitle') . '</div>';
+                else: ?>
+
+                <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description'); ?>
+                </div>
+
+                <?php endif; ?>
+
+                <?php
+
+                echo '<div class="usage-snippet">' . $_helper->productAttribute($_product, $_product->getUsage(), 'usage') . '</div>';
+
+
+                ?>
+                <?php $this->helper('yotpo')->showBottomline($this, $_product); ?>
+                <?php if($_product->getRatingSummary()): ?>
+                <?php endif; ?>
+                <div class="regular-price">
+                    <div class="price">
+                        <?php echo '$' . number_format($_product->getMaxPrice()); ?>
+                    </div>
+                </div>
+
+                <p class="retail-value">
+                    <?php $rv = $_product->getRetailvalue();
+                    if ($rv != "") {
+                        if (strpos($rv, '$') != false)
+                            echo '$' . number_format($rv) . " Value";
+                        else if (strpos($rv, '$') == false) {
+                            echo $rv . " Value";
+                        }
+                    }
+                    ?>
+                </p>
+                <div class="actions">
+                    <?php if($_product->isSaleable()): ?>
+                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-shop" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><?php echo $this->__('Shop') ?></button>
+                    <?php else: ?>
+                        <?php if ($_product->getIsSalable()): ?>
+                            <p class="availability in-stock"><span><?php echo $this->__('In stock') ?></span></p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            </div> <!-- .prod-right -->
+            
+            <!-- QUICKVIEW -->
+
+            <?php $proddy = Mage::getModel('catalog/product')->load($_product->getId()); ?>
+
+            <div class='quickview-hidden'>
+    <div class="imageleftpop">
+        <div class="imgcontain">
+            <a href="<?php echo $_product->getProductUrl() ?>">
+                <img src="<?php echo $proddy->getMediaConfig()->getMediaUrl($proddy->getData('image')) ?>" class='quickview-prod-img' />
+            </a>
+        </div>
+    </div>
+
+    <div class="rightcontentpop" id="prodid-<?php echo $_product->getId() ?>">
+        <h2 class="prodtitle">
+            <a href="<?php echo $_product->getProductUrl() ?>"><?php echo $_product->getName() ?>
+            </a>
+        </h2>
+
+        <?php $product = Mage::getModel('catalog/product')->load('product_id');
+        $attributeNames = array_keys($product->getData()); ?>
+
+        <?php echo '<div class="subtitle-snippet">' . $_helper->productAttribute($_product, $_product->getSubtitle(), 'subtitle') . '</div>'; ?>
+
+        <?php if ($_product->getShortDescription()) {
+            echo "<span class='productshort'>" . $_product->getShortDescription() . "<br /></span>";
+            } ?>
+        
+        <div class="desc std">
+            <p><?php $_product->getShortDescription() ?></p>
+            <a href="<?php echo $_product->getProductUrl() ?>">Learn more</a>
+        </div>
+
+        <!-- PRICE -->
+        <?php $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false); ?>
+        
+        <!-- NEW -->
+        <?php $id = $_product->getId(); ?>
+        <?php if($_product->isConfigurable()): ?>
+        <span class="price"><?php echo "$" . number_format(getPriceRange($id), 2); ?></span>
+        <?php else: ?>
+        <span class="price"><?php echo $_formattedActualPrice; ?></span>
+         <?php endif; ?>
+
+         <!-- END NEW -->
+
+       <!--  <span class="price"><?php echo $_formattedActualPrice; ?></span> -->
+    
+        <!-- <form action="/custom_includes/addtocart-quickview.php"> -->
+           
+           <!-- QUANTITY -->
+            <div class="quantity">
+                <label for="qty">Qty: </label>
+                <!-- <input type="text" title="qty" class="qty" name="qty" value="1"></input> -->
+                    <select class="input-text qty" name="qty" id="qty-<?php echo $_product->getId() ?>">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+            </div>
+
+           
+
+            <input type="hidden" name="prodid" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" id="checkoutLink" name="checkoutlink" value="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product) ?>" />
+
+
+            <?php /* get alt skus */
+
+                if ($_product->isConfigurable()) { ?>
+
+                     <!-- SUBSCRIPTION TYPE -->
+                    <div class="recurly_type">
+                        <label for="recurly_type">Subscription type: </label>
+                        <!-- <input type="text" title="qty" class="qty" name="qty" value="1"></input> -->
+                            <select id="recurly-<?php echo $_product->getId() ?>">
+                                <option value="30">One-Time Purchase</option>
+                                <option value="29">Every 30 Days – Save 10%</option>
+                                <option value="28">Every 45 Days – Save 10%</option>
+                                <option value="27">Every 60 Days – Save 10%</option>
+                                <option value="26">Every 90 Days – Save 10%</option>
+                            </select>
+                    </div>
+
+            <?php
+
+                    $sku = $_product->getSku();
+
+                    $pid1 = Mage::getModel("catalog/product")->getIdBySku($sku . '-S1');
+                    $pid30 = Mage::getModel("catalog/product")->getIdBySku($sku . '-S30');
+                    $pid45 = Mage::getModel("catalog/product")->getIdBySku($sku . '-S45');
+                    $pid60 = Mage::getModel("catalog/product")->getIdBySku($sku . '-S60');
+                    $pid90 = Mage::getModel("catalog/product")->getIdBySku($sku . '-S90');
+            ?>
+
+                    <input type="hidden" id="pid1-<?php echo $_product->getId() ?>" value="<?php echo $pid1 ?>" />
+                    <input type="hidden" id="pid30-<?php echo $_product->getId() ?>" value="<?php echo $pid30 ?>" />
+                    <input type="hidden" id="pid45-<?php echo $_product->getId() ?>" value="<?php echo $pid45 ?>" />
+                    <input type="hidden" id="pid60-<?php echo $_product->getId() ?>" value="<?php echo $pid60 ?>" />
+                    <input type="hidden" id="pid90-<?php echo $_product->getId() ?>" value="<?php echo $pid90 ?>" />
+
+            <?php } // endif ?>
+
+
+            <!-- ADD TO CART -->
+            <?php if($_product->isSaleable()): ?>
+               <!--  <button type="button" title="Add to Cart" class="button btn-cat" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($_product) ?>   ')">Add to Cart</button> -->
+               <button type="button" title="Add to Cart" class="button btn-cart" onclick="interceptAddToCart('<?php echo $_product->getId() ?>')">Add to Cart</button>
+                <!-- <input type="submit" title="Add to Cart" class="button btn-cart" /> -->
+
+            <?php endif; ?>
+
+        <!-- </form> -->
+
+        <!-- ADD TO WISHLIST -->
+        <button type="button" title="Add to Wishlist" class="button btn-cart btn-wishlist" onclick="setLocation('<?php echo Mage::helper('wishlist')->getAddUrl($_product) ?>   ')">Add to Wishlist</button>
+</div>
+
+            <!-- END QUICKVIEW -->
+
+        </li>
+    <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+    </ul>
+    <?php endif ?>
+    <?php endforeach ?>
+    <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+<?php endif; ?>
+</div>
+<div class="toolbar-bottom">
+    <?php echo $this->getToolbarHtml() ?>
+</div>
+<?php endif; ?>
+
+<script type="text/javascript">
+function interceptAddToCart(prodid) {
+    var link = jQuery('#prodid-' + prodid + ' #checkoutLink').val();
+
+    var qty = jQuery('select#qty-' + prodid + ' > option:selected').text();
+    qty = qty.substr(qty.length - 1); // => "1"
+
+    // configurable product
+    if(jQuery("#pid1-" + prodid).length > 0) {
+
+        var sub = jQuery('select#recurly-' + prodid + ' > option:selected').text();
+        sub = sub.replace("One-Time Purchase", "");
+        var newpid = prodid;
+
+        switch(sub) {
+            case "One-Time Purchase":
+                sub = 30;
+                newpid = jQuery('#pid1-' + prodid).val();
+                break;
+            case "Every 30 Days – Save 10%":
+                newpid = jQuery('#pid30-' + prodid).val();
+                sub = 29;
+                break;
+            case "Every 45 Days – Save 10%":
+                newpid = jQuery('#pid45-' + prodid).val();
+                sub = 28;
+                break;
+            case "Every 60 Days – Save 10%":
+                newpid = jQuery('#pid60-' + prodid).val();
+                sub = 27;
+                break;
+            case "Every 90 Days – Save 10%":
+                newpid = jQuery('#pid90-' + prodid).val();
+                sub = 26;
+                break;
+            default:
+                sub = 30;
+                break;
+        }
+
+        // replace old pid with new pid
+
+        link = link.replace(/product\/\d*/, "product/" + newpid);
+
+        // link = link.concat('?super_attribute%5B216%5D=' + sub);
+    }
+
+    link = link.concat('qty/' + qty);
+
+    setLocation(link);    
+}
+</script>

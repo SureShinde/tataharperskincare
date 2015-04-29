@@ -1,0 +1,67 @@
+<?php
+
+/*
+ * AX 4.8.13
+ * parses names, descriptions, and filenames for ingredients from ingredients.txt
+ * uses bPopup/jQuery for gallery
+*/
+
+class Ingredients
+{
+	private function get_data($url) {
+		$ch = curl_init();
+		$timeout = 5;
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
+	}
+
+	private function parseFile()
+	{
+		if($this->get_data('http://tataharperskincare.com/scripts/ingredients.txt') ? $ingredientsFile = $this->get_data('http://tataharperskincare.com/scripts/ingredients.txt') : $ingredientsFile = $this->get_data('http://tataharperskincare.com/wp-content/ingredients.txt'));
+		$lines = explode(PHP_EOL, $ingredientsFile);
+
+		$ingredients = array();
+
+		while ($currentLine = current($lines))
+		{
+			$currentName = $currentLine;
+			$ingredients[$currentName]["image"] = htmlentities(trim(preg_replace('/\s\s+/', ' ', next($lines))));
+			$ingredients[$currentName]["description"] = htmlentities(trim(preg_replace('/\s\s+/', ' ', next($lines))));
+			$trash = next($lines);
+			$trash = next($lines);
+		}
+		
+		return $ingredients;
+	}
+
+	public function displayIngredients()
+	{
+		$ingredients = $this->parseFile();
+
+		$total = count($ingredients);
+		$count = 1;
+		echo "<div class='ingredients_container'>";
+		foreach ($ingredients as $key=>$value)
+		{
+			$thumb = "http://tataharperskincare.com/skin/frontend/enterprise/default/images/ingredients/thumbs/thumbs_" . $value["image"];
+			$main = "http://tataharperskincare.com/skin/frontend/enterprise/default/images/ingredients/" . $value["image"];
+			echo "<div class='ingredients'>";
+			echo "<a class='ingredients-link' title=\"" . html_entity_decode($value["description"]) . "\" href='" . $main . "' data-total='" . $total . "' data-current='" . $count . "'>";
+			echo "<img src='" . $thumb . "' />";
+			echo "</a>";
+			//echo "<span>" . $key . "</span>";
+			echo "</div>";
+			$count++;
+		}
+
+		echo "<div id='bpopup' />";
+		echo "</div>";
+	}
+}
+
+
+?>

@@ -1,0 +1,82 @@
+<?php
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER                   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Android
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+?>
+<?php //echo $this->getChildHtml('topSearch') ?>
+<?php //echo $this->getChildHtml('footer_links') ?>
+<!-- For email implementation -->
+<?php
+	// Get user email in mage
+	//$email = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+	//echo $email;
+	//Compare it to email database in MailChimp
+?>
+<div class="footer_container clearfix">
+	<!-- Contact Us -->
+	<h2>Contact Us</h2>
+		<div class="phone_area linkbottom"><a href="tel:1-877-321-8282">CALL 1-877-321-8282</a></div>
+		<div class="email_area linkbottom"><a href="mailto:info@tataharper.com">Email Us</a></div>
+	<!-- In Touch -->
+	<h2>Let’s Stay in Touch</h2>
+	<div class="home_signup_lightbox_bottom bottom">
+		<form id="home_signup_form_2" class="validate home_signup_form_2" action="/custom_includes/home_email_signup.php" method="post" name="home-email-form" target="_blank"><input class="required email" onfocus="if(this.value == 'Email Address') { this.value = ''; }" type="text" name="email" value="Sign Up For Tata's Newsletter" /> <input id="mc-embedded-subscribe" type="submit" name="subscribe" value="Go" />
+		<p class="response">&nbsp;</p>
+		</form>
+	</div>
+		<div class="social_icons">
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_03.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_05.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_07.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_09.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_11.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_13.jpg"></a>
+			<a href="#"><img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_15.jpg"></a>
+		</div>
+		<div class="info_area">
+			<img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_25.png" class="firstimg">
+			<img src="/skin/frontend/enterprise/tatamobile/images/homepagemobile_29.jpg" class="lastimg">
+		</div>
+	<!-- Newsletter box -->
+	<div class="menu-footer-skincare-container">
+		<ul class="menu">
+			<li class="menu-item"><a href="http://www.tataharperskincare.com">FULL SITE</a></li>
+			<li class="menu-item"><a href="/store-locator">STORE LOCATOR</a></li>
+			<li class="menu-item"><a href="/privacy-policy-terms-conditions">PRIVACY POLICY</a></li>
+			<li class="menu-item"><a href="/autoship">REPLENISHMENT SERVICE</a></li>
+			<li class="menu-item"><a href="http://blog.tataharperskincare.com">BLOG</a></li>
+			<li class="menu-item"><a href="/faq">FAQ'S</a></li>
+			<li class="menu-item"><a href="/customer/account/create">REGISTER</a></li>
+			<li class="menu-item"><a href="/customer/account/login">LOGIN</a></li>
+		</ul><!-- END .menu -->
+	</div><!-- END .menu-footer-skincare-container -->
+</div><!-- END .footer_container -->
+<div class="footer-copyright">
+		<p class="footercopyright">100% Natural &amp; Nontoxic Beauty | &copy; 2013 Tata's Natural Alchemy, LLC. All Rights Reserved</p>
+</div>

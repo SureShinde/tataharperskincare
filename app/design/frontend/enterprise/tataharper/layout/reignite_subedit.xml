@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Reignite_Subedit layout
+ *
+ * @author Anthony Xiques
+ * @copyright July 6, 2013
+ * @link www.reignitegroup.com
+ */
+ -->
+
+<layout version="1.0">
+
+	<reignite_subedit_index_index translate="label">
+		<update handle="customer_account"/>
+		<label>Change My Subscription Frequency</label>
+		<reference name="root">
+			<action method="setHeaderTitle" translate="title" module="reignite_subedit">
+				<title>Change My Subscription Frequency</title>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="reignite_subedit/index" name="subedit.index" template="reignite/subedit/change.phtml" />
+		</reference>
+		<reference name="head">
+            <action method="setTitle" translate="title" module="sarp">
+                <title>Change My Subscription Frequency</title>
+            </action>
+        </reference>
+	</reignite_subedit_index_index>
+
+	<reignite_subedit_change_index translate="label">
+		<update handle="customer_account"/>
+		<label>Change My Subscription Frequency</label>
+		<reference name="root">
+			<action method="setHeaderTitle" translate="title" module="reignite_subedit">
+				<title>Change My Subscription Frequency</title>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="reignite_subedit/change" name="subedit.change" template="reignite/subedit/change.phtml" />
+		</reference>
+		<reference name="head">
+            <action method="setTitle" translate="title" module="sarp">
+                <title>Change My Subscription Frequency</title>
+            </action>
+        </reference>
+	</reignite_subedit_change_index>
+
+	<reignite_subedit_change_type translate="label">
+		<update handle="customer_account"/>
+		<label>Change My Subscription Frequency</label>
+		<reference name="root">
+			<action method="setHeaderTitle" translate="title" module="reignite_subedit">
+				<title>Change My Subscription Frequency</title>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="reignite_subedit/change" name="subedit.change" template="reignite/subedit/type.phtml" />
+		</reference>
+		<reference name="head">
+            <action method="setTitle" translate="title" module="sarp">
+                <title>Change My Subscription Frequency</title>
+            </action>
+            <action method="addJs"><script>subedit/subedit.js</script></action>
+            <action method="addCss"><stylesheet>subedit/css/main.css</stylesheet></action>
+        </reference>
+	</reignite_subedit_change_type>
+	
+	<reignite_subedit_change_results translate="label">
+		<update handle="customer_account"/>
+		<label>Subscription Change Confirmation</label>
+		<reference name="root">
+			<action method="setHeaderTitle" translate="title" module="reignite_subedit">
+				<title>Subscription Change Confirmation</title>
+			</action>
+		</reference>
+		<reference name="content">
+			<block type="reignite_subedit/change" name="subedit.change" template="reignite/subedit/results.phtml" />
+		</reference>
+		<reference name="head">
+            <action method="setTitle" translate="title" module="sarp">
+                <title>Subscription Change Confirmation</title>
+            </action>
+            <action method="addJs"><script>subedit/subedit.js</script></action>
+            <action method="addCss"><stylesheet>subedit/css/main.css</stylesheet></action>
+        </reference>
+	</reignite_subedit_change_results>
+
+</layout>

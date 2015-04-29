@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Axthsc_Moretemplates>
+      <active>true</active>
+      <codePool>local</codePool>
+      <depends>
+        <Mage_Page />
+		<Mage_Admin />
+		<Mage_Adminhtml />
+		<Mage_Cms />
+		<Mage_Widget />
+      </depends>
+    </Axthsc_Moretemplates>
+  </modules>
+</config>

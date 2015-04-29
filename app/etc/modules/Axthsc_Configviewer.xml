@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Axthsc_Configviewer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Axthsc_Configviewer>
+    </modules>
+</config>

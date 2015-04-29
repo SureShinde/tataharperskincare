@@ -1,0 +1,156 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+ <meta name="globalsign-domain-verification" content="-vW3KIRZjCYS2Oh4xbhDZTDphR5mUzPmqcmJsgp0mm" />
+<?php echo $this->getChildHtml('head') ?>
+<meta http-equiv="Cache-control" content="public">
+</head>
+<body class="cms-home-2">
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper clearfix">
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+        <div class="header-custom">
+
+            <div class="theme-default home-slider">
+                <div id="slider" class="nivoSlider">
+                   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('desktop-home-featured-slider')->toHtml() ?>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="page">
+
+          <div class="intromessage">
+            <img src="//www.tataharperskincare.com/blasts/desktophome/brand-top.png" />
+            <h2 style="margin-top:0.8em;margin-bottom:0.8em;">We are inventors and manufacturers of the world's finest 100% natural, antiaging skincare and we believe that when it comes to your skincare, the fewer mysteries the better.</h2>
+
+            <h2>Trace your product back to its origin here in our Vermont headquarters. <br /><a href="/vintage" class="green homegreen">GO INSIDE OUR OPEN LAB</a></h2>
+          </div>
+
+        <div  class="content-main">
+            <div class="col-main">
+                
+                 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-page-ctas')->toHtml() ?>
+
+                <div class="row5 featuredpress instagram">
+                    <a class="see-more" href="http://instagram.com/tataharper" target="_blank"><img src="//www.tataharperskincare.com/blasts/desktophome/title_head3.jpg" /></a>
+                    <!-- Get instagram stream -->
+                   <?php
+                       function fetch_data($url){
+                           $ch = curl_init();
+                           curl_setopt($ch, CURLOPT_URL, $url);
+                           curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                           curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+                           $result = curl_exec($ch);
+                           curl_close($ch);
+                           return $result;
+                       }
+
+                       $count = 4; // the number of photos you want to fetch
+                       // $access_token = "225721227.af4df8f.ce5f67f6655e449983df16944020b649";
+                       $access_token = "225721227.af4df8f.a441ee9ed7e743ea98950664359216ac";
+                       $display_size = "standard_resolution"; // you can choose between "low_resolution", "thumbnail" and "standard_resolution"
+
+                       $result = fetch_data("https://api.instagram.com/v1/users/225721227/media/recent?count={$count}&access_token={$access_token}");
+                       $result = json_decode($result);
+
+                       echo "<div class='photostream clearfix'>";
+                       foreach ($result->data as $photo) {
+                           $img = $photo->images->{$display_size};
+                           echo "<div class='singleimg'><a href='{$photo->link}' target='_blank'><img src='{$img->url}' /></a></div>";
+                       }
+                       echo "</div>";
+                   ?>
+                </div>
+                <!-- //Get instagram stream -->
+                <div class="row5 featuredpress">
+                    <a class="see-more" href="/press-awards"><img src="//www.tataharperskincare.com/blasts/desktophome/title_head2.jpg" /></a>
+                    <a id="prev" class="prev" href="#">&nbsp;</a>
+                    <div id="fp-slider" class="fp-slider">
+                        <img onload="loadPress()" src="//www.tataharperskincare.com/blasts/desktophome/press1.jpg" />
+                        <img src="//www.tataharperskincare.com/blasts/desktophome/press2.jpg" />
+                    </div>
+                    <a id="next" class="next" href="#">&nbsp;</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+        <?php echo $this->getAbsoluteFooter() ?>
+</body>
+
+<script type="text/javascript">
+
+function loadPress() {
+    jQuery(".fp-slider ").carouFredSel({
+            items: 1,
+            direction: "left",
+            prev: '#prev',
+            next: '#next',
+            auto: false,
+            width: 995
+        });
+}
+// Home Page Slider
+  jQuery(window).load(function() {
+     jQuery('#slider').nivoSlider({
+            effect:"fade",pauseTime:10000,directionNav:true,controlNav:true,pauseOnHover:false,prevText: 'p',nextText: 'n',slices:24,captionOpacity:0.8,startSlide:0
+    });
+  });
+   
+
+    function playDifferentlyVideo() {
+        var one = "<div class='popup vimeo'>";
+        var two = '<iframe src="//player.vimeo.com/video/102090527" width="920" height="515" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+        var three = "</div>";
+        var coolhtml = jQuery(one + two + three);
+        jQuery.colorbox({html:coolhtml, width:"960px", height:"560px"});
+    }
+</script>
+</html>

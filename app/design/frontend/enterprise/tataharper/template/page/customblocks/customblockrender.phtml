@@ -1,0 +1,98 @@
+<?php
+
+// AX 4.8.13 
+// used to render static blocks in custom fields
+
+class Custom_Block_Render
+{
+	function widgetToHtml($matches) {
+         $construct = array();
+         $construct[1] = 'widget';
+         $construct[2] = ' '.$matches[1];
+         return Mage::getModel('widget/template_filter')->widgetDirective($construct);
+    }
+    
+    function parse_widgets($html) {
+         $output = preg_replace_callback("/{{widget (.*)}}/U", 
+            array($this, "widgetToHtml"), 
+            $html);
+         return $output;
+    }
+
+    function removeWidgetPlaintext($html)
+    {
+        $html = preg_replace("{{.*}}", "", $html);
+        return $html;
+    }
+
+    function displayWidgets($content)
+    {
+        $static_block_output = $this->parse_widgets($content);
+        $block = explode("=>", $static_block_output);
+        $cmsblockcount = 0;
+        $block5 = $block[5];
+        $pos = strpos($block5, "\"");
+        $maybe = substr($block5, $pos);
+        $maybe = str_replace("\"", "", $maybe);
+        $finalblock = str_replace("}", "", $maybe);
+        return "<div>" . $finalblock;
+    }
+
+    function listAllDisplayWidgets($content)
+    {
+        $static_block_output = $this->parse_widgets($content);
+        $block = explode("=>", $static_block_output);
+        $cmsblockcount = 0;
+        $block5 = $block[5];
+        $pos = strpos($block5, "\"");
+        $maybe = substr($block5, $pos);
+        //$maybe = str_replace("\"", "", $maybe);
+        //$maybe = preg_replace(strrev("\""),strrev(""),strrev($maybe),1);
+        $maybe = substr($maybe, 1);
+        $maybe = substr($maybe, 0, -5);
+        $finalblock = str_replace("}", "", $maybe);
+
+        $quote = strrpos($finalblock, "\"");
+
+        //echo "quote: " . $quote . "<br />";
+        $finalblock = substr($finalblock, 0, ($quote-1));
+
+        return $finalblock;
+    }
+
+    function renderCustomTabContent($content)
+    {
+        echo $this->removeWidgetPlaintext($content);
+        if(!(strpos($content, "cms/widget") === FALSE))
+        {
+            $widgetblock=true;
+        }
+        else
+            $widgetblock=false;
+        if ($widgetblock)
+        {
+            echo $this->displayWidgets($content);
+        }
+    }
+
+    function renderListAll($content)
+    {
+        echo $this->removeWidgetPlaintext($content);
+        echo $this->listAllDisplayWidgets($content);
+    }
+
+    function renderDefaultTabContent($content)
+    {
+        $pos1 = strpos($content, "array(");
+        $pos2 = strripos($content, "string(");
+        $length = $pos2 - $pos1;
+        $content = substr_replace($content, "", $pos1, $length);
+        $content = preg_replace("/^[0-9 ]+/","", $content);
+        $content = preg_replace("/string\([0-9]+\) \"/", "", $content);
+        //$content = str_replace(array('\'', '"'), '', $content); 
+        //$content = str_replace('"', '', $content);
+        $content = preg_replace('/"\s[{}]/', '', $content);
+        return $content;
+    
+    }
+}

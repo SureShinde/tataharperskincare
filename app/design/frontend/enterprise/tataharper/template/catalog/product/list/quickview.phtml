@@ -1,0 +1,77 @@
+<?php 
+    $sku = $this->sku;
+    $product_id = Mage::getModel("catalog/product")->getIdBySku($sku);
+    $_product = Mage::getModel('catalog/product')->load($product_id);
+?>
+
+<div class='quickview-hidden'>
+    <div class="imageleftpop">
+        <div class="imgcontain">
+            <a href="<?php echo $_product->getProductUrl() ?>">
+                <img src="<?php echo $_product->getMediaConfig()->getMediaUrl($_product->getData('image')) ?>" class='quickview-prod-img' />
+            </a>
+        </div>
+    </div>
+
+    <div class="rightcontentpop">
+        <h2 class="prodtitle">
+            <a href="<?php echo $_product->getProductUrl() ?>"><?php echo $_product->getName() ?>
+            </a>
+        </h2>
+
+        <?php $product = Mage::getModel('catalog/product')->load('product_id');
+        $attributeNames = array_keys($product->getData()); ?>
+
+        <?php if ($_product->getShortDescription()) {
+            echo "<span class='productshort'>" . $_product->getShortDescription() . "<br /></span>";
+            } ?>
+
+        <div class="desc std">
+            <p><?php $_product->getShortDescription() ?></p>
+            <a href="<?php echo $_product->getProductUrl() ?>">Learn more</a>
+        </div>
+
+        <!-- PRICE -->
+        <?php //$_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false); echo $_formattedActualPrice; ?>
+    <?php
+
+     // if(strstr($_product->_data['type_id'],'configurable'))
+     // {
+     //    $attrs = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+     // }
+     // if ($attrs)
+     // {
+     //    echo "<div class='pricebottom'>";
+
+     //    $attr_name = $attrs[0]["label"];
+     //    $attr_id = $attrs[0]["attribute_id"];
+     //    echo "<label for='" . $attr_name . "'>" . "Choose a " . $attr_name . ": </label>";
+     //    echo "<select class='custom_attribute_select' name='" . $attr_name . "' attrid='" . $attr_id . "' >";
+        
+     //    foreach ($attrs[0]["values"] as $value)
+     //    {
+     //        $valindex = $value["value_index"];
+     //        $label = $value["label"];
+     //        echo "<option value='" . $valindex . "' >" . $label . "</option>";
+     //    }
+
+     //    echo "</select>";
+     //    echo "</div>";
+        
+     //    $attrs=null;
+     // }
+    ?>
+        <!-- QUANTITY -->
+        <label for="qty">Quantity: </label>
+        <input type="text" title="qty" class="qty" name="qty" value="1"></input>
+
+        <!-- ADD TO CART -->
+        <?php if($_product->isSaleable()): ?>
+            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->helper('checkout/cart')->getAddUrl($_product) ?>   ')"><?php echo $this->__('Add to Cart') ?></button>
+        <?php endif; ?>
+
+        <!-- ADD TO WISHLIST -->
+        <button type="button" title="<?php echo $this->__('Add to Wishlist') ?>" class="button btn-cart btn-wishlist" onclick="setLocation('<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>   ')"><?php echo $this->__('Add to Wishlist') ?></button>
+
+
+</div>

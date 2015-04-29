@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Axthsc_Review>
+            <version>0.1.0</version>
+        </Axthsc_Review>
+    </modules>
+     <global>
+        <models>
+            <mysql4>
+                <rewrite>
+                    <review>Axthsc_Review_Model_Mysql4_Review</review>
+                    <review_product_collection>Axthsc_Review_Model_Mysql4_Review_Product_Collection</collection>
+                </rewrite>
+            </mysql4>
+        </models>
+    </global>
+</config>

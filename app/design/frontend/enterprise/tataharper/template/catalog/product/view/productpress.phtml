@@ -1,0 +1,95 @@
+<div class="slider_pin">
+
+<div class="pinwheel_slider" style="width: 500px; display: block; margin-top: 1em;">
+
+<div id="pinwheel_slider_1_prev" class="pinwheel_prev" style="top: 45%; left: 0%;"><img src="http://tataharperskincare.com/skin/frontend/enterprise/default/images/prev.png" alt="" width="12" height="19" /></div>
+
+<div id="pinwheel_slider_1_next" class="pinwheel_next" style="top: 45%; right: 0%;"><img src="http://tataharperskincare.com/skin/frontend/enterprise/default/images/next.png" alt="" width="12" height="19" /></div>
+
+<div id="pinwheel_slider_1" class="pinwheel_slider_handle" style="width: 500px; height: 350px;">
+
+<?php
+
+function displayPressBox($images) {
+
+	echo '<div style="background-color: rgb(238, 236, 237); border: 0px solid rgb(204, 204, 204); padding: 2px; left: 323px; width: 250px; height: 200px; top: 30px; z-index: 1;" class="pinwheel_slideri carousel-feature"><!-- pinwheel_slideri -->';
+
+	echo '<a href="' . $images[1] . '" title="Allure June 13 Press Box" class="color-press">';
+
+	echo '<img width="450" height="300" alt="Bloomberg Feb 14 Press Box" src="' . $images[0] . '" style="width: 250px; height: 200px;" class="slider_thumbnail large pinwheel_slider_thumbnail carousel-image">';
+
+	echo '</a>';
+	
+	echo '<div style="bottom: 2px; right: 2px; left: 2px; opacity: 0.1 ! important; display: none;" class="pinwheel_text carousel-caption">';
+	
+	echo '<h2 style="clear: none; line-height: 18px; font-family: Georgia, Arial, Helvetica, sans-serif; font-size: 13px; font-weight: normal; font-style: normal; color: #ffffff; margin: 0 0 5px 0;">';
+		
+		echo '<a href="' . $images[1] . '" style="color: #ffffff;" class="color-press">Press image</a>';
+
+	echo '</h2>';
+	
+	echo '</div>';
+	echo '</div>';
+
+}
+
+
+function getPressImages($dir){
+    $images = scandir($dir);
+
+    return $images;
+}
+?>
+
+
+<?php
+
+$checkBase = '/root/www/htdocs/www.tataharperskincare.com/blasts/productpress/' . $this->getSku();
+$actualBase = '/blasts/productpress/' . $this->getSku() . '/';
+$defaultbase = '/blasts/productpress/default/';
+
+$images = getPressImages($checkBase);
+
+$imagepaths = array();
+
+if (count($images) > 1 ) {
+
+    $newcount = floor((count($images) - 2) / 2);
+
+    for($x=1;$x<=$newcount;$x++)
+    {
+        foreach ($images as $image) {
+            if (($image !== "." && $image !== "..") && (strpos($image, strval($x)) !== false) && (strpos($image, 'box') !== false)) {
+                $imagepaths[$x]['box'] = $image;
+            } else if (($image !== "." && $image !== "..") && (strpos($image, strval($x)) !== false) && (strpos($image, 'popup') !== false)) {
+                $imagepaths[$x]['popup'] = $image;
+            }
+        }
+    }
+
+   foreach ($imagepaths as $image){
+       $displayImages[0] = $actualBase . $image['box'];
+       $displayImages[1] = $actualBase . $image['popup'];
+
+       displayPressBox($displayImages);
+   }
+
+} else {
+    $images = array();
+
+    for ($x=1; $x<4; $x++) {
+
+        $images[0] = $defaultbase . $x . '-box.jpg';
+        $images[1] = $defaultbase . $x . '-popup.jpg';
+
+        displayPressBox($images);
+
+    }
+
+}
+
+?>
+
+</div>
+</div>
+</div>

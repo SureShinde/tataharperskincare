@@ -1,0 +1,407 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=280118368808735";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<?php echo $this->getChildHtml('head') ?>
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5329ab772ae41f57"></script>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<style type="text/css">
+ 
+#share-buttons img {
+/*width: 35px;*/
+/*padding: 5px;*/
+border: 0;
+box-shadow: 0;
+/*display: inline;*/
+}
+
+.cms-videos #share-buttons {
+  position: absolute;
+  float: right;
+  margin-left: 575px;
+  margin-top: -50px;
+}
+ 
+</style>
+
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('breadcrumbsContainer') ?>
+        <div class="main col1-layout">
+            <div class="col-main noshadow white">
+            <!-- Main Content Box -->
+            <div class="generic_box_full">
+
+            <div class="video-nav">
+                <!-- <a href="#">Product Info</a> -->
+                <a href="#howto">How-To</a>
+                <a href="#livefrom">Live From VT</a>
+                <a href="#inthenews">In the News</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            <div class="col-main noshadow">
+            <!-- Main Content Box -->
+            <div class="generic_box_full">
+
+            <div class="featured-video player-1" onClick="playVideo(1,1)">
+                <img src="/images/videos/estategrown.PNG" />
+                <p class="featured-title">Estate Grown Beauty Complex</p>
+                <div id="share-buttons">
+                    <!-- Like on FB Start -->
+                    <div class="shareleft">
+                    <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                    </div>
+                    <!-- Like on FB end -->
+                    <!-- AddThis Button BEGIN -->
+                    <div class="shareright share_area">
+                    <a id="share-btn-p1"></a>
+                    </div>
+                    <!-- AddThis Button END -->
+                </div>
+            </div>
+            <div class="shop-the-video-container">
+                <p class="title">shop the video</p>
+                <div class="shop-the-video">
+                <?php $blockObj->renderListAll($customfields[tab_two_content]); ?>
+                </div>
+                <a id="prev1" class="prev" href="#">&nbsp;</a>
+                 <a id="next1" class="next" href="#">&nbsp;</a>
+            </div>
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+            
+            <div class="get_email_updates_wrapper">
+            <div class="get-email-updates">
+                <p class="description">Get Email Updates</p>
+                <form id="video-email-signup" class="validate video-email-signup" action="/custom_includes/home_email_signup.php" method="post" name="video-email-signup-form" target="_blank"><input class="required email" onfocus="if(this.value == 'Email Address') { this.value = ''; }" type="text" name="email" value="Email Address" /> <input id="mc-embedded-subscribe" type="submit" name="subscribe" value="Subscribe" />
+                <p class="response">&nbsp;</p>
+                </form>
+            </div>
+            </div>
+
+            <?php /*
+            <!-- PRODUCT INFO -->
+            <div class="col-main noshadow">
+            <div class="generic_box_full">
+            <p class="title">Product Info</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-2" onClick="playVideo(2,1)">
+                   
+                    <img src="/images/videos/featured-2.jpg" />
+                    <p class="featured-title">Regenerating Cleanser</p>
+                    <div id="share-buttons">
+                        <!-- Like on FB Start -->
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <!-- Like on FB end -->
+                        <!-- AddThis Button BEGIN -->
+                        <div class="shareright share_area">
+                        <a id="share-btn-p2"></a>
+                        </div>
+                        <!-- AddThis Button END -->
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-2">
+                    <div class="sub-video" onClick="playVideo(2,2)">
+                        <img src="/images/videos/player-2-sub-1.jpg" />
+                        <p class="title">Repairative Moisturizer</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(2,3)">
+                        <img src="/images/videos/player-2-sub-2.jpg" />
+                        <p class="title">Resurfacing Mask</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(2,4)">
+                        <img src="/images/videos/player-2-sub-3.jpg" />
+                        <p class="title">Restorative Eye Creme</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            */ ?>
+
+             <!-- OPEN LAB -->
+            <div class="col-main noshadow">
+            <div class="generic_box_full" id="howto">
+            <p class="title">OPEN LAB</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-7" onClick="playVideo(7,1)">
+                    
+                    <img src="/images/videos/featured-1.jpg" />
+                    <p class="featured-title">Spring/Summer 2014</p>
+                    <div id="share-buttons">
+                        <!-- Like on FB Start -->
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <!-- Like on FB end -->
+                        <!-- AddThis Button BEGIN -->
+                        <div class="shareright share_area">
+                        <a id="share-btn-p3"></a>
+                        </div>
+                        <!-- AddThis Button END -->
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-7">
+                    <div class="sub-video" onClick="playVideo(7,2)">
+                        <img src="/images/videos/springsummer.PNG" />
+                        <p class="title">Estate Grown Beauty Complex</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(7,3)">
+                        <img src="/images/videos/openlab.PNG" />
+                        <p class="title">Open Lab Program</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(7,4)">
+                        <img src="/images/videos/productmanufacturing.PNG" />
+                        <p class="title">Product Manufacturing</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            <!-- HOW TO -->
+            <div class="col-main noshadow white">
+            <div class="generic_box_full" id="howto">
+            <p class="title">HOW TO</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-3" onClick="playVideo(3,1)">
+                    
+                    <img src="/images/videos/featured-3.jpg" />
+                    <p class="featured-title">How to De-Stress Naturally</p>
+                    <div id="share-buttons">
+                        <!-- Like on FB Start -->
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <!-- Like on FB end -->
+                        <!-- AddThis Button BEGIN -->
+                        <div class="shareright share_area">
+                        <a id="share-btn-p3"></a>
+                        </div>
+                        <!-- AddThis Button END -->
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-3">
+                    <div class="sub-video" onClick="playVideo(3,2)">
+                        <img src="/images/videos/player-3-sub-1.jpg" />
+                        <p class="title">Fight Signs of Aging Naturally</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(3,3)">
+                        <img src="/images/videos/player-3-sub-3.jpg" />
+                        <p class="title">Healthy, Glowing Skin - Natu..</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(3,4)">
+                        <img src="/images/videos/player-3-sub-4.jpg" />
+                        <p class="title">DIY Face Mask with Tee..</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            <!-- LIVE FROM VT -->
+            <div class="col-main noshadow">
+            <div class="generic_box_full" id="livefrom">
+            <p class="title">LIVE FROM VT</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-4" onClick="playVideo(4,2)">
+                    
+                    <img src="/images/videos/meettata.PNG" />
+                    <p class="featured-title">Meet Tata Harper</p>
+                    <div id="share-buttons">
+                        <!-- Like on FB Start -->
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <!-- Like on FB end -->
+                        <!-- AddThis Button BEGIN -->
+                        <div class="shareright share_area">
+                        <a id="share-btn-p4"></a>
+                        </div>
+                        <!-- AddThis Button END -->
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-4">
+                   <!--  <div class="sub-video" onClick="playVideo(4,2)">
+                        <img src="/images/videos/player-4-sub-1.jpg" />
+                        <p class="title">Tata's Office</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(4,3)">
+                        <img src="/images/videos/player-4-sub-2.jpg" />
+                        <p class="title">Juice Recipes with Tata</p>
+                    </div> -->
+                    <div class="sub-video" onClick="playVideo(4,1)">
+                        <img src="/images/videos/featured-4.jpg" />
+                        <p class="title">Carrie's Inspiration</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(4,4)">
+                        <img src="/images/videos/player-4-sub-3.jpg" />
+                        <p class="title">Clare Shares...</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(4,3)">
+                        <img src="/images/videos/holidayfeast.PNG" />
+                        <p class="title">A Holiday Feast</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            <!-- IN THE NEWS -->
+            <div class="col-main noshadow white">
+            <div class="generic_box_full" id="inthenews">
+            <p class="title">In the News</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-5" onClick="playVideo(5,1)">
+                    
+                    <img src="/images/videos/featured-5.jpg" />
+                    <p class="featured-title">Vogue Italia Interviews Tata</p>
+                    <div id="share-buttons">
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <div class="shareright share_area">
+                        <a id="share-btn-p5"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-5">
+                    <div class="sub-video" onClick="playVideo(5,2)">
+                        <img src="/images/videos/player-5-sub-1.jpg" />
+                        <p class="title">Tata Harper on NY1 Wellness</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(5,3)">
+                        <img src="/images/videos/player-5-sub-2.jpg" />
+                        <p class="title">Watch Tata Harper on ExtraTV</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(5,4)">
+                        <img src="/images/videos/player-5-sub-3.jpg" />
+                        <p class="title">THINKR</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+            <!-- TATA HARPER SKINCARE REVIEWS -->
+            <div class="col-main noshadow">
+            <div class="generic_box_full" id="reviews">
+            <p class="title">Tata Harper Skincare Reviews</p>
+            <p class="sub-title">featured video:</p>
+                 <div class="featured-video player-6" onClick="playVideo(6,1)">
+                    
+                    <img src="/images/videos/featured-6.jpg" />
+                    <p class="featured-title">Ecoholic Beauty Reviews Tata Harper</p>
+                    <div id="share-buttons">
+                        <!-- Like on FB Start -->
+                        <div class="shareleft">
+                        <div class="fb-like" data-href="http://www.tataharperskincare.com/videos" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+                        </div>
+                        <!-- Like on FB end -->
+                        <!-- AddThis Button BEGIN -->
+                        <div class="shareright share_area">
+                        <a id="share-btn-p6"></a>
+                        </div>
+                        <!-- AddThis Button END -->
+                    </div>
+                </div>
+
+                <div class="sub-videos sub-6">
+                    <div class="sub-video" onClick="playVideo(6,2)">
+                        <img src="/images/videos/player-6-sub-1.jpg" />
+                        <p class="title">Vlogwithkendra</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(6,3)">
+                        <img src="/images/videos/player-6-sub-2.jpg" />
+                        <p class="title">Kokolaroo</p>
+                    </div>
+                    <div class="sub-video" onClick="playVideo(6,4)">
+                        <img src="/images/videos/player-6-sub-3.jpg" />
+                        <p class="title">Ecoholic Beauty</p>
+                    </div>
+                </div>
+                
+            </div> <!-- .generic_box_full -->
+            </div> <!-- .col-main -->
+
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+
+<script type="text/javascript" src="//www.tataharperskincare.com/js/custom/videos.js"></script>
+
+</html>

@@ -1,0 +1,22 @@
+<div id="store-locator-input">
+<div id="sl-input-1">
+<label for="addressInput">Location (Address/Zipcode):</label>
+<input type="text" id="addressInput" size="10"/><br />
+</div>
+<div id="sl-input-2">
+<label for="radiusSelect">Radius:</label>
+<select id="radiusSelect">
+<option value="25" selected>25mi</option>
+<option value="100">100mi</option>
+<option value="200">200mi</option>
+</select>
+<input type="button" onclick="searchLocations()" value="Find Locations" class="button"/>
+</div>
+</div>
+<!--<div><select id="locationSelect" style="width:100%;visibility:hidden"></select></div>-->
+<div id="map" style="width: 100%; height: 80%"></div>
+<div id="storeListings">
+	<table id="storesTable">
+		<h2 id="inputText">Enter Your Address or Zip Code Above.</h2>
+	</table>
+</div>

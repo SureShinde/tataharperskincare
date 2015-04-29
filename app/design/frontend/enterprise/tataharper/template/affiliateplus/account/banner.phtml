@@ -1,0 +1,349 @@
+<?php
+/**
+ * Banner view template
+ */
+?>
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php $bannerCollection = $this->getBannerCollection() ?>
+<?php $typesLabel = $this->getTypesLabel() ?>
+<?php $account = $this->getAccount() ?>
+<?php $store_id = Mage::app()->getStore()->getId();?>
+
+<div class="page-title">
+	<h2><?php echo $this->__('Affiliate Link') ?></h2>
+</div>
+<div class="affiliate-get-link fieldset">
+	<h2 class="legend legend-title"><?php echo $this->__('Your unique affiliate program link:') ?></h2>
+	<ul class="form-list">
+		<li class="wide">
+			<?php echo $this->__('Your unique Affiliate Link. Start sharing the Tata Harper love: 100% natural & nontoxic beauty!') ?>
+            <br/><br/>
+            <!--
+			<input type="text" title="<?php echo $this->__('Affiliate Link') ?>" onclick="this.select();" class="input-text" id="affiliate-link" name="affiliate-link" readonly value="<?php echo $this->getAffiliateUrl()  ?>" />
+            -->
+			<a id="affiliate-link" href="<?php echo $this->getAffiliateUrl()  ?>" title="<?php echo $this->__('Affiliate Link') ?>"><?php echo $this->getAffiliateUrl()  ?></a>
+			<br/><br />
+			<?php echo $this->__('You can copy this link (which goes to the Tata Harper Skincare homepage by default) into your blog posts and email blasts, and you\'ll receive a comission from every purchase anyone makes using that link! Also, you can create custom links below that link to specific products, pages, or promotions on our website. Especially love the Wild Plum Mask? Under "Make a custom, personal link" type "http://www.tataharperskincare.com/limited-edition-wild-plum-resurfacing-mask" and copy the link to send people straight to our brand new exclusive Wild Plum Mask!') ?>
+		</li>
+	</ul>
+	<h2 class="legend legend-2 legend-title"><?php echo $this->__('Make a custom, personal link:') ?></h2>
+	<ul class="form-list">
+		<li class="affiliate-page-link wide">
+			<?php echo $this->__('Please fill one of the links from our store such as: product url, category url or another pages into the text box below:')?>
+            <br/><br/>
+            <div class="input-box">
+                <input type="text" class="input-text" id="affiliate-page-link" name="affiliate-page-link" onkeyup="keyupChangeAffiliateLink(this, event)" />
+            </div>
+            <button type="button" class="button" title="<?php echo $this->__('Get Affiliate Link') ?>" onclick="changeAffiliateLink($('affiliate-page-link'));">
+                <span>
+                    <span><?php echo $this->__('Get Link') ?></span>
+                </span>
+            </button>
+		</li>
+	</ul>
+</div>
+<?php
+    // prepare short URL
+    $shortUrl = parse_url($this->getBaseUrl());
+    $shortUrl = str_replace('www.', '', $shortUrl['host']);
+    $replaceUrl = explode('/', $this->getBaseUrl());
+    $replaceUrl = $replaceUrl[0] .'//'. $replaceUrl[2];
+?>
+<script type="text/javascript">
+function keyupChangeAffiliateLink(src, event) {
+    if (event.keyCode == 13) {
+        changeAffiliateLink(src);
+    }
+}
+function changeAffiliateLink(src){
+	var linkConfig = {
+		storeCode: '<?php echo $this->getStoreCode() ?>',
+		acc: '<?php echo $account->getIdentifyCode() ?>',
+		baseUrl: '<?php echo $this->getBaseUrl() ?>',
+        shortUrl: '<?php echo $shortUrl ?>',
+        replaceUrl: '<?php echo $replaceUrl ?>'
+	};
+	var customLink = ''+src.value;
+    customLink.replace(' ','');
+    if (customLink.indexOf(linkConfig.shortUrl) != -1
+        && customLink.indexOf(linkConfig.baseUrl) == -1
+    ) {
+        customLink = customLink.substring(customLink.indexOf(linkConfig.shortUrl));
+        customLink = customLink.substring(linkConfig.shortUrl.length);
+        customLink = linkConfig.replaceUrl + customLink;
+    }
+	var queryParams = {};
+	if (customLink.search('[?]')!=-1)
+		queryParams = customLink.toQueryParams();
+	if (linkConfig.storeCode && queryParams['___store'] == undefined)
+		queryParams['___store'] = linkConfig.storeCode;
+	queryParams['acc'] = linkConfig.acc;
+	var affLink = customLink;
+	if (customLink.search('[?]')!=-1)
+		affLink = customLink.split('?')[0];
+	else if (customLink.search('[#]'))
+		affLink = customLink.split('#')[0];
+	affLink += '?' + Object.toQueryString(queryParams);
+	if (affLink.search('http://')==-1 && affLink.search('https://')==-1) {
+		affLink = linkConfig.baseUrl + affLink;
+	}
+	if (customLink.search('[#]')!=-1)
+		affLink += '#' + customLink.split('#')[1];
+	var el = $('affiliate-link');
+	el.href = affLink;
+	el.innerHTML = affLink;
+	//el.value = affLink;
+}
+</script>
+<p>&nbsp;</p>
+
+<div class="page-title">
+	<h2><?php echo $this->__('Banners') ?></h2>
+</div>
+
+<!-- <div class="banner-filter">
+	<strong><?php echo $this->__('Filter:') ?></strong>
+	<?php foreach ($this->getFilters() as $filter): ?>
+		<span>
+			<?php if ($filter['current']): ?>
+				<?php echo $filter['label'] ?>
+			<?php else: ?>
+				<a href="<?php echo $filter['url'] ?>" title="<?php echo $filter['label'] ?>"><?php echo $filter['label'] ?></a>
+			<?php endif ?>
+		</span>
+	<?php endforeach ?>
+</div>
+<br /> -->
+
+<h1>Affiliate Banners</h1>
+                Below you'll find affiliate banners available for your use to promote Tata Harper Skincare products through your affiliate account. Please contact us at affiliates@tataharper.com or 1-877-321-8282 if you have any questions.
+
+                <div class="affiliate-banner">
+                <h2>Open Lab 160 x 600</h2>
+                <img src="/media/affiliateplus/banner/TH_skyscraper1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/open-lab-traceability</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/TH_skyscraper1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Hydrating Floral Essence 160 x 600</h2>
+                <img src="/media/affiliateplus/banner/floral_skyscraper1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/hydrating-floral-essence-50ml</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/floral_skyscraper1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Hydrating Floral Essence 300 x 250</h2>
+                <img src="/media/affiliateplus/banner/flora_square1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/hydrating-floral-essence-50ml</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/flora_square1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Natural Skincare Try Me Set 728 x 90</h2>
+                <img src="/media/affiliateplus/banner/floral_letterboard1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/floral_letterboard1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Natural Skincare Try Me Set 300 X 250</h2>
+                <img src="/media/affiliateplus/banner/tryme_square1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_square1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>V2 Ready to See Results? Natural Skincare Try Me Set 160 x 600</h2>
+                <img src="/media/affiliateplus/banner/tryme_skyscraper1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_skyscraper1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>V2 New to Natural Try Me Banner Ad 160 X 600</h2>
+                <img src="/media/affiliateplus/banner/tryme_skyscraper2.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_skyscraper2.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>V3 New to Natural Try Me Banner Ad 160 X 600</h2>
+                <img src="/media/affiliateplus/banner/tryme_skyscraper3.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_skyscraper3.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Ready to See Results? Natural Skincare Try Me Set 160 x 600</h2>
+                <img src="/media/affiliateplus/banner/tryme_skyscraper4.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_skyscraper4.jpg" /></a></textarea> 
+                </div>   
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Ready to See Results? Natural Skincare Try Me Set 728 x 90</h2>
+                <img src="/media/affiliateplus/banner/tryme_letterboard1.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com/natural-skincare-try-me-kit</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_letterboard1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <!-- FF Banners -->
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Letterboard 1</h2>
+                <img src="/media/affiliateplus/banner/FF2014_letterboard.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/FF2014_letterboard.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Letterboard 2</h2>
+                <img src="/media/affiliateplus/banner/FF2014_letterboard2.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/tryme_letterboard1.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Skyscraper 1</h2>
+                <img src="/media/affiliateplus/banner/FF2014_skyscraper.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/FF2014_skyscraper.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Skyscraper 2</h2>
+                <img src="/media/affiliateplus/banner/FF2014_skyscraper2.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/FF2014_skyscraper2.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Square 1</h2>
+                <img src="/media/affiliateplus/banner/FF2014_square.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/FF2014_square.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                <div class="affiliate-banner">
+                <h2>Friends &amp; Family Square 2</h2>
+                <img src="/media/affiliateplus/banner/FF2014_square2.jpg" />
+                <div class="right">
+                <h3>1. Get your unique affiliate link</h3>
+                <p>At the top of this page enter the following link under "Make a custom, personal link":</p>
+                <p class="link">http://www.tataharperskincare.com</p>
+                <p>Copy the new link with your affiliate code at the end and in the code below, replace the text "YOUR-AFFILIATE-LINK" with your new link.</p>
+                <h3>2. Copy/paste this source code into your website, after replacing the placeholder text with your unique affiliate link</h3>
+                <textarea readonly="true"><a href="YOUR-AFFILIATE-LINK" target="_blank"><img src="http://www.tataharperskincare.com/media/affiliateplus/banner/FF2014_square2.jpg" /></a></textarea>
+                </div>
+                <p style="clear:both">&nbsp;</p>
+                </div>
+
+                

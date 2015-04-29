@@ -1,0 +1,13 @@
+<?php 
+function getProdList ($catId)
+{   
+    $categories = new Mage_Catalog_Model_Category();
+    $categories->load($catId);
+    $collection = $categories->getProductCollection()->addAttributeToSelect('name');
+
+    foreach ($collection as $product)
+    {
+        echo sprintf("%s<br />", $product->getName());
+    }
+}
+?>

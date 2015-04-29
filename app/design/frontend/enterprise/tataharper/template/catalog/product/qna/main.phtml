@@ -1,0 +1,39 @@
+<div class="qna">
+	<?php $pid = $this->getProduct()->getId(); ?>
+	<div class="button_green askquestion" id="clickme" data-pid="<?php echo $pid; ?>">Ask a Question</div>
+
+	<div class="questions">
+		<?php
+			$resource = Mage::getSingleton('core/resource');
+			$readConnection = $resource->getConnection('core_read');
+			$query = "SELECT * FROM un38dj4_rg_questions WHERE prod = {$pid} AND approved = 1";
+			$questions = $readConnection->fetchAll($query);
+
+			foreach ($questions as $question) {
+				$qid = stripslashes($question["id"]);
+				$query = "SELECT * FROM un38dj4_rg_answers WHERE qid = {$qid} AND approved = 1";
+				$answers = $readConnection->fetchAll($query);
+				$numAnswers = count($answers);
+				
+				echo "<div class='question' data-qid='" . $qid . "'>";
+				echo "<p class='question-text'>" . stripslashes($question["text"]) . "</p>";
+				echo "<p class='num-answers'>" . $numAnswers . " answers</p>";
+				echo "<p class='question-fname'>" . stripslashes($question["fname"]) . "</p>";
+				echo "<p class='question-zip'>" . stripslashes($question["zip"]) . "</p>";
+				echo "<div class='button_green answerquestion' id='clickme'>Answer Question</div>";
+				echo "<div class='answers'>";
+					
+					foreach ($answers as $answer) {
+						echo "<div class='answer'>";
+						echo "<p class='answer-text'>" . stripslashes($answer['text']) ."</p>";
+						echo "<p class='answer-fname'>" . stripslashes($answer['fname']) ."</p>";
+						echo "<p class='answer-zip'>" . stripslashes($answer['zip']) ."</p>";
+						echo "</div>"; // end .answer
+					}
+
+				echo "</div>"; // end .question-answers
+				echo "</div>"; // end.question
+			}
+		?>
+	</div> <!-- end .questions -->
+</div>

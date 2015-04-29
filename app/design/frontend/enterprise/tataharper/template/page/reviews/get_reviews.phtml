@@ -1,0 +1,64 @@
+<?php
+
+// AX 4.7.13 
+// used to get all reviews - for /testimonials page
+// http://mandagreen.com/showing-all-reviews-and-ratings-on-a-page-in-magento/
+// http://stackoverflow.com/questions/6697189/magento-show-product-reviews-in-review-summary
+
+class AP_CustReview_Block_View extends Mage_Core_Block_Template
+{
+	protected $_loadedProducts;
+
+	function getReviews() {
+	  $reviews = Mage::getModel('review/review')->getResourceCollection();
+	  // $reviews->addStoreFilter( Mage::app()->getStore()->getId() )
+	         $reviews->addStatusFilter( Mage_Review_Model_Review::STATUS_APPROVED )
+              //->setDateOrder("desc")
+              ->setOrder('main_table.review_id', 'desc')
+	          ->addRateVotes()
+	          ->load(); 
+      //echo $reviews->getSelect()->__toString();
+	  return $reviews;
+	}
+
+	function getProduct( Mage_Review_Model_Review $review ) {
+	  if( !isset($this->_loadedProducts[ $review->getEntityPkValue() ]) ) {
+	    $this->_loadedProducts[$review->getEntityPkValue()] = Mage::getModel('catalog/product')->load($review->getEntityPkValue());
+	  }	 
+	  return $this->_loadedProducts[$review->getEntityPkValue()];
+	}
+
+	function displayReviews()
+	{
+		$reviews = $this->getReviews();
+		foreach ($reviews as $review) {
+
+            if( $review->getEntityId() == 1 ) {
+                $_prod = $this->getProduct( $review ); 
+                echo "<div class='review_block'>";
+                //echo "Product name: " . $_prod->getName() . "<br />";
+                //echo "Product URL: " . $_prod->getProductUrl() . "<br />";
+                echo "<h2 class='summary'>" . $review->getTitle() . "</h2>";
+                ?>
+                <div class="revi-box-star">
+                <?php foreach ($review->getRatingVotes() as $_vote): ?>
+                    <div class="rating-box">
+                        <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                    </div>
+                <?php endforeach; ?>
+                <?php
+                echo "</div>";
+                echo "<div class='rev-box'>";
+                echo "By: " . $review->getNickname() . "<br />";
+                echo "City, State: " . $review->getLocation() . "<br />";
+                echo "</div>";
+                echo "<div class='review-detail'>";
+                echo $review->getDetail();
+                echo "</div>";
+                //echo "Review created at: " . $review->getCreatedAt() . "<br />";
+                echo "</div>";
+            }
+        }
+	}
+}
+?>

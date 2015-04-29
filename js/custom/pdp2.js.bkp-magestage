@@ -1,0 +1,52 @@
+/* Code for PDP2 */
+// jQuery(window).bind("load", function() {
+
+jQuery(window).bind("load", function() {
+
+	jQuery(function() {
+    jQuery("#tabs.beta-top" ).tabs();
+    jQuery("#tabs.beta-bottom" ).tabs();
+    });
+
+	// Video CTA
+    jQuery("span.youtube").colorbox({iframe:true, innerWidth:640, innerHeight:390});
+
+    // Product images
+    jQuery(".group3").colorbox({rel:'group3', transition:"none", width:"25%", height:"75%"});
+
+    jQuery('.revision .click-to-zoom').click(function() {
+    	var imgurl = jQuery(this).parent().find('a.group3').attr('href');
+    	var coolhtml = '<img src="' + imgurl + '" />';
+    	jQuery.colorbox({html:coolhtml});
+    });
+
+    jQuery('.more-views li a').click(function(e) {
+    	e.preventDefault();
+    	
+    	var imgurl = jQuery(this).attr('href');
+
+    	imgurl = imgurl.replace("http:", "");
+    	imgurl = imgurl.replace("https:", "");
+
+    	var coolhtml = '<img src="' + imgurl + '" />';
+    	jQuery.colorbox({html:coolhtml});
+
+    	return false;
+    });
+
+    // Questions & Answers
+    jQuery('.revision .questions .question .question-text').addClass('arrowup');
+
+    jQuery( ".revision .questions .question .question-text" ).click(function() {
+
+            jQuery('.arrowup').toggleClass('arrowdown');
+            jQuery(this).parent().find( ".answers" ).slideToggle( "200" );
+            event.preventDefault();
+    });
+
+});
+
+jQuery(window).bind("load", function() {
+        jQuery('#tabs.beta-top').tabs();
+        jQuery('#tabs.beta-bottom').tabs();
+});

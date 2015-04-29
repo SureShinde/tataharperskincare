@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <frontend>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <Axthsc_Subscriptioncart before="Mage_Checkout">Axthsc_Subscriptioncart_Checkout</Axthsc_Subscriptioncart>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+</config>

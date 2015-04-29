@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<link rel="stylesheet" href="/skin/frontend/enterprise/tatamobile/css/owl.carousel.css">
+<link rel="stylesheet" href="/skin/frontend/enterprise/tatamobile/css/owl.theme.css">
+<script src="/skin/frontend/enterprise/tatamobile/js/owl.carousel.min.js"></script>
+</head>
+
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+
+    <?php include('/root/www/private/c.php'); ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+
+    <?php
+
+        if (isset($_POST['one']))
+            $one = $_POST['one'];
+        if (isset($_POST['two']))
+            $two = $_POST['two'];
+        if (isset($_POST['three']))
+            $three = $_POST['three'];
+
+        $batch = intval($one . $two . $three);
+
+        if (($batch > 99) && ($batch < 1000)): ?>
+
+        <?php
+             $mysqli = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
+
+
+            $caption = $mysqli->query("SELECT * FROM olbatches WHERE batchnum = $batch");
+
+            while ($result = $caption->fetch_assoc()) {
+
+                $sku = $result['sku'];
+                $batchdate = $result['batchdate'];
+                $people = $result['people'];
+                $peoplez = explode("-", $people);
+            
+            }
+
+            if($_product = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku)):
+        ?>
+    <div class="page">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                
+                <!-- Main Content Box -->
+                <div class="generic_box_full tracking">
+                    <img src="/skin/frontend/enterprise/default/images/ol/r/1.jpg" style="margin-bottom: 1em;" />
+
+                    <p class="batchnum"><?php echo $batch; ?></p>
+
+                    <div class="box product">
+                        <h2>Your </h2>
+                        <?php echo '<img src="' . $_product->getImageUrl() . '" />';
+                        echo '<h4>' . $_product->getName() . '</h4>'; ?>
+                    </div>
+
+                    <div class="box date">
+                        <h2>Was hand-crafted on </h2>
+                        <?php
+                        $batchdate = strtotime($batchdate);
+                        $month = date('F', $batchdate);
+                        $day = date('d', $batchdate);
+                        $year = date('Y', $batchdate);
+                        echo '<p class="month">' . $month . '</p>';
+                        echo '<p class="day">' . $day . '</p>';
+                        echo '<p class="year">' . $year . '</p>';
+
+                        ?>
+                    </div>
+
+                    <div class="box team-member">
+                        <h2>And was batched by </h2>
+                        <img src="/skin/frontend/enterprise/default/images/ol/r/jon.jpg" />
+                    </div>
+
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <?php endif; ?> 
+
+                <!-- Main Content Box -->
+    <div class="page full gray">
+        <div class="main col1-layout">
+            <div class="noshadow">
+
+        <div class="generic_box_full_wide skincarestory">
+            <!-- <img src="/skin/frontend/enterprise/default/images/ol/r/headertextvideo.jpg" class="vspacer" /> -->
+            <h1>Discover the Story<br/>Behind Your Skincare</h1>
+            <p>In our heart of hearts, we're a team of people who are passionate about improving lives. Our method? Natural and nontoxic skincare that's proven to deliver results and to help you discover your healthiest skin. We feel that enriching your skincare experience with the unique storeies behind our products is another means to that end, too. Explore below to discover the one-of-a-kind people, ingredients and unique circumstances behind your favorite skincare.</p>
+            <div class="video-contain"><a onclick="playVideo();return false;" href="#" target="_blank"><img src="/skin/frontend/enterprise/default/images/ol/r/2.jpg" style="margin-bottom: 2em;" /></a></div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="page editions">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+
+                <!-- Main Content Box -->
+                <div class="generic_box_full editions">
+                    <!-- <img src="/skin/frontend/enterprise/default/images/ol/r/headereditions.jpg" class="vspacer" style="margin-top: 0;" /> -->
+                   <div class="header">
+                   <h1>Editions Library</h1>
+                    <p>Our Product Editions are our way of sharing insights into the technological and ingredient improvements that can subtly affect individual products. These nuances are the sign of 100% natural skincare done right, and this Edition Library showcases the story behind each new Edition as it is released.</p>
+                    </div>
+<!--                     <div class="top">
+                        <img src="/skin/frontend/enterprise/default/images/ol/r/editions.jpg" />
+                    </div> -->
+
+                    <div id="editions-slider">
+
+                    <div class="top">
+                        <img class="editions-top" src="/skin/frontend/enterprise/default/images/ol/r/editions.jpg" />
+                        <img src="/skin/frontend/enterprise/default/images/ol/r/frank.jpg" class="collapse2" />
+                        <p class="see-less-collapse2 see-less-1">frankincense - see more</p>
+                        <img src="/skin/frontend/enterprise/default/images/ol/r/hely.jpg" class="collapse1" />
+                        <p class="see-less-collapse1 see-less-1">helichrysum - see more</p>
+                    </div>
+                    <!-- <p class="see-less-null see-less-1">&nbsp;</p> -->
+                    
+
+                   <!--  <div> <h1>New Source: Helichrysum Essential Oil</h1><img src="/skin/frontend/enterprise/default/images/ol/r/hely.jpg" class="collapse1" /> -->
+                    <div class="description1 desc">
+                        <!-- Temp Description -->
+
+                            <p>Essential Oil from the Helichrysum flower, also known as immortelle or everlasting, is used in two of our proprietary antiaging formulas. This flower’s nicknames are derived from its ability to retain its vivid color and shape even when dried. In skincare, it contributes powerful regenerative and antiaging benefits, due to its high antioxidant content, ability to relieve inflammation, and healing properties, all of which contribute to radiant and youthful skin.</p>
+
+                            <p>Our original source for this oil was Corsica, but intense storms and prolonged bad weather led to a worldwide shortage of the supply. Our ingredient team found a perfect substitute for this multitasking ingredient in Albania, where it’s also cultivated, and grows naturally in the mountains.</p>
+
+                             <div class="photos">
+                                <img src="/skin/frontend/enterprise/default/images/ol/r/hely-photo.jpg" />
+                                <img src="/skin/frontend/enterprise/default/images/ol/r/oil.jpg" />
+                            </div>  
+
+                            <h2 class="exp">The experience:</h2>
+                            <p>This newly sourced oil has the same active properties, but has a distinctly more robust floral aroma that subtly changes the scents of the formulas in which it’s included. This change is found in the new Editions of the Rejuvenating Serum and Restorative Eye Crème. </p>
+
+                            <div id="edprod-slider-heli" class="experience heli">
+                                <a href="/rejuvenating-serum-50ml"><img src="/skin/frontend/enterprise/default/images/ol/r/e/rs.jpg" /></a>
+                                <a href="/restorative-eye-creme"><img src="/skin/frontend/enterprise/default/images/ol/r/e/rec.jpg" /></a>
+                            </div>
+
+                    </div>
+                   
+                    <!-- </div>
+                    <div>
+                    <h1>New Source: Frankincense Essential Oil</h1>
+                    <img src="/skin/frontend/enterprise/default/images/ol/r/frank.jpg" class="collapse2" /> -->
+
+                    <div class="description2 desc">
+                        <!-- Temp Description -->
+                            <p>Frankincense Essential Oil is used in many of our skincare formulas for its healing and regenerative properties, and in two of our aromatherapy products for its calming therapeutic benefits. For the skin, Frankincense is ideal for dry or mature complexions as it encourages healing, reduces the appearance of spots and blemishes, and balances the skin tone. For the spirit, its scent brings feelings of peaceful relaxation.</p>
+
+                            <p>Somaliland produces the finest Frankincense in the world; it’s the country’s second most-exported commodity. We recently found a local Vermont producer of the oil who receives Organic frankincense gum resin directly from Somalian farmers. The oil is distilled right here, just 40 miles from our headquarters. We’ve since switched suppliers to work with this new distillery, which means that our new oil is now Organic as well as purchased locally.</p>
+
+                            <div class="photos">
+                                <img src="/skin/frontend/enterprise/default/images/ol/r/frank-photo.jpg" />
+                                <img src="/skin/frontend/enterprise/default/images/ol/r/oil.jpg" />
+                            </div>  
+
+                            <h2 class="exp">The experience:</h2>
+                                    <p>This oil's new distillation process imports a distinctly "greener", or fresher balsamic scent that is extra stimulating and zesty when inhaled. It subtly changes the scent of the formulas in which it's included. Products with New Editions to feature this change include the <span class='green'>Rejuvenating Serum</span>, Revitalizing Body Oil, Replenishing Nutrient Complex, Aromatic Stress Treatment and Aromatic Irritability Treatment.</p>
+
+                                    <div id="edprod-slider-frank" class="experience frank">
+                                        <a href="/rejuvenating-serum-50ml"><img src="/skin/frontend/enterprise/default/images/ol/r/e/rs.jpg" class="first"/></a>
+                                        <a href="/revitalizing-body-oil"><img src="/skin/frontend/enterprise/default/images/ol/r/e/rbo.jpg" /></a>
+                                        <a href="/replenishing-nutrient-complex"><img src="/skin/frontend/enterprise/default/images/ol/r/e/rnc.jpg" /></a>
+                                       <a href="/aromatic-stress-treatment"> <img src="/skin/frontend/enterprise/default/images/ol/r/e/ast.jpg" class="four" /></a>
+                                        <a href="/aromatic-irritability-treatment"><img src="/skin/frontend/enterprise/default/images/ol/r/e/ait.jpg" /></a>
+                                    </div>
+                    </div>         
+<!-- 
+                    </div>
+                    </div> -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="page full gray last">
+        <div class="main col1-layout">
+            <div class="noshadow">
+
+                <div class="generic_box_full team">
+                <div class="header">
+                <h1>Meet our Vermont<br />Manufacturing Team</h1>
+                <p>We're redefining quality in skincare by pouring care and attention in to each small batch of skincare. Swipe right on the photo below to meet the team behind each bottle.</p>
+                </div>
+                    <!-- <img src="/skin/frontend/enterprise/default/images/ol/r/headermeet.jpg" class="vspacer" /> -->
+
+                    <div id="team-slider">
+                        <div>
+                            <h1>Jon</h1>
+                            <h2>Product Manufacturing, Research Development</h2>
+                             <img src="/skin/frontend/enterprise/default/images/ol/r/jon.jpg" />
+                             <p>What I appreciate the most about working with this company is the personal connection I’ve obtained with all of my co-workers. All aspects of the company are in-house, from raw ingredient purchasing through manufacturing, packaging and marketing. We are all together in this through thick and thin, and I feel that the fact that all different aspects and departments of the company interact with each other every day develops trust and closer relationships all around.</p>
+
+                            <p>One of the most fascinating things that I've ever learned is actually about our super concentrated botanical messengers, Essential Oils. Pure, unadulterated essential oils have the highest measurable vibrational frequency of anything else on the planet! For the most part everything has a frequency that is measurable in Megahertz. For instance, fresh produce has a frequency up to 15 MHz, dry herbs from 12 to 22 MHz, and fresh herbs from 20 to 27 MHz., whereas processed and canned foods have no measurable frequency whatsoever. The measured frequencies of essential oils begin at 52 MHz, the frequency of basil oil, and go as high as 320 MHz — the frequency of rose oil. The high frequency that these oils have creates an environment in which no virus, bacteria or pathogens can survive! They’re truly the perfect botanical healers. So, the fact that every single one of our products at Tata Harper Skincare is scented with these pure oils not only means that the aroma is outstanding, but also means that these powerful essential oils are delivering their benefits and energy to your skin with every use.</p>
+
+                            <p>Picking a favorite product is tough for me, I Love them all, but I would have to say that our Replenishing Nutrient Complex is at the top. Not only for it's incredible aroma, but the Complex has a powerhouse of very beneficial oils for the health and repair of our skin at a cellular level. The high percentage of Rosehip oil lends to a healthy glow to skin and fast healing to damaged areas. This oil contains Omega 3,6 and 9, vitamin C, lycopene and linoleic acids. All of these elements help regenerate skin cells, minimize the signs of aging, reduce fine lines, boosts collagen and moisturizes skin. I use it every night after washing my face and wouldn't go without it.</p>
+                        </div>
+
+                        <div>
+                            <h1>Amanda</h1>
+                            <h2>Research and Development, Manufacturing Coordinator</h2>
+                            <img src="/skin/frontend/enterprise/default/images/ol/r/amanda.jpg" />
+                            <p>For me, the thing I love most about working at a vertically integrated company is that I’m always busy and always learning new things, whether it’s about raw materials or regulations.</p>
+
+                            <p>One thing that I was surprised to learn about the skin that has really influenced the way I approach research and development for new products (especially antiaging ones) is that as we age, our skin’s ability to produce Hyaluronic Acid, which is an important element in retaining water and that youthful plump look, gradually decreases. We bring in our own HA with the lowest molecular weight possible, to help replenish that lost substance. It makes such a dramatic difference in the skin!</p>
+
+                            <p>If I could recommend one product to everyone, it would be the Regenerating cleanser. I use it in the shower every morning. I love the vibrant smell of grapefruit essential oil; it helps to wake me up.</p>
+                        </div>
+
+                        <div>
+                            <h1>Louis</h1>
+                            <h2>Operations Manager</h2>
+                            <img src="/skin/frontend/enterprise/default/images/ol/r/louis.jpg" />
+                            <p>Our ability to control all aspects of our business means that we can produce the highest quality products on the market. There is something special about seeing the plants grow, moving them to our processing facility, and making small batches of skin care products with those freshly dried and processed plants.</p>  
+
+                            <p>Something I love about our manufacturing process has been discovering that when you make products out of 100% natural ingredients, I'm always amazed by how consistently they come out, yet at the same time, each lotion has an independent feel and smell. I can probably only tell that because I’m interacting with the formulas every day as they’re freshly batched – as you can imagine, our offices smell amazing!</p>
+
+                            <p>I love all of the products, but the Revitalizing Body Oil is one of my favorite. I play a lot of hockey, and this oil is great after a hot shower following a game, especially in the cold Vermont months when the weather saps your skin of moisture.</p>
+                        </div>
+
+                        <div>
+                            <h1>Joe</h1>
+                            <img src="/skin/frontend/enterprise/default/images/ol/r/joe.jpg" />
+                            <p>It’s clear to me that having all of our aspects of production in-house really allow us to have better control over the quality of our products. There are no mysteries, no questions we have to ask people outside of our own building. It forges a really strong connection between the employees and the products, too; we know them all inside and out.</p>
+
+                            <p>One fun fact that I think really shows how concentrated and powerful our products are, especially the essential oils involved, is that it takes 10,000 roses to make one fluid ounce of Rose Otto essential oil.</p>
+
+                            <p>The Revitalizing Body Oil is a product that I’d recommend to anyone, especially people who spend a lot of time active outdoors, like I do. It really helps soothe the skin after a lot of time in the sun.</p>
+                        </div>
+
+                    <!-- <div> -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+</div>
+<script type="text/javascript">
+
+jQuery('.collapse1, .see-less-collapse1').click(function(){
+        jQuery('.description1').slideToggle('slow');
+        jQuery('.description2').hide();
+        jQuery('.collapse2').parent().removeClass( "tinter" );
+        jQuery('.collapse2').removeClass('imgtint');
+
+        var pshow = false;
+
+        if (jQuery('.see-less-collapse1').text() == 'helichrysum - see more') {
+            jQuery('.see-less-collapse1').text('see less');
+            jQuery('.collapse1').wrap('<span class="tinter"></span>');
+            jQuery('.collapse1').addClass('imgtint');
+            pshow = true;
+        } else {
+            jQuery('.see-less-collapse1').text('helichrysum - see more');
+            jQuery('.collapse1').parent().removeClass( "tinter" );
+            jQuery('.collapse1').removeClass('imgtint');
+            pshow = false;
+        }
+
+        jQuery('.see-less-collapse2').text('frankincense - see more');
+    });
+    jQuery('.collapse2, .see-less-collapse2').click(function(){
+        jQuery('.description2').slideToggle('slow');
+        jQuery('.description1').hide();
+        jQuery('.collapse1').parent().removeClass( "tinter" );
+        jQuery('.collapse1').removeClass('imgtint');
+
+        var pshow = false;
+
+        if (jQuery('.see-less-collapse2').text() == 'frankincense - see more') {
+            jQuery('.see-less-collapse2').text('see less');
+            jQuery('.collapse2').wrap('<span class="tinter"></span>');
+            jQuery('.collapse2').addClass('imgtint');
+            pshow = true;
+        }
+        else {
+            jQuery('.see-less-collapse2').text('frankincense - see more');
+            jQuery('.collapse2').parent().removeClass( "tinter" );
+            jQuery('.collapse2').removeClass('imgtint');
+            pshow = false;
+        }
+
+        jQuery('.see-less-collapse1').text('helichrysum - see more');
+    });
+
+    function playVideo() {
+        var playerHtml = '<iframe src="//player.vimeo.com/video/102119764" width="475" height="205" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/102119764">Stories & Editions: Spring / Summer 2014</a>.</p>';
+
+        jQuery('.video-contain').html(playerHtml);
+    }
+
+
+    jQuery(document).ready(function() {
+  // jQuery("#editions-slider, #team-slider, #edprod-slider-frank, #edprod-slider-heli").owlCarousel({
+      jQuery("#team-slider, #edprod-slider-frank, #edprod-slider-heli").owlCarousel({
+        singleItem: true
+      });
+     
+    });
+
+</script>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

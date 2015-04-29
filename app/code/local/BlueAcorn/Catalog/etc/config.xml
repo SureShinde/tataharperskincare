@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <BlueAcorn_Catalog>
+            <version>1.0</version>
+        </BlueAcorn_Catalog>
+    </modules>
+    <global>
+        <helpers>
+            <catalog>
+                <rewrite>
+                    <product_compare>BlueAcorn_Catalog_Helper_Product_Compare</product_compare>
+                </rewrite>
+            </catalog>
+        </helpers>
+    </global>
+</config>

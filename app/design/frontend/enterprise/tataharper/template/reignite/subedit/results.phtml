@@ -1,0 +1,29 @@
+<?php
+/**
+ * Index template for testing
+ *
+ * @author Anthony Xiques
+ * @copyright July 6, 2013
+ * @link www.reignitegroup.com
+ */
+?>
+<div class="page-title title-buttons">
+    <h1>Your Subscription Has Been Changed!</h1>
+</div>
+<div class="boxarea"><h2>Summary for Subscription #<?php echo $this->getSubscriptionId(); ?></h2>
+
+<?php $subData = $this->getSubscriptionData(); ?>
+
+<ul>
+	<li>Customer Name: <?=$subData["customer_name"]?></li>
+	<li>Product: <?=$subData["products_text"]?></li>
+	<li>Subscription Start Date: <?=$subData["date_start"]?></li>
+	<li>Next Payment Date: <?=$subData["flat_next_payment_date"]?></li>
+	<li>Next Ship Date: <?=$subData["flat_next_delivery_date"]?></li>
+	<li>Subscription Status: <?=($subData["status"]==1) ? "Active" : "Suspended" ?></li>
+	<li>Subscription Type: Every <?=$subData["period_days"]?> days</li>
+</ul>
+
+<p><a href="/subscriptions/customer" class="greenbutton">Return to My Subscriptions</a></p>
+
+</div>

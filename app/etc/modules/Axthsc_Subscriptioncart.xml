@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+     <modules>
+          <Axthsc_Subscriptioncart>
+               <active>true</active>
+               <codePool>local</codePool>
+          </Axthsc_Subscriptioncart>
+    </modules>
+</config>

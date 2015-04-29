@@ -1,0 +1,214 @@
+<div id="navigation">
+	<div id="megaMenu" class="megaMenuContainer megaFullWidth megaMenuHorizontal">
+		<ul id="megaUber" class="megaMenu">
+		    <li class="menu-item">
+		    	<a href="http://www.tataharperskincare.com">Home</a>
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/skincare/">Skincare</a>
+
+						<div class="dropdown_3column submenu skincare-menu">
+			              
+			            <div class="col_1 skincare-bg">
+			            </div>  
+
+			      		<div class="col_1" style="width:20.5%;margin-left:30px;">
+			            	<h3><a href="/shop-all-skincare">Shop All Products</a></h3>  
+			            <ul class="shopallprod">
+			                <li><a href="/regenerating-cleanser">Regenerating Cleanser</a></li>
+							<li><a href="/refreshing-cleanser">Refreshing Cleanser</a></li>
+							<li><a href="/hydrating-floral-essence-125ml">Hydrating Floral Essence - 125ml</a></li>
+							<li><a href="/hydrating-floral-essence-50ml">Hydrating Floral Essence - 50ml</a></li>
+							<li><a href="/rejuvenating-serum-50ml">Rejuvenating Serum - 50ml</a></li>
+							<li><a href="/rejuvenating-serum-30ml">Rejuvenating Serum - 30ml</a></li>
+							<li><a href="/rebuilding-moisturizer">Rebuilding Moisturizer</a></li>
+							<li><a href="/repairative-moisturizer">Repairative Moisturizer</a></li>
+							<li><a href="/restorative-eye-creme">Restorative Eye Creme</a></li>
+							<li><a href="/resurfacing-mask">Resurfacing Mask</a></li>
+							<li><a href="/replenishing-nutrient-complex">Replenishing Nutrient Complex</a></li>
+							<li><a href="/revitalizing-body-oil">Revitalizing Body Oil</a></li>
+							<li><a href="/aromatic-stress-treatment">Aromatic Stress Treatment</a></li>
+							<li><a href="/aromatic-bedtime-treatment">Aromatic Bedtime Treatment</a></li>
+							<li><a href="/aromatic-irritability-treatment">Aromatic Irritability Treatment</a></li>
+							<li><a href="/be-true">Be True Lip Treatment</a></li>
+							<li><a href="/be-fierce">Be Fierce Lip Treatment</a></li>
+							<li><a href="/be-adored">Be Adored Lip Treatment</a></li>
+							<li><a href="/supernatural-collection/boosted-contouring-serum">Boosted Contouring Serum</a></li>
+			            </ul>
+			            </div>
+
+			            <div class="col_1" style="width:18%;margin-left:40px;">
+			            	<h3><a href="/skincare/shop-by-category">Shop By Category</a></h3>  
+			                <ul>  
+			                    <li><a href="/skincare/shop-by-category/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Cleanse</a></li>  
+			                    <li><a href="/skincare/shop-by-category/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">Antiage</a></li>  
+			                    <li><a href="/skincare/shop-by-category/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Moisturize</a></li>  
+			                    <li><a href="/skincare/shop-by-category/#tabs-5" onclick="window.location.href = '#tabs-5';location.reload();">Mask</a></li>  
+			                    <li><a href="/skincare/shop-by-category/#tabs-4" onclick="window.location.href = '#tabs-4';location.reload();">Body</a></li>  
+			                </ul> 
+			                <h3><a href="/skincare/shop-by-skintype">Shop By Skintype</a></h3>   
+			                <ul>
+			                	<li><a href="/skincare/shop-by-skintype">Find Your Skintype</a></li>  
+			                    <li><a href="/skincare/shop-by-skintype/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">Oily/Combination</a></li>  
+			                    <li><a href="/skincare/shop-by-skintype/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Dry or Mature</a></li>  
+			                    <li><a href="/skincare/shop-by-skintype/#tabs-4" onclick="window.location.href = '#tabs-4';location.reload();">Sensitive</a></li>    
+			                </ul>
+			            </div>
+
+			            <div class="col_1" style="width:26.5%;margin-left:0px;">  
+
+			                <h3><a href="/skincare/shop-by-beauty-sets">Shop by Beauty &amp; Gift Sets</a></h3>  
+			                <ul>  
+			                    <li><a href="/deluxe-beauty-set">Deluxe Beauty Set</a></li>  
+			                    <li><a href="/maximum-results-sensitive-skin">Maximum Results – Sensitive Skin</a></li>  
+			                    <li><a href="/maximum-results-oilycombination-skin">Maximum Results – Oily/Combination Skin</a></li>  
+			                    <li><a href="/maximum-results-dry-or-mature-skin">Maximum Results – Dry or Mature Skin</a></li>  
+			                    <li><a href="/antiaging-essentials-set">Antiaging Essentials Set</a></li>
+			                    <li><a href="/ultimate-glow-set">Ultimate Glow Set</a></li>
+			                    <!-- <li><a href="/jet-set-survival-kit">Jet Set Survival Kit</a></li> -->
+			                </ul>     
+			                <h3><a href="/supernatural-collection">Supernatural Collection</a></h3>
+							<ul>  
+			                    <li><a href="/supernatural-collection/boosted-contouring-serum">Boosted Contouring Serum</a></li>  
+			                </ul>
+			                <h3><a href="/press-awards/customer-testimonials">Customer Testimonials</a></h3>
+
+			            </div>  
+			              
+			        </div>
+
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/aromatherapy/">Aromatherapy</a>
+
+		    	<div class="dropdown_2column submenu">
+			              
+			            <div class="col_1 aromath-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:40%;margin-top:15px;">
+			                <ul>
+						    <li><a href="/aromatherapy/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Why Aromatherapy?</a></li> 
+						    <li><a href="/aromatherapy/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">How it Works</a></li> 
+						    <li><a href="/aromatherapy/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Shop Aromatherapy</a></li> 
+						        <li class="small"><a class="small" href="/aromatic-bedtime-treatment">Aromatic Bedtime Treatment</a></li> 
+						        <li class="small"><a class="small" href="/aromatic-stress-treatment">Aromatic Stress Treatment</a></li> 
+						        <li class="small"><a class="small" href="/aromatic-irritability-treatment">Aromatic Irritability Treatment</a></li> 
+			                </ul> 
+			            </div>  
+			              
+			    </div>
+			    
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/lip-care">Lip Care</a>
+
+				<div class="dropdown_2column submenu" style="padding:0px;width:305px;">
+			              
+			            <div class="col_1 lipcare-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:140px;margin-top:5px;margin-left:10px;">
+			                <ul>
+							<li><a href="/lip-care/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Why Lip Treatments?</a></li> 
+							<li><a href="/lip-care/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">Benefits &amp; Technology</a></li> 
+							<li><a href="/lip-care/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Shop Lip Treatments</a></li> 
+								<li class="small"><a class="small" href="/be-true">Be True</a></li> 
+								<li class="small"><a class="small" href="/be-adored">Be Adored</a></li> 
+								<li class="small"><a class="small" href="/be-fierce">Be Fierce</a></li> 
+							</ul>
+			            </div>  
+
+			    </div>
+
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/tatas-mission">Tata's Mission</a>
+
+				<div class="dropdown_2column item-5 submenu" style="padding:0px;width:477px;">
+			              
+			            <div class="col_1 mission-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:190px;margin-top:5px;margin-left:5px;">
+			                <ul>
+							<li><a href="/tatas-mission">Tata’s Mission</a></li> 
+							<li><a href="/our-lab/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Results from Natural Actives</a></li>
+							</ul>
+			            </div>  
+
+			    </div>
+
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/our-lab">Our Lab</a>
+
+				<div class="dropdown_2column item-6 submenu" style="padding:0px;width:360px;">
+			              
+			            <div class="col_1 lab-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:170px;margin-top:5px;margin-left:5px;">
+			                <ul>
+							<li><a href="/our-lab">Our Lab</a></li>
+								<li class="small"><a class="small" href="/our-lab/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Our Technology</a></li> 
+								<li class="small"><a class="small" href="/our-lab/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Results from Natural Actives</a></li> 
+								<li class="small"><a class="small" href="/our-lab/#tabs-4" onclick="window.location.href = '#tabs-4';location.reload();">Meet Our Lab Team</a></li> 
+							<li><a href="/shop-by-antiaging/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">Our Antiaging Technology</a></li> 
+							<li><a href="/our-lab/ingredients">Ingredients</a></li> 
+							</ul>
+			            </div>  
+
+			    </div>
+
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/why-we-are-different">About Us</a>
+
+		    	<div class="dropdown_2column item-7 submenu" style="padding:0px;width:392px;">
+			              
+			            <div class="col_1 about-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:140px;margin-top:5px;margin-left:-15px;">
+			                <ul>
+							<li><a href="/why-we-are-different">Why We are Different</a></li> 
+							<li><a href="/about-us/our-farm">Our Farm</a></li> 
+							<li><a href="/about-us/our-certifications">Our Certifications</a></li>
+							<li><a href="/about-us/pricing-philosophy">Pricing Philosophy</a></li>
+							<li><a href="http://blog.tataharperskincare.com" target="_blank">Our Blog</a></li>
+							<li><a href="/about-us/store-locator">Store Locator</a></li>
+							<li><a href="/about-us/faq">FAQ</a></li>
+							</ul>
+			            </div>  
+
+			    </div>
+
+		    </li>
+		    <li class="menu-item">
+		    	<a href="/press-awards">Press &amp; Awards</a>
+
+		    	<div class="dropdown_2column item-8 submenu" style="padding:0px;width:300px;">
+			              
+			            <div class="col_1 press-bg">
+
+			            </div>  
+			      
+			            <div class="col_1" style="width:150px;margin-top:5px;margin-left:-5px;">
+			                <ul>
+							<li><a href="/press-awards">Press &amp; Awards</a></li> 
+							<li><a href="/press-awards/customer-testimonials">Customer Testimonials</a></li>
+							</ul>
+			            </div>  
+
+			    </div>
+
+		    </li>
+		</ul>
+	</div>
+</div>

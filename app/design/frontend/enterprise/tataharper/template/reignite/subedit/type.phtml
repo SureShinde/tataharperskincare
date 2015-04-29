@@ -1,0 +1,59 @@
+<?php
+/**
+ * Index template for testing
+ *
+ * @author Anthony Xiques
+ * @copyright July 6, 2013
+ * @link www.reignitegroup.com
+ */
+?>
+<div class="page-title title-buttons">
+    <h1>Change My Subscription Type</h1>
+</div>
+<div class="boxarea"><h2>Summary for Subscription #<?php echo $this->getSubscriptionId(); ?></h2>
+
+<?php $subData = $this->getSubscriptionData(); ?>
+
+<ul>
+	<li>Customer Name: <span><?=$subData["customer_name"]?></span></li>
+	<li>Product: <span><?=$subData["products_text"]?></span></li>
+	<li>Subscription Start Date: <span><?=$subData["date_start"]?></span></li>
+	<li>Next Payment Date: <span><?=$subData["flat_next_payment_date"]?></span></li>
+	<li>Next Ship Date: <span><?=$subData["flat_next_delivery_date"]?></span></li>
+	<li>Subscription Status: <span><?=($subData["status"]==1) ? "Active" : "Suspended" ?></span></li>
+	<li>Subscription Type: <span>Every <?=$subData["period_days"]?> days</span></li>
+</ul>
+
+<p><a href="/subscriptions/customer" class="greenbutton">Return to My Subscriptions</a></p>
+</div>
+<?php if ($subData["status"]==1): ?>
+
+	<?php if ($subData["redzone"]): ?>
+		<div class="boxarea">
+			<h2>Whoops!</h2>
+			<p>You just placed an order in the last few days and you're still waiting for the delivery! Check back in a few days after you received your latest order, and you'll be able to change your subscription frequency. Feel free to call us at 1-877-321-TATA (8282) or email info@tataharper.com with any questions or feedback.</p>
+		</div>
+	<?php else: ?>
+
+		<div class="boxarea">
+			<h2>Change My Subscription Frequency</h2>
+			<?php $formAction = "/subedit/change/submit/id/" . $this->getSubscriptionId(); ?>
+			<form name='changeSubscriptionType' method='post' action="<?=$formAction?>" onsubmit="return validateForm()" >
+				<label for='periodid'>Change frequency to: </label>
+				<span class="kyoo-tooltip"><select name='periodid' class='display_periods'>
+					<?= $this->getOptions($subData["period_type"]) ?>
+				</select><span class="kyootip kyootip--right">Choose the new frequency for your subscription here.</span></span>
+
+				<p>New Billing Date: <span class="kyoo-tooltip"><input name="newbilldate" type="text" class="datepicker" readonly="true"/><span class="kyootip kyootip--right">This is the date your subscription starts again - the next time you'll be billed, and when your next order will be shipped.</span></span></p>
+				<input type='submit' value='Update subscription'>
+			</form>
+			</div>
+
+	<?php endif; ?>
+
+<?php else: ?>
+	<div class="boxarea">
+		<h2>Whoops!</h2>
+		<p> Your subscription must be active in order to make changes! </p>
+	</div>
+<?php endif; ?>

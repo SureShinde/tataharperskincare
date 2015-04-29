@@ -1,0 +1,120 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+<?php $cart_subtotal = Mage::helper('checkout/cart')->getQuote()->getSubtotal(); ?>
+<div class="page-title title-buttons">
+        <div class="category-head">
+    <h2 class="flleft"><?php echo $this->__('My Shopping Bag') ?></h2><h2 class="flright"><?php echo "<strong>Subtotal: $" . number_format($cart_subtotal, 2) ?></h2>
+        </div>
+<div id="cart_message">
+    <?php if ($cart_subtotal < 200): ?>
+    <p class="freecalculator">
+        <span class="label freecalculator">You only need $<?php echo number_format(200 - $cart_subtotal, 2)?> more in your cart to get free shipping!</span></p>
+    <?php elseif ($cart_subtotal >= 200): ?>
+    <p class="freecalculator">
+        <span class="label freecalculator">Your order ships free!</span></p>
+    <?php endif; ?>
+</div>
+</div>
+
+<div class="cart">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php //echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" id="checkout-items-form">
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+                <col width="1" />
+                <col />
+                <col width="1" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+            <?php endif; ?>
+                <col width="1" />
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                
+                <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+    <?php if($GLOBALS['subproducttrue']): ?>
+    <p class="green autoshipnotice">*By choosing our replenishment service, your item will automatically be shipped and charged according to your selected frequency</p>
+    <?php endif; ?>
+    
+    <div class="cart-collaterals<?php if($this->getChildHtml('crosssell')) echo ' cross-inside'; ?>">
+        <?php echo $this->getChildHtml('crosssell') ?>
+        <div class="deals">
+            <?php /* Extensions placeholder */ ?>
+            <?php //echo $this->getChildHtml('checkout.cart.extra') ?>
+            <?php //echo $this->getChildHtml('checkout_cart_widget') ?>
+            <?php echo $this->getChildHtml('coupon') ?>
+            <?php echo $this->getChildHtml('giftcards') ?>
+        </div>
+    </div>
+    
+    <!-- <div class="bottom_proceed"> -->
+         <?php //echo $this->getChildHtml('proceed_link'); ?>
+    <!-- </div> -->
+    
+    <div class="totals">
+        <?php echo $this->getChildHtml('totals'); ?>
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+        <?php foreach ($this->getMethods('methods') as $method): ?>
+            <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+            <li><?php echo $methodHtml; ?></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+    </div>
+    <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+</div>

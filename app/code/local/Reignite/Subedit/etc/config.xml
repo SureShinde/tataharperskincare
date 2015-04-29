@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Reignite_Subedit configuration
+ *
+ * @author Anthony Xiques
+ * @copyright July 6, 2013
+ * @link www.reignitegroup.com
+ */
+ -->
+ <config>
+ 	<modules>
+ 		<Reignite_Subedit>
+ 			<version>1.0</version>
+ 		</Reignite_Subedit>
+ 	</modules>
+ 	<frontend>
+ 		<routers>
+ 			<reignite_subedit>
+ 				<use>standard</use>
+ 				<args>
+ 					<module>Reignite_Subedit</module>
+ 					<frontName>subedit</frontName>
+ 				</args>
+ 			</reignite_subedit>
+ 		</routers>
+ 		<layout>
+ 			<updates>
+ 				<reignite_subedit>
+ 					<file>reignite_subedit.xml</file>
+ 				</reignite_subedit>
+ 			</updates>
+	</layout>
+ 	</frontend>
+ 	<global>
+ 		<helpers>
+ 			<reignite_subedit>
+ 				<class>Reignite_Subedit_Helper</class>
+ 			</reignite_subedit>
+ 		</helpers>
+ 		<blocks>
+ 			<reignite_subedit>
+ 				<class>Reignite_Subedit_Block</class>
+ 			</reignite_subedit>
+ 		</blocks>
+ 	</global>
+ </config>

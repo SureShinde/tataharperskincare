@@ -1,0 +1,92 @@
+<?php
+/**
+ * Template for Onecol-Custom-Photostream-Page
+ */
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script type="text/javascript" src="http://www.tataharperskincare.com/js/custom/masonry.pkgd.min.js"></script>
+<!-- <script type="text/javascript" src="http://www.tataharperskincare.com/js/custom/AnimOnScroll.js"></script> -->
+<script type="text/javascript" src="http://www.tataharperskincare.com/js/custom/classie.js"></script>
+<script type="text/javascript" src="http://www.tataharperskincare.com/js/custom/imagesloaded.js"></script>
+<script type="text/javascript" src="http://www.tataharperskincare.com/js/custom/modernizr.custom.js"></script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js?domready=1#pubid=ra-5329ab772ae41f57"></script>
+</head>
+
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                <div class="generic_box_full">
+                
+                <div class="headimgtop"><img src="http://tataharperskincare.com/skin/frontend/enterprise/default/images/header_tw.jpg" alt="" /></div>
+                    <div class="photostream" id="streamcontain">
+                        <ul class="grid effect-1" id="grid">
+
+                       <?php 
+
+                        $consumer = 'QQwVj9mGzsqtMQFWSETkHJ9D7ic1Ml2tKrZgvxLKp9hZvAZGyw';
+                        $secret = 'BHU9IYw5EKpmiyYxPrUT1zwklI2TCOaZH5t6oHePK8fuHQ3r8e';
+                        $tumblr = new Tumblr_Tumblr($consumer, $secret);
+
+                        $offset = 0;
+                        $count = 1;
+
+                        while ($count > 0) {
+                            $posts = $tumblr->get('/blog/tataharper.tumblr.com/posts', array('offset' => $offset));
+
+                            $count = count($posts->response->posts);
+
+                            foreach($posts->response->posts as $posts) {
+                                $postDate = date('Y-m-d', $posts->timestamp);
+                                if ($posts->type == 'photo') {
+                                    foreach ($posts->photos as $photo) {
+                                        $imgURL = $photo->alt_sizes[1]->url; ?>
+                                        <li class="item">
+                                            <span href="<?php echo $imgURL;?>" data-permalink="<?php echo $imgURL;?>" class="group3 cboxElement"><img src="<?php echo $imgURL; ?>"></span>
+                                        </li> <?php
+                                        // echo "<img src=\"$imgURL\" />";
+                                    }
+                                    // echo $posts->caption;
+                                }
+                            }
+
+                            $offset += 20;
+
+                        } ?>
+
+                        </ul>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+<div id="tumblr_down"></div>
+<div id="fb-root"></div>
+</body>
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+<script>
+jQuery(window).load(function() {
+    new AnimOnScroll( document.getElementById('grid'), {
+        minDuration : 0.4,
+        maxDuration : 0.7,
+        viewportFactor : 0.2
+    } );
+});
+</script>
+</html>

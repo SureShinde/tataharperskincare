@@ -1,0 +1,229 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<div class="footer_container clearfix">
+	<div class="col-full bgimgfooter clearfix" id="footer">
+	
+		    
+	    
+		<!-- <div id="copyright" class="col-left">
+			100% Natural & Nontoxic Beauty | © 2012 Tata's Natural Alchemy, LLC. All Rights Reserved
+		</div>
+		
+		<div id="credit" class="col-right">
+			
+		</div> -->
+
+	<div class="col_container">
+	<div class="col_fter col_first">
+		<div class="menu-footer-skincare-container">
+		<ul class="menu">
+
+				<li class="menu-item">
+			<a href="/shop-all-skincare">ALL PRODUCTS</a>  
+			            <ul class="sub-menu allprodfoot">
+			                <li><a href="/regenerating-cleanser">Regenerating Cleanser</a></li>
+							<li><a href="/refreshing-cleanser">Refreshing Cleanser</a></li>
+							<li><a href="/hydrating-floral-essence-125ml">Hydrating Floral Essence - 125ml</a></li>
+							<li><a href="/hydrating-floral-essence-50ml">Hydrating Floral Essence - 50ml</a></li>
+							<li><a href="/rejuvenating-serum-50ml">Rejuvenating Serum - 50ml</a></li>
+							<li><a href="/rejuvenating-serum-30ml">Rejuvenating Serum - 30ml</a></li>
+							<li><a href="/rebuilding-moisturizer">Rebuilding Moisturizer</a></li>
+							<li><a href="/repairative-moisturizer">Repairative Moisturizer</a></li>
+							<li><a href="/restorative-eye-creme">Restorative Eye Creme</a></li>
+							<li><a href="/resurfacing-mask">Resurfacing Mask</a></li>
+							<li><a href="/replenishing-nutrient-complex">Replenishing Nutrient Complex</a></li>
+							<li><a href="/revitalizing-body-oil">Revitalizing Body Oil</a></li>
+							<li><a href="/aromatic-stress-treatment">Aromatic Stress Treatment</a></li>
+							<li><a href="/aromatic-bedtime-treatment">Aromatic Bedtime Treatment</a></li>
+							<li><a href="/aromatic-irritability-treatment">Aromatic Irritability Treatment</a></li>
+							<li><a href="/be-true">Be True Lip Treatment</a></li>
+							<li><a href="/be-fierce">Be Fierce Lip Treatment</a></li>
+							<li><a href="/be-adored">Be Adored Lip Treatment</a></li>
+							<li><a href="/supernatural-collection/boosted-contouring-serum">Boosted Contouring Serum</a></li>
+
+				</ul>
+				</li>
+
+<!-- <li class="bold menu-item menu-item-type-post_type menu-item-object-page menu-item-977" id="menu-item-977"><a href="/press-awards/customer-testimonials">CUSTOMER TESTIMONIALS</a></li> -->
+</ul></div></div>
+	<div class="col_fter col_bg"><div class="menu-footer-aromatherapy-container"><ul class="menu" id="menu-footer-aromatherapy">
+
+<li class="menu-item">
+					<a href="/skincare/">SKINCARE</a>
+		<ul class="sub-menu">
+			<!-- <li><a href="/skincare/shop-all-skincare/">All Skincare</a></li> -->
+			<li><a href="/skincare/shop-by-skintype/">Shop by Skintype</a></li>
+			<li><a href="/antiage">Antiaging Serums</a></li>
+			<li><a href="/cleanse">Cleansers</a></li>
+			<li><a href="/moisturize">Moisturizers &amp; Toners</a></li>
+			<li><a href="/body">Body</a></li>
+			<li><a href="/mask">Masks</a></li>
+			<li><a href="/skincare/beauty-and-gift-sets">Beauty Sets</a></li>
+		</ul>
+		</li>
+
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-729 parent" id="menu-item-729"><a href="/aromatherapy/">AROMATHERAPY</a>
+<ul class="sub-menu">
+	<li><a href="/aromatherapy/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Why Aromatherapy?</a></li>
+	<li><a href="/aromatherapy/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">How it Works</a></li>
+	<li><a href="/aromatherapy/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Shop Aromatherapy</a></li>
+	<li><a href="/aromatic-irritability-treatment">Irritability Treatment</a></li>
+	<li><a href="/aromatic-bedtime-treatment">Bedtime Treatment</a></li>
+	<li><a href="/aromatic-stress-treatment">Stress Treatment</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-660 parent" id="menu-item-660"><a href="/lip-care/">LIP CARE</a>
+<ul class="sub-menu">
+	<li><a href="/lip-care/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Why Lip Treatments?</a></li>
+	<li><a href="/lip-care/#tabs-2" onclick="window.location.href = '#tabs-2';location.reload();">Benefits &amp; Technology</a></li>
+	<li><a href="/lip-care/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Shop Lip Treatments</a></li>
+	<li><a href="/be-true">Be True</a></li>
+	<li><a href="/be-adored">Be Adored</a></li>
+	<li><a href="/be-fierce">Be Fierce</a></li>
+</ul>
+</li>
+</ul></div></div>
+<div class="col_fter col_bg"><div class="menu-footer-about-container">
+		<ul class="menu" id="menu-footer-about">
+			<li class="menu-item menu-item-type-post_type menu-item-object-page parent"><a href="/supernatural-collection">SUPERNATURAL COLLECTION</a>
+<ul class="sub-menu">
+	<li><a href="/supernatural-collection/boosted-contouring-serum/">Boosted Contouring Serum</a></li>
+	<li><a href="/supernatural-collection/concentrated-brightening-serum/">Concentrated Brightening Serum</a></li>
+	<li><a href="/supernatural-collection/elixir-vitae/">Elixir Vitae</a></li>
+</ul>
+</li>
+			<li class="menu-item menu-item-type-post_type menu-item-object-page parent"><a href="/why-we-are-different/">ABOUT US</a>
+<ul class="sub-menu">
+	<li><a href="/why-we-are-different">Why We are Different</a></li>
+	<li><a href="/about-us/our-farm">Our Farm</a></li>
+	<li><a href="/about-us/pricing-philosophy">Pricing Philosophy</a></li>
+	<li><a href="/about-us/our-certifications">Our Certifications</a></li>
+	<li><a href="http://blog.tataharperskincare.com" target="_blank">Blog, News, &amp; Events</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page parent"><a href="/tatas-mission/">TATA’S MISSION</a>
+<!-- <ul class="sub-menu">
+	<li><a href="http://www.tataharperskincare.com/our-lab/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Natural & Organic</a></li>
+	<li><a href="http://www.tataharperskincare.com/our-lab/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Nontoxic</a></li>
+</ul> -->
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page parent"><a href="/our-lab/">OUR LAB</a>
+<ul class="sub-menu">
+	<li><a href="/our-lab/ingredients">Ingredients</a></li>
+	<li><a href="/our-lab/#tabs-3" onclick="window.location.href = '#tabs-3';location.reload();">Proven Results</a></li>
+	<li><a href="/our-lab/#tabs-1" onclick="window.location.href = '#tabs-1';location.reload();">Our Technology</a></li>
+	<li><a href="/our-lab/#tabs-4" onclick="window.location.href = '#tabs-4';location.reload();">Our Team</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="col_fter col_bg col_last">
+<div class="menu-footer-faqcontact-container">
+<ul class="menu" id="menu-footer-faqcontact">
+<li class="null menu-item"><a href="http://#">NULL</a>
+	<ul class="sub-menu">
+		<li><a href="/faq/">FAQ</a></li>
+		<li><a href="/store-locator/">Store Locator</a></li>
+		<!-- <li><a href="/store-locator/">Customer Service</a></li> -->
+		<li><a href="/privacy-policy-terms-conditions/">Privacy Policy</a></li>
+		<li><a href="/privacy-policy-terms-conditions/">Terms &amp; Conditions</a></li>
+		<!-- <li class="bolder"><a href="/autoship">Replenishment Service</a></li> -->
+	</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page parent" style="margin-bottom:0px;"><a href="/affiliates">TATA HARPER AFFILIATE PROGRAM</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page parent" style="margin-bottom:0px;"><a href="/autoship">REPLENISHMENT SERVICE</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page parent"><a href="/customer/account/login">MY ACCOUNT</a>
+<ul class="sub-menu">
+	<li><a href="/wishlist">My Wishlist</a></li>
+	<li><a href="/replenishment/index/index/">My Replenishment Subscriptions</a></li>
+</ul>
+</li>
+</ul></div>
+<div class="ft_contactinfo">
+		<p><span>CONTACT US</span><br />
+		T: 1-877-321-TATA (8282)<br />
+		Email: <a style="color:#58595b;" href="mailto:info@tataharper.com">info@tataharper.com</a></p>
+</div>
+	<!-- <div class="fter_social">
+		<div class="soc_fter_icon"><a target="_blank" href="https://www.facebook.com/TataHarperSkinCare"><img alt="image" src="<?php echo $this->getSkinUrl('images/ft_facebook.jpg') ?>" /></a></div>
+		<div class="soc_fter_icon"><a target="_blank" href="https://twitter.com/TataHarper"><img alt="image" src="<?php echo $this->getSkinUrl('images/ft_twitter.jpg') ?>" /></a></div>
+		<div class="soc_fter_icon"><a target="_blank" href="http://pinterest.com/tataharper/"><img alt="image" src="<?php echo $this->getSkinUrl('images/ft_pinterest.jpg') ?>" /></a></div>
+		<div class="soc_fter_icon"><a target="_blank" href="http://blog.tataharperskincare.com"><img alt="image" src="<?php echo $this->getSkinUrl('images/ft_rss.jpg') ?>" /></a></div>
+		<div class="soc_fter_icon "><a target="_blank" href="http://www.youtube.com/user/TataHarperSkincare"><img alt="image" src="<?php echo $this->getSkinUrl('images/ft_youtube.jpg') ?>" /></a></div>
+	</div> -->
+	</div>
+	<div class="handmadearea">
+		<img src="//www.tataharperskincare.com/skin/frontend/enterprise/default/images/handmadebottom.jpg" />
+	</div>
+	</div>
+	
+	</div><!-- /#footer  -->
+	<div class="greenfooter">
+		<img src="//www.tataharperskincare.com/skin/frontend/enterprise/default/images/madewithlove.jpg" />
+		<p class="copyrighttext">&copy 2010 - <?php echo date(Y); ?> Tata's Natural Alchemy. All Rights Reserved.</p>
+		<p class="copyrighttext second"><a href="#">Contact Us</a> | <a href="/privacy-policy-terms-conditions/">Terms of Use | <a href="/privacy-policy-terms-conditions/">Privacy Policy</p>
+	</div>
+	</div>
+<script type="text/javascript">
+jQuery(document).ready(function(){ 
+	jQuery(document).pngFix(); 
+}); 
+</script>
+<script type="text/javascript">
+var __lc = {};
+__lc.license = 3231622;
+
+(function() {
+    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+})();
+</script>
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0019/0358.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<script type="text/javascript">
+adroll_adv_id = "4Q3CWYSZQZBX5KVMIJIPSR";
+adroll_pix_id = "UB4JJZFNRVAM7IVXBNPLJ3";
+(function () {
+var oldonload = window.onload;
+window.onload = function(){
+   __adroll_loaded=true;
+   var scr = document.createElement("script");
+   var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+   scr.setAttribute('async', 'true');
+   scr.type = "text/javascript";
+   scr.src = host + "/j/roundtrip.js";
+   ((document.getElementsByTagName('head') || [null])[0] ||
+  document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+   if(oldonload){oldonload()}};
+}());
+</script>

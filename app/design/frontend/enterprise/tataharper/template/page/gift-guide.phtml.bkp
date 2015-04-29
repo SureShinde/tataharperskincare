@@ -1,0 +1,715 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<!-- <script type="text/javascript" src="/js/custom/jquery.carouFredSel.js"></script> -->
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="header-custom">
+            <?php echo "<img src='http://tataharperskincare.com/blasts/desktophome/gift-guide-header.jpg' />"; ?>
+        </div>
+        <?php echo $this->getChildHtml('breadcrumbsContainer') ?>
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                
+                <!-- Main Content Box -->
+                <div class="generic_box_full intro">
+                    <?php echo $blockObj->renderDefaultTabContent($this->getChildHtml('content')); ?>
+                </div>
+
+                <!-- GIFT GUIDE START -->
+
+                 <div class="generic_box_full gift-guide-four">
+                    <div class="gift-guide-left">
+                        <p class="description">Every Occasion</p>
+                        <div class="gift-sub-cats">
+                            <a href="#" onClick="displayBridesmaid(); return false;" class="bridesmaid">Bridesmaid</a><br />
+                            <a href="#" onClick="displayForYourLove(); return false;" class="for-your-love">For Your Love</a><br />
+                            <!-- <a href="#" onClick="displaySecretSanta(); return false;" class="secret-santa">Secret Santa</a><br /> -->
+                            <a href="#" onClick="displayBestBets(); return false;" class="best-bets">Best Bets</a>
+                            <a href="#" onClick="displayBirthday(); return false;" class="birthday">Birthday</a>
+                             <a href="#" onClick="displayStockingStuffer(); return false;" class="stocking-stuffer">Stocking Stuffer</a><br />
+                            <a href="#" onClick="displayValentines(); return false;" class="valentines">Valentine's Day</a>
+                            <a href="#" onClick="displayMothers(); return false;" class="mothers">Mother's Day</a>
+                             <a href="#" onClick ="displayFathers(); return false;" class="fathers">Father's Day</a><br />
+                        </div>
+                    </div>
+                    <p class="gift-cat-title">Bridesmaid</p>
+                    <a id="prev4" class="prev" href="#">&nbsp;</a>
+                    <div class="the-gifts">
+                        <?php $blockObj->renderListAll($customfields[tab_five_content]); ?>
+                    </div>
+                        <a id="next4" class="next" href="#">&nbsp;</a>
+                    </div>
+                    <p class="clear" />
+                </div>
+
+                <div class="generic_box_full gift-guide-two">
+                    <div class="gift-guide-left">
+                        <p class="description">Every Price</p>
+                        <div class="gift-sub-cats">
+                            <a href="#" onClick="displayLittleSomething(); return false;" class="little-something">Little Something</a><br />
+                            <a href="#" onClick="display75AndUnder(); return false;" class="75-and-under">$75 & Under</a><br />
+                            <a href="#" onClick="display100AndUnder(); return false;" class="100-and-under">$100 & Under</a><br />
+                            <a href="#" onClick="displayPremiumGifts(); return false;" class="premium-gifts">Premium Gifts</a>
+                        </div>
+                    </div>
+                    <p class="gift-cat-title">Little Something</p>
+                    <a id="prev2" class="prev" href="#">&nbsp;</a>
+                    <div class="the-gifts">
+                        <?php $blockObj->renderListAll($customfields[tab_three_content]); ?>
+                    </div></div>
+                    <a id="next2" class="next" href="#">&nbsp;</a>
+                    <p class="clear" />
+                </div>
+
+                <div class="generic_box_full gift-guide-one">
+                    <div class="gift-guide-left">
+                        <p class="description">Every Special Someone</p>
+                        <div class="gift-sub-cats">
+                            <a href="#" onClick="displayHer(); return false;" class="her">Her</a><br />
+                            <a href="#" onClick="displayHim(); return false;" class="him">Him</a><br />
+                            <a href="#" onClick="displayChildTeen(); return false;" class="child-teen">Child/Teen</a>
+                        </div>
+                    </div>
+                    <p class="gift-cat-title">Her</p>
+                    <a id="prev1" class="prev" href="#">&nbsp;</a>
+                    <div class="the-gifts">
+                       <?php $blockObj->renderListAll($customfields[tab_two_content]); ?>
+                    </div></div>
+                    <a id="next1" class="next" href="#">&nbsp;</a>
+                    <p class="clear" />
+                </div>
+
+                <div class="generic_box_full gift-guide-three">
+                    <div class="gift-guide-left">
+                        <p class="description">Every Age</p>
+                        <div class="gift-sub-cats">
+                            <a href="#" onClick="displayTeen(); return false;" class="teen">Teen</a><br />
+                            <a href="#" onClick="display20s(); return false;" class="20s">20's</a><br />
+                            <a href="#" onClick="display30sAnd40s(); return false;" class="30s-and-40s">30's & 40's</a><br />
+                            <a href="#" onClick="display50sAndUp(); return false;" class="50s-and-up">50's & up</a><br />
+                        </div>
+                    </div>
+                    <p class="gift-cat-title">Teen</p>
+                    <a id="prev3" class="prev" href="#">&nbsp;</a>
+                    <div class="the-gifts">
+                        <?php $blockObj->renderListAll($customfields[tab_four_content]); ?>
+                    </div></div>
+                    <a id="next3" class="next" href="#">&nbsp;</a>
+                    <p class="clear" />
+                </div>
+
+
+                <!-- GIFT GUIDE END -->
+
+                <!-- Addl Content Box(es) -->
+                <?php if (!empty($customfields[tab_two_content]) && (1==5)) {
+                    echo "<div class='generic_box_full secondbox'>";
+                    $blockObj->renderListAll($customfields[tab_two_content]);
+                    echo "</div>";
+                } ?>
+
+                <?php if (!empty($customfields[tab_three_content]) && (1==5)) {
+                    echo "<div class='generic_box_full thirdbox'>";
+                    $blockObj->renderListAll($customfields[tab_three_content]);
+                    echo "</div>";
+                } ?>
+                <!-- END Add'l content boxes -->
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+<script type="text/javascript">
+
+function displayHer() {
+    jQuery('.gift-guide-one a').removeClass('bold-link');
+    jQuery('a.her').addClass('bold-link');
+     jQuery('.gift-guide-one .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-one').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-one .the-gifts').load('/shop-cat-her .category-products', function(){
+         jQuery(".gift-guide-one .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev1',
+            next: '#next1',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-one .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-one .gift-guide-loader').remove();
+         jQuery('.gift-guide-one .gift-cat-title').text('Her');
+
+    });
+}
+
+function displayHim() {
+    jQuery('.gift-guide-one a').removeClass('bold-link');
+    jQuery('a.him').addClass('bold-link');
+    jQuery('.gift-guide-one .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-one').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-one .the-gifts').load('/shop-cat-him .category-products', function(){
+         jQuery(".gift-guide-one .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev1',
+            next: '#next1',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+         jQuery('.gift-guide-one .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-one .gift-guide-loader').remove();
+         jQuery('.gift-guide-one .gift-cat-title').text('Him');
+    });
+}
+
+function displayChildTeen() {
+    jQuery('.gift-guide-one a').removeClass('bold-link');
+    jQuery('a.child-teen').addClass('bold-link');
+     jQuery('.gift-guide-one .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-one').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-one .the-gifts').load('/shop-cat-child-teen .category-products', function(){
+         jQuery(".gift-guide-one .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev1',
+            next: '#next1',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-one .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-one .gift-guide-loader').remove();
+         jQuery('.gift-guide-one .gift-cat-title').text('Child/Teen');
+    });
+}
+
+function displayLittleSomething() {
+    jQuery('.gift-guide-two a').removeClass('bold-link');
+    jQuery('a.little-something').addClass('bold-link');
+     jQuery('.gift-guide-two .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-two').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-two .the-gifts').load('/shop-cat-little-something .category-products', function(){
+         jQuery(".gift-guide-two .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev2',
+            next: '#next2',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-two .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-two .gift-guide-loader').remove();
+         jQuery('.gift-guide-two .gift-cat-title').text('Little Something');
+    });
+
+}
+
+function display75AndUnder() {
+    jQuery('.gift-guide-two a').removeClass('bold-link');
+    jQuery('a.75-and-under').addClass('bold-link');
+     jQuery('.gift-guide-two .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-two').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-two .the-gifts').load('/shop-75-and-under .category-products', function(){
+         jQuery(".gift-guide-two .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev2',
+            next: '#next2',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-two .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-two .gift-guide-loader').remove();
+         jQuery('.gift-guide-two .gift-cat-title').text('$75 & Under');
+    });
+
+}
+
+function display100AndUnder() {
+    jQuery('.gift-guide-two a').removeClass('bold-link');
+    jQuery('a.100-and-under').addClass('bold-link');
+     jQuery('.gift-guide-two .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-two').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-two .the-gifts').load('/shop-cat-100-and-under .category-products', function(){
+         jQuery(".gift-guide-two .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev2',
+            next: '#next2',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-two .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-two .gift-guide-loader').remove();
+         jQuery('.gift-guide-two .gift-cat-title').text('$100 & Under');
+    });
+
+}
+
+function displayPremiumGifts() {
+    jQuery('.gift-guide-two a').removeClass('bold-link');
+    jQuery('a.premium-gifts').addClass('bold-link');
+     jQuery('.gift-guide-two .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-two').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-two .the-gifts').load('/shop-cat-premium-gifts .category-products', function(){
+         jQuery(".gift-guide-two .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev2',
+            next: '#next2',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-two .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-two .gift-guide-loader').remove();
+         jQuery('.gift-guide-two .gift-cat-title').text('Premium Gifts');
+    });
+
+}
+
+function displayTeen() {
+    jQuery('.gift-guide-three a').removeClass('bold-link');
+    jQuery('a.teen').addClass('bold-link');
+     jQuery('.gift-guide-three .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-three').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-three .the-gifts').load('/shop-cat-teen .category-products', function(){
+         jQuery(".gift-guide-three .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev3',
+            next: '#next3',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-three .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-three .gift-guide-loader').remove();
+         jQuery('.gift-guide-three .gift-cat-title').text('Teen');
+    });
+
+}
+
+function display20s() {
+    jQuery('.gift-guide-three a').removeClass('bold-link');
+    jQuery('a.20s').addClass('bold-link');
+     jQuery('.gift-guide-three .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-three').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-three .the-gifts').load('/shop-cat-20s .category-products', function(){
+         jQuery(".gift-guide-three .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev3',
+            next: '#next3',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+         jQuery('.gift-guide-three .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-three .gift-guide-loader').remove();
+         jQuery('.gift-guide-three .gift-cat-title').text('20\'s');
+    });
+
+}
+
+function display30sAnd40s() {
+    jQuery('.gift-guide-three a').removeClass('bold-link');
+    jQuery('a.30s-and-40s').addClass('bold-link');
+     jQuery('.gift-guide-three .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-three').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-three .the-gifts').load('/shop-cat-30s-and-40s .category-products', function(){
+         jQuery(".gift-guide-three .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev3',
+            next: '#next3',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-three .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-three .gift-guide-loader').remove();
+         jQuery('.gift-guide-three .gift-cat-title').text('30\'s & 40\'s');
+    });
+
+}
+
+function display50sAndUp() {
+    jQuery('.gift-guide-three a').removeClass('bold-link');
+    jQuery('a.50s-and-up').addClass('bold-link');
+     jQuery('.gift-guide-three .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-three').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-three .the-gifts').load('/shop-cat-50s-and-up .category-products', function(){
+         jQuery(".gift-guide-three .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev3',
+            next: '#next3',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-three .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-three .gift-guide-loader').remove();
+         jQuery('.gift-guide-three .gift-cat-title').text('50\'s & Up');
+    });
+
+}
+
+function displayStockingStuffer() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.stocking-stuffer').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-cat-stocking-stuffer .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {
+
+            jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+            jQuery('.gift-guide-four .gift-guide-loader').remove();
+            jQuery('.gift-guide-four .gift-cat-title').text('Stocking Stuffer');
+
+         });
+        
+    });
+
+}
+
+function displayForYourLove() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.for-your-love').addClass('bold-link');
+     jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+    jQuery('.gift-guide-four .the-gifts').load('/shop-cat-for-your-love .category-products', function(){
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+         jQuery.getScript('/js/custom/quickview.js', function () {
+         });
+          jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+         jQuery('.gift-guide-four .gift-cat-title').text('Your Love');
+    });
+
+}
+
+function displaySecretSanta() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.secret-santa').addClass('bold-link');
+     jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-cat-secret-santa .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () { });
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Secret Santa');
+    });
+
+}
+
+function displayBestBets() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.best-bets').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-cat-best-bets .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Best Bets');
+    });
+
+}
+
+function displayBirthday() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.birthday').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-page-cat-birthday .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Birthday');
+    });
+
+}
+
+function displayValentines() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.valentines').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-page-cat-valentines .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Valentine\'s Day');
+    });
+
+}
+
+function displayMothers() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.mothers').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-page-cat-mothers .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Mother\'s Day');
+    });
+
+}
+
+function displayFathers() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.fathers').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-page-cat-fathers .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Father\'s Day');
+    });
+
+}
+
+function displayBridesmaid() {
+    jQuery('.gift-guide-four a').removeClass('bold-link');
+    jQuery('a.bridesmaid').addClass('bold-link');
+    jQuery('.gift-guide-four .the-gifts').addClass('loading-gifts-2');
+
+    jQuery('.gift-guide-four').append('<div class="gift-guide-loader"><img src="/skin/frontend/enterprise/default/images/ajax_loader.gif" /></div>');
+
+    jQuery('.gift-guide-four .the-gifts').load('/shop-page-cat-bridesmaid .category-products', function(){
+
+         jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+
+         jQuery.getScript('/js/custom/quickview.js', function () {});
+
+         jQuery('.gift-guide-four .the-gifts').removeClass('loading-gifts-2');
+         jQuery('.gift-guide-four .gift-guide-loader').remove();
+
+         jQuery('.gift-guide-four .gift-cat-title').text('Bridesmaid');
+    });
+
+}
+
+ jQuery(document).ready(function() { 
+     jQuery(".gift-guide-one .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev1',
+            next: '#next1',
+            auto: false,
+            width: 700
+         });
+
+       jQuery(".gift-guide-two .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev2',
+            next: '#next2',
+            auto: false,
+            width: 700
+         });
+
+         jQuery(".gift-guide-three .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev3',
+            next: '#next3',
+            auto: false,
+            width: 700
+         });
+
+           jQuery(".gift-guide-four .category-products").carouFredSel({
+            items: 3,
+            direction: "left",
+            prev: '#prev4',
+            next: '#next4',
+            auto: false,
+            width: 700
+         });
+ });
+
+</script>
+</html>

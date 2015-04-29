@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5329ab772ae41f57"></script>
+<script type="text/javascript" src="http://fast.fonts.net/jsapi/55222375-0ea5-4ca5-bc1b-11874820c8ae.js"></script>
+</head>
+<?php include('/root/www/private/c.php'); ?>
+
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    
+    <div class="navi_sub">
+        <a href="/release#editions">EDITIONS &amp; STORIES</a>
+        <a href="/manufacturing">OUR MANUFACTURING</a>
+        <a href="/open-lab-traceability">TRACE YOUR PRODUCT</a>
+        <a href="/open-lab-traceability#ol-faq">FAQ</a>
+    </div>
+
+    <div class="page">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+
+                <!-- Main Content Box -->
+                <div class="generic_box_full imgcenter">
+                    <div class="phantomvideo_contain">
+                        <img src="/skin/frontend/enterprise/default/images/ol/m/1.jpg" style="margin-bottom:3px;" />
+                        <a class="phantom" href="#" onClick="playVideo();return false;"><img src="/skin/frontend/enterprise/default/images/ol/m/vid_top_manu.jpg" /></a>
+                        <div class="one-desc desc">
+                            <h1>Handcrafting our own skincare makes a difference</h1>
+                            <p>Each one of our products is made by hand in our own <span class="bold">Vermont headquarters.</span></p>
+                            <p>Explore below to see <span class="bold">why</span> that matters, and <span class="bold">how</span> it works.</p>
+                        </div>
+                    </div>
+                    <div class="phantomvideo_contain">
+                        <img src="/skin/frontend/enterprise/default/images/ol/m/2.jpg" />
+                        <div class="two-desc desc">
+                            <h1>Discover radically authentic skincare.</h1>
+                            <p>We manufacture our skincare products ourselves, by hand, in our own Vermont headquarters, which means that we can vouch for their purity, quality, and freshness. We are a vertically integrated beauty company because we believe that that’s the only way it should be done, and that’s what our customers expect.</p>
+                            <a href="/skin-care" class="shop-cta cta">Shop</a>
+                        </div>
+                    </div>
+
+                    <div class="barn-intro">
+                         <h1>Where it all happens:<br />1136 Wooster Road</h1>
+                        <p>Our headquarters is located on 1,200 acres in the Champlain Valley of Vermont, with Lake Champlain to our west and the Green Mountains to our east. On this property, we have a functioning certified Organic farm where we grow many of our ingredients, a greenhouse where we process those ingredients, as well as a red barn that we’ve converted into a manufacturing facility and offices.</p>
+                        <h2>Come inside the Lab!</h2>
+                        <ul>
+                            <li>Explore the building below by moving your mouse over the image.</li>
+                            <li>Click on a part of the image to jump inside and see photos of every step of the process.</li>
+                        </ul>
+                    </div>
+                    <!-- <img src="/skin/frontend/enterprise/default/images/ol/m/3.jpg" style="margin-bottom:1em;margin-top:1em;" /> -->
+                </div>
+
+                <div class="generic_box_full farm">
+                    <div class="phantomvideo_contain">
+                        <img id="farm" src="/skin/frontend/enterprise/default/images/ol/m/farm.jpg"/>
+                            <a href="#" id="link2"><div class="maparea production"><h2>Production</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link3"><div class="maparea filling"><h2>Filling</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link4"><div class="maparea batching"><h2>Batching</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link1"><div class="maparea shipping"><h2>Shipping</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link5"><div class="maparea sales"><h2>Sales &amp; Marketing</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link6"><div class="maparea tatasoffice"><h2>Tata's Office</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link7"><div class="maparea receiving"><h2>Receiving</h2><span>Click to see more</span></div></a>
+                            <a href="#" id="link8"><div class="maparea ingredients"><h2>Ingredients</h2><span>Click to see more</span></div></a>
+                    </div>
+                </div>
+
+                <div class="generic_box_full bts">
+                    <div class="hdrstuff">
+                        <h1>Behind the Scenes</h1>
+                        <p>Embark on a visual tour of our VT headquarters below. Click on an image to expand, and to learn more about each step of producing our 100% natural & nontoxic skincare.</p>
+                    </div>
+
+                    <div class="gallery" id="gall_map">
+
+                        <?php 
+                            $images = glob($_SERVER['DOCUMENT_ROOT'] . '/skin/frontend/enterprise/default/images/ol/m/bts/*.jpg');
+
+                            $mysqli = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
+
+                            foreach($images as $filename){
+                                $img = basename($filename);
+
+                                $num = str_replace('.jpg', '', $img);
+                                $captnum = intval($num);
+                                $caption = $mysqli->query("SELECT description FROM olphotocaptions WHERE photoid = $captnum");
+
+                                while ($result = $caption->fetch_assoc()) {
+                                
+                                    $description = $result['description'];
+                                }
+
+                                echo "<span href='/skin/frontend/enterprise/default/images/ol/m/bts/full/" . $img . "' title='$description' data-permalink='/skin/frontend/enterprise/default/images/ol/m/bts/full/" . $img . "' class='group3 cboxElement " . $num . "'><img src='/skin/frontend/enterprise/default/images/ol/m/bts/" . $num . "' /></span>";
+
+                                $description = "";
+
+
+                            }
+
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+
+<!-- Testing, add to series jQuery file later -->
+<script type="text/javascript">
+
+        function playVideo() {
+            var one = "<div class='popup vimeo'>";
+            var two = '<iframe src="//player.vimeo.com/video/102090009" width="920" height="515" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+            var three = "</div>";
+            var coolhtml = jQuery(one + two + three);
+            jQuery.colorbox({className: 'manu-vid', html:coolhtml, width:"960px", height:"560px"});
+        }
+
+        jQuery(window).load(function() {
+
+            jQuery(".group3").colorbox({className: 'manu-gal', rel:'group3', title: function() {var title = jQuery(this).attr("title");var addthishtml = '<div class="soc_icons_light"><a target="_blank" class="gal-pin" href="#"><img src="/skin/frontend/enterprise/default/images/light_pin.jpg"></a><a target="_blank" class="gal-tweet" href="#"><img src="/skin/frontend/enterprise/default/images/light_twitter.jpg"></a><a target="_blank" class="gal-fb" href="#"><img src="/skin/frontend/enterprise/default/images/light_facebook.jpg"></a></div><div class="shareright share_area"><a id="share-btn-p1"></a></div>';return addthishtml+ '<span id="cboxTitleLeft">'+title+'</span>';}, transition:"none", top: "5%", minWidth: "462px", maxHeight: "70%",next: "<p class='cbox-man-next'>| next</p>", previous: "<p class='cbox-man-previous'>prev</p>"});
+
+            // bkp
+            jQuery( ".cms-manufacturing .gallery img" ).hover(
+                function() {
+                jQuery( this ).parent().addClass( "img-learn-more" );
+                }, function() {
+                jQuery( this ).parent().removeClass( "img-learn-more" );
+                }
+            );
+
+        });
+
+        jQuery(document).bind('cbox_complete', function(){
+            
+            var addthis_ui_config = {ui_show_promo: false, services_compact: 'facebook, pinterest, twitter, googleplus, email, more' }
+            var newsharecode = 
+            {
+                url: 'http://www.tataharperskincare.com/manufacturing',
+                title: 'Learn how Tata Harper produces 100% natural & nontoxic skincare',
+                description: jQuery('#cboxTitleLeft').text(),
+                width: "560",
+                height: "340",
+                screenshot: 'http://www.tataharperskincare.com'+jQuery('.cboxPhoto').attr('src')
+            }
+            addthis.button('#share-btn-p1', addthis_ui_config, newsharecode);
+
+            var description = encodeURIComponent(jQuery('#cboxTitleLeft').text());
+
+            var pinurl = 'http://pinterest.com/pin/create/button/?url=http://www.tataharperskincare.com/manufacturing&media=http://www.tataharperskincare.com'+jQuery('.cboxPhoto').attr('src')+'&description='+description;
+
+            jQuery('a.gal-pin').attr("href", pinurl);
+
+            var tdesc = encodeURIComponent('Learn how how 100% natural Tata Harper products are created!');
+            var turl = encodeURIComponent('http://www.tataharperskincare.com/manufacturing');
+            var tweeturl = 'http://twitter.com/share?text='+tdesc+'&url='+turl;
+
+             jQuery('a.gal-tweet').attr("href", tweeturl);
+
+             var fburl = 'http://www.facebook.com/sharer.php?s=100&p[title]='+tdesc+'&p[url]=http://www.tataharperskincare.com/manufacturing&p[summary]='+description+'&p[images][0]='+jQuery('.cboxPhoto').attr('src');
+
+             jQuery('a.gal-fb').attr("href", fburl);
+
+        });
+        
+        // Assign category names to random foreach images
+        jQuery("img[src$='55']").attr('name', 'shipping');
+        jQuery("img[src$='44']").attr('name', 'production');
+        jQuery("img[src$='37']").attr('name', 'filling');
+        jQuery("img[src$='21']").attr('name', 'batching');
+        jQuery("img[src$='01']").attr('name', 'sales');
+        jQuery("img[src$='03']").attr('name', 'tatasoffice');
+        jQuery("img[src$='56']").attr('name', 'receiving');
+        jQuery("img[src$='08']").attr('name', 'ingredients');
+        //ingredients = 08
+
+
+        //Magic stuff to make it scroll
+        function scrollToAnchor(aid){
+            var aTag = jQuery("img[name='"+ aid +"']");
+            jQuery('html,body').animate({scrollTop: aTag.offset().top},'slow');
+        }
+
+        // Make the image map scroll
+        jQuery("#link1").click(function() {
+            displayBarnBox('shipping');
+            return false;
+        });
+
+        jQuery("#link2").click(function() {
+           displayBarnBox('production');
+           return false;
+        });
+
+        jQuery("#link3").click(function() {
+           displayBarnBox('filling');
+           return false;
+        });
+
+        jQuery("#link4").click(function() {
+           displayBarnBox('batching');
+           return false;
+        });
+
+        jQuery("#link5").click(function() {
+           displayBarnBox('sales');
+           return false;
+        });
+
+        jQuery("#link6").click(function() {
+           displayBarnBox('tatasoffice');
+           return false;
+        });
+
+        jQuery("#link7").click(function() {
+           displayBarnBox('receiving');
+           return false;
+        });
+
+        jQuery("#link8").click(function() {
+           displayBarnBox('ingredients');
+           return false;
+        });
+
+        function displayBarnBox(name) {
+            var link = jQuery('img[name="'+name+'"]').attr('src');
+            var last2 = link.slice(-2);
+            var selectE = "."+last2+".group3";
+            jQuery(selectE).colorbox({open: true, className: 'manu-gal', rel:'group3', title: function() {var title = jQuery(this).attr("title");var addthishtml = '<div class="shareright share_area"> <a id="share-btn-p1"></a></div>';return '<span id="cboxTitleLeft">'+title+'</span>' + addthishtml;}, transition:"none", top: "5%", minWidth: "462px", maxHeight: "70%",next: "<p class='cbox-man-next'>| next</p>", previous: "<p class='cbox-man-previous'>prev</p>"});
+            return false;
+        }
+
+</script>
+
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?php
+
+// AX 4.8.13 
+// used to display custom fields
+
+class Display_Custom_Fields
+{
+	function getCustomFields() {
+
+		$rid = Mage::getBlockSingleton('cms/page')->getPage()->getPublishedRevisionId();
+	    $resource = new Mage_Core_Model_Resource();
+	    $read = $resource->getConnection('core_read');
+	    $select = $read->select() ->from('un38dj4_enterprise_cms_page_revision') ->where('revision_id = ?', $rid);
+	    $data = $read->fetchAll($select);
+	    $customfields = array();
+	    foreach ($data[0] as $key=>$value)
+	    {
+	    	$customfields[$key] = $value;
+	    }
+	    return $customfields;
+	}
+
+}

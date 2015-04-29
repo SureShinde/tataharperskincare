@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config> 
+    <modules>
+
+        <Axthsc_Recurly>
+            <version>0.0.1</version>
+        </Axthsc_Recurly>
+
+    </modules>
+
+    <global>
+    
+        <models>
+            <axthsc_recurly>
+                <class>Axthsc_Recurly_Model</class>
+            </axthsc_recurly>
+        </models>
+
+        <events>
+             <sales_quote_save_before>
+                <observers>
+                    <axthsc_recurly>
+                        <type>singleton</type>
+                        <class>axthsc_recurly/observer</class>
+                        <method>savePaymentInfoInSession</method>
+                    </axthsc_recurly>
+                </observers>
+            </sales_quote_save_before>
+            <checkout_type_onepage_save_order_after>
+                <observers>
+                    <axthsc_recurly>
+                        <type>singleton</type>
+                        <class>axthsc_recurly/observer</class>
+                        <method>assignSubscriptionToCustomer</method>
+                    </axthsc_recurly>
+                </observers>
+            </checkout_type_onepage_save_order_after>
+            <payment_method_is_active>
+                <observers>
+                    <axthsc_recurly>
+                        <type>singleton</type>
+                        <class>axthsc_recurly/observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </axthsc_recurly>
+                </observers>
+            </payment_method_is_active>
+        </events>
+
+        <helpers>
+            <axthsc_recurly>
+                <class>Axthsc_Recurly_Helper</class>
+            </axthsc_recurly>
+        </helpers> 
+
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <axthsc_recurly module="Axthsc_Recurly">
+                    <file>axthsc_recurly.xml</file>
+                </axthsc_recurly>
+            </updates>
+        </layout>    
+        <routers>
+            <axthsc_recurly>
+                <use>standard</use>
+                <args>
+                    <module>Axthsc_Recurly</module>
+                    <frontName>replenishment</frontName>
+                </args>
+            </axthsc_recurly>
+        </routers>
+    </frontend>
+
+</config>

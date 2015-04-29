@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<install><product id="137" key="Aitoc_Aitpreorder" version="10.0.29" license_id="15933" link_id="558126" ent_hash="a995"><![CDATA[Pre-Orders for Enterprise Edition]]></product><serial>4VeYRNtXAYgEBUi2AVhbBxqctMqGCT8h6O0060qvS6</serial><checkid>be54766823d93304cf2bfc1c1fa55a29</checkid><store_url><![CDATA[http://www.aitoc.com/en/]]></store_url><service><![CDATA[https://www.aitoc.com/api/xmlrpc/]]></service><constraint><store label="Number of stores within one Magento Installation:">1</store></constraint></install>

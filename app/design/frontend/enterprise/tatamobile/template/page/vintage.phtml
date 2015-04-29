@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<link rel="stylesheet" href="/skin/frontend/enterprise/tatamobile/css/owl.carousel.css">
+<link rel="stylesheet" href="/skin/frontend/enterprise/tatamobile/css/owl.theme.css">
+<script src="/skin/frontend/enterprise/tatamobile/js/owl.carousel.min.js"></script>
+</head>
+
+<body<?php echo $this->getBodyClass()?' class="cms-vintage '.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+                
+                 <!-- Main Content Box -->
+                <div class="generic_box_full imgcenter">
+                    
+
+                    <div class="phantomvideo_contain">
+                        <img src="/skin/frontend/enterprise/default/images/ol/v/1-mob.jpg" />
+                        <div class="phantom">
+                            <a onclick="playVideo();return false;" href="#"><img src="/skin/frontend/enterprise/default/images/ol/v/1-vid.jpg" /></a>
+                        </div>
+                    </div>
+                    
+                    <img src="/skin/frontend/enterprise/default/images/ol/v/2-mob.jpg" class="vspacer" />
+                        <div class="cta_hovers">
+                            <a href="/release#bios"><img src="/skin/frontend/enterprise/default/images/ol/v/2.1-mob.jpg" /></a>
+                            
+                            <a href="#trackit"><img src="/skin/frontend/enterprise/default/images/ol/v/2.2-mob.jpg"/></a>
+                            
+                            <a href="/release#editions"><img src="/skin/frontend/enterprise/default/images/ol/v/2.3-mob.jpg" /></a>
+                        </div>
+
+                    <div id="trackit" class="tracerbox">
+                        <img src="/skin/frontend/enterprise/default/images/ol/v/3-mob.jpg" class="bspacer" />
+                       
+                        <div class="phantombox">
+                            <form action="/release" method="post" class="trackerinfo">
+                                <input type="text" name="one" maxlength="1" />
+                                <input type="text" name="two" maxlength="1" />
+                                <input type="text" name="three" maxlength="1" />
+                                <input type="submit" value="Go" />
+                                <p style="clear: both">&nbsp;</p>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <a href="/release#bios"><img src="/skin/frontend/enterprise/default/images/ol/v/4-mob.jpg" class="bspacer" /></a>
+                    <a href="/manufacturing"><img src="/skin/frontend/enterprise/default/images/ol/v/5-mob.jpg" class="bspacer" /></a>
+                    <a href="/release#editions"><img src="/skin/frontend/enterprise/default/images/ol/v/6-mob.jpg" /></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="page full gray">
+    <div class="main col1-layout">
+        <div class="noshadow">
+
+    <div class="generic_box_full_wide skincarestory">
+            
+            <img class="header" src="/skin/frontend/enterprise/default/images/ol/v/storyheader.jpg" style="margin-top:1em;" />
+        
+        <div id="skincare-story" class="nivoSlidervin">
+            <div><img src="/skin/frontend/enterprise/default/images/ol/v/pg1.jpg" /><p>Tata Harper Skincare was founded by Tata Harper with the idea that women shouldn’t have to sacrifice their health to look and feel beautiful, and that skincare should be able to deliver real, visible results without a single drop of synthetic chemicals.</p></div>
+            <div><img src="/skin/frontend/enterprise/default/images/ol/v/pg2.jpg" /><p>Since the beginning, we’ve felt a commitment to authenticity, trust and transparency. Our company, including our labs, has been based in Vermont since the birth of the company, and our own passionate team hand crafts each batch of Tata Harper skincare product from start to finish.</p></div>
+            <div><img src="/skin/frontend/enterprise/default/images/ol/v/pg3.jpg" /><p>Our formulas were developed over the course of five years by a team of eight leading European chemists, who collectively set out to challenge the idea that “natural” couldn’t mean “effective”. Using the latest clinically proven skincare science from around the world, the Core line was released in 2010.</p></div>
+            <div><img src="/skin/frontend/enterprise/default/images/ol/v/pg4.jpg" /><p>Our fascinating ingredients lend a rich background to each unusually concentrated formula: our ingredients are real, natural and exquisite and are brought from amazing places in the world – like the Amazon, Tasmania, Morocco, the Czech Republic, Spain and Israel. We grow what we can here on our own Organic Vermont farm.</p></div>
+        </div>
+
+        <p class='scroll-text'>Scroll right to see more...</p>
+
+     </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="page full">
+    <div class="main col1-layout">
+        <div class="noshadow">
+
+    <img class="how-it-works-header" src="/skin/frontend/enterprise/default/images/ol/v/howworks.jpg" style="margin-bottom:1em" />
+
+
+     <div class="generic_box_full howitworks" id="howitworks">
+             <img src="/skin/frontend/enterprise/default/images/ol/v/create-mobile.jpg" />
+             <img src="/skin/frontend/enterprise/default/images/ol/v/trace-mobile.jpg" />
+             <img src="/skin/frontend/enterprise/default/images/ol/v/discover-mobile.jpg" />
+             <img src="/skin/frontend/enterprise/default/images/ol/v/editions-mobile.jpg" />
+     </div>
+
+     <p class='scroll-text'>Scroll right to see more...</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="page full">
+    <div class="greenbg">
+        <h1>Have a question about the program?</h1>
+        <h3>See if we've answered it already in this list of common questions, along with our answers for each one. If not, send us an email with your inquiry at info@tataharper.com, or give us a ring at 1-877-321-8282 to chat. Thanks!</h3>
+        <a target="_blank" href="/editions-faq"><img src="/skin/frontend/enterprise/default/images/ol/v/ctafaq.jpg" /></a>
+    </div>
+</div>
+
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+
+    <script type="text/javascript">
+
+     function playVideo() {
+        var playerHtml = '<iframe src="//player.vimeo.com/video/102090527" width="475" height="205" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+
+        jQuery('.phantom').html(playerHtml);
+    }
+
+    jQuery(document).ready(function() {
+ 
+      jQuery("#skincare-story, #howitworks").owlCarousel({
+        singleItem: true
+      });
+     
+    });
+
+    var container = document.getElementsByClassName("trackerinfo")[0];
+    container.onkeyup = function(e) {
+        var target = e.srcElement;
+        var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+        var myLength = target.value.length;
+        if (myLength >= maxLength) {
+            var next = target;
+            while (next = next.nextElementSibling) {
+                if (next == null)
+                    break;
+                if (next.tagName.toLowerCase() == "input") {
+                    next.focus();
+                    break;
+                }
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?php
+
+function formatVideoLink($link) {
+
+	$matches = array();
+
+	preg_match('/(?<=(?:v|i)=)[a-zA-Z0-9-]+(?=&)|(?<=(?:v|i)\/)[^&\n]+|(?<=embed\/)[^"&\n]+|(?<=(?:v|i)=)[^&\n]+|(?<=youtu.be\/)[^&\n]+/', $link, $matches);
+
+	if (!is_null($matches[0])) {
+
+		$code = preg_replace('/(\x{200e}|\x{200f})/u', '', $matches[0]);
+		$link = htmlentities("https://www.youtube.com/embed/" . $code . "?rel=0&wmode=transparent&autoplay=1");
+
+		return $link;
+
+	} else {
+
+		return false;
+		
+	}
+
+}
+
+$_product = $this->getProduct();
+
+if (!is_null($_product->getVideolink())) {
+
+	$videolink = $_product->getVideolink();
+
+	$videolink = formatVideoLink($videolink);
+
+	if (!is_null($_product->getVideotext())) {
+		$videotext = $_product->getVideotext();
+ 	
+		if ($videolink): ?>
+
+		<p style="color: rgb(85, 85, 85);"><span href="<?php echo $videolink ?>" class="youtube cboxElement" style="color: rgb(85, 85, 85);"><img src="/skin/frontend/enterprise/default/images/camicon.jpg" alt=""><?php echo $videotext; ?> - <span style="color: rgb(85, 85, 85);" class="watch-video">Watch Video</span></span></p>
+
+		<?php endif;
+	}
+}
+

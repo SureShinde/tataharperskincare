@@ -1,0 +1,7 @@
+AuthUserFile /home/admin/.htpasswd
+AuthName "Please Log In"
+AuthType Basic
+
+require user thsadmin
+
+DirectoryIndex main.php index.php index.html

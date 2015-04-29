@@ -1,0 +1,58 @@
+<!-- 
+	/**
+	  * Code from http://thomasgbennett.com/customizing-magento-with-local-xml/
+	  * Added by AX 4.3.13
+	  */
+-->
+<?xml version="1.0"?> <!-- this sucker just opens the doc -->
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <reference name="top.links">
+                <action method="removeLinkByUrl"><url helper="wishlist/"/></action>
+ 
+                <!-- for Magento 1.4.x -->
+                <remove name="wishlist_link"/>
+            </reference>
+        </reference>
+    </default>
+    <customer_account>
+
+        <!--  <reference name="left">
+
+            <reference name="customer_account_navigation">
+                <action method="addLink" translate="label" module="customer">
+                    <name>logout</name>
+                    <path>customer/account/logout/</path>
+                    <label>Log Out</label>
+                </action>
+            </reference>
+
+        </reference> -->
+
+        <reference name="customer_account_navigation" >
+                <!-- remove the link using your custom method -->
+                <action method="removeLinkByName"><name>reward_points</name></action>
+
+               <!--  <action method="addLink" translate="label" module="customer">
+                    <name>logout</name>
+                    <path>customer/account/logout/</path>
+                    <label>Log Out</label>
+                </action> -->
+        </reference>
+    </customer_account>
+</layout>
+<config>
+    <global>
+        <page>
+            <layouts>
+                <tabbed_category module="page" translate="label">
+                    <label>Tabbed Category</label>
+                    <template>page/tabbed-category.phtml</template>
+                    <layout_handle>tabbed_category</layout_handle>
+                    <is_default>1</is_default>
+                </tabbed_category>
+            </layouts>
+        </page>
+    </global>
+</config>

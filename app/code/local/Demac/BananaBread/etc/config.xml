@@ -1,0 +1,16 @@
+<config>
+    <modules>
+        <Demac_BananaBread>
+            <version>0.0.1</version>
+        </Demac_BananaBread>
+    </modules>
+    <global>
+        <blocks>
+            <page>
+                <rewrite>
+                    <html_breadcrumbs>Demac_BananaBread_Block_Breadcrumbs</html_breadcrumbs>
+                </rewrite>
+            </page>
+        </blocks>
+    </global>
+</config>

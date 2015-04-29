@@ -1,0 +1,178 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<?php $classes = $this->getBodyClass();?>
+
+<body<?php echo $this->getBodyClass()?' class="'.$classes.'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+     <?php
+        echo $this->getChildHtml('displaycustomfields');
+        $fieldsObj = new Display_Custom_Fields();
+        $customfields = $fieldsObj->getCustomFields();
+
+        echo $this->getChildHtml('customblockrender');
+        $blockObj = new Custom_Block_Render();
+    ?>
+
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <div class="page">
+        <div class="header-custom">
+            <a href="/customer-care/"><?php echo "<img src='http://tataharperskincare.com/skin/frontend/enterprise/default/images/" . $customfields[custom_image_url] . "' />"; ?></a>
+        </div>
+        <?php echo $this->getChildHtml('breadcrumbsContainer') ?>
+        <div class="main col1-layout">
+            <div class="col-main noshadow">
+
+               <div class="generic_box_full">
+
+                    <div class="care-unit">
+                         <a href="/customer-care/returns"><img src="/skin/frontend/enterprise/default/images/customercare/returns.jpg" /></a>
+                        <h1><a href="/customer-care/returns">Returns</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/returns#return-policy">Return Policy</a>
+                            <a href="/customer-care/returns#international-returns">International Returns</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit">
+                     <a href="/customer-care/general-faq"><img src="/skin/frontend/enterprise/default/images/customercare/generalfaq.jpg" /></a>
+                    <h1> <a href="/customer-care/general-faq">General FAQ</a></h1>
+                    <div class="sub-menu">
+                        <a href="/customer-care/general-faq#spf">SPF</a>
+                        <a href="/customer-care/general-faq#organic">Organic</a>
+                        <a href="/customer-care/general-faq#recommended-regimens">Recommended Regimens</a>
+                        <a href="/customer-care/general-faq#professional-program">Professional Program</a>
+                        <a href="/customer-care/general-faq#visiting-the-farm">Visiting the Farm</a>
+                    </div>
+                     <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit third">
+                        <a href="/customer-care/shipping"><img src="/skin/frontend/enterprise/default/images/customercare/shipping.jpg" /></a>
+                        <h1><a href="/customer-care/shipping">Shipping</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/shipping#usa">USA</a>
+                            <a href="/customer-care/shipping#international-shipping">International Shipping</a>
+                            <a href="/customer-care/shipping#track-your-package">Track Your Package</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit">
+                         <a href="/customer-care/samples"><img src="/skin/frontend/enterprise/default/images/customercare/samples.jpg" /></a>
+                        <h1> <a href="/customer-care/samples">Samples</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/samples#tryme-kit">Try-Me Kit</a>
+                            <a href="/customer-care/samples#free-samples">Free Samples</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit">
+                        <a href="/customer-care/payment"><img src="/skin/frontend/enterprise/default/images/customercare/payment.jpg" /></a>
+                        <h1> <a href="/customer-care/payment">Payment</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/payment#payment-options">Payment Options</a>
+                            <a href="/customer-care/payment#sales-tax">Sales Tax</a>
+                            <a href="/customer-care/payment#paypal">PayPal</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit third">
+                         <a href="/customer-care/replenishment-service"><img src="/skin/frontend/enterprise/default/images/customercare/replenishment.jpg" /></a>
+                        <h1> <a href="/customer-care/replenishment-service">Replenishment Service</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/replenishment-service#how-it-works">How it Works</a>
+                            <a href="/customer-care/replenishment-service#my-replenishment-service">My Replenishment Service</a>
+                            <a href="/customer-care/replenishment-service#cancellation">Cancellation</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit">
+                         <a href="/customer-care/product-info-and-care"><img src="/skin/frontend/enterprise/default/images/customercare/productinfo.jpg" /></a>
+                        <h1><a href="/customer-care/product-info-and-care">Product Info &amp; Care</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/product-info-and-care#shelf-life">Shelf Life</a>
+                            <a href="/customer-care/product-info-and-care#storage">Storage</a>
+                        </div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit">
+                       <a href="/customer-care/get-in-touch"><img src="/skin/frontend/enterprise/default/images/customercare/getintouch.jpg" /></a>
+                        <h1> <a href="/customer-care/get-in-touch">Get in Touch</a></h1>
+                        <div class="sub-menu">
+                            <a href="/customer-care/get-in-touch#press-inquiries">Press Inquiries</a>
+                            <a href="/customer-care/get-in-touch#wholesale-inquiries">Wholesale Inquiries</a>
+                            <a href="/customer-care/get-in-touch#general-inquiries">General Inquiries</a>
+                            <hr style="margin-top:10px;margin-bottom: 10px;"/>
+                        <p>Talk to a real person<br />
+                        Call us any time between 9 am - 5 pm EST<br />
+                        Monday - Friday<br />
+                        <span class="green">1-877-321-8282</span><br />
+                        </p></div>
+                         <p style="clear:both">&nbsp;</p>
+                    </div>
+
+                    <div class="care-unit third">
+                    <a href="/customer-care/careers"><img src="/skin/frontend/enterprise/default/images/customercare/careers.jpg" /></a>
+                    <h1><a href="/customer-care/careers">CAREERS</a></h1>
+                    <div class="sub-menu">
+                            <a href="/customer-care/careers#jobs">Jobs</a>
+                            <a href="/customer-care/careers#internships">Internships</a>
+                            <a href="/customer-care/careers#general-career-inquiries">General Career Inquiries</a>
+                    </div>
+                    <p style="clear:both">&nbsp;</p>
+                    </div>
+
+               </div>
+
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('footer_before') ?>
+    <?php echo $this->getChildHtml('footer') ?>
+    <?php echo $this->getChildHtml('before_body_end') ?>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

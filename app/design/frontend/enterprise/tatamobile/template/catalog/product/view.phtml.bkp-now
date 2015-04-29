@@ -1,0 +1,405 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<!-- Static image for all products - MAS -->
+ 
+<?php $currentUrl = $this->helper('core/url')->getCurrentUrl(); ?>
+<?php //echo $this->getLayout()->getBlock('breadcrumbs')->toHtml()?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=288987594535121";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript" src="/js/custom/pdp-mobile.js"></script>
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->setEscapeMessageFlag(true)->toHtml() ?></div>
+<div class="product-view"><!-- This is directly inside the "col-main" class from the template file. -->
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-essential">
+            <div id="main">
+                <!-- <div id="tabs"> -->
+               
+                <div id="content-main">
+
+                    <div class="contentcolu">
+                    <div class="product-main-info">
+                    <h1 class="prodtitle"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                    </div>
+                    <?php 
+                    if($_product->_data['type_id'] == 'subscription_configurable')
+                    {
+                    $attrs = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+                    }
+                    if ($attrs)
+                    {
+                    $attr_name = $attrs[0]["label"];
+                    $attr_id = $attrs[0]["attribute_id"];
+                    echo "<div class='sizestitle'> (";
+                    foreach ($attrs[0]["values"] as $value)
+                    {
+                        $label = $value["label"];
+                        echo "<span>";
+                        echo $label;
+                        echo "</span>";
+                    }
+                    echo ") </div>";
+                    $attrs=null;
+                    } ?>
+                    </div>
+                    <div class="prodcontent">
+                    <?php if ($attributes = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                        <?php //echo $attributes["description"] . "<br />"; ?>
+                    </div>
+                    <?php endif; ?>
+
+                     <div class="imagecolu">
+                        <?php //echo "PT: " . $_product->getTypeId(); ?>
+                        <?php $type = $_product->getTypeId();
+                        $id = $_product->getId();
+
+                            // switch ($type)
+                            // {
+                            //     case Mage_Catalog_Model_Product_Type::TYPE_SUBSCRIPTIONSIMPLE:
+                            //         echo "SS";
+                            //         break;
+                            // }
+                        ?>
+                        <?php echo $this->getChildHtml('media') ?>
+                       <!--  <div class="pricearea"><?php echo Mage::helper('core')->currency(number_format(getPriceRange($id), 2));?><?php //echo $_product->getAttributeText('size'); ?></div> -->
+                        <span class="regular-price" id="product-price-new-<?php echo $id; ?>">
+                           <?php echo '<span class="price" data-origprice="' . number_format(getPriceRange($id), 2) . '">$' . number_format(getPriceRange($id), 2) . "</span>"; ?>
+                    </span>
+                        <?php //echo $this->getChildHtml('product_type_data') ?>
+
+                    </div>
+                <!-- </div> -->
+                        <div class="reviews">
+                        <?php 
+                        $reviewData = Mage::getModel('review/review/summary'); 
+                        ?>
+                        <?php
+                            $_reviews = Mage::getModel('review/review')->getResourceCollection();  
+                            $_reviews->addEntityFilter('product', $_product->getId())
+                                        ->addStatusFilter( Mage_Review_Model_Review::STATUS_APPROVED )  
+                                        ->setDateOrder()  
+                                        ->addRateVotes();  
+                            $countReviews = count($_reviews);
+                            $avg = 0; 
+                            $ratings = array(); 
+                            $summaryData = Mage::getModel('review/review_summary')->load($_product->getId());
+                            if (count($_reviews) > 0){
+                            foreach ($_reviews->getItems() as $_review): ?>
+                            <?php foreach( $_review->getRatingVotes() as $_vote ): ?>
+                                    <?php $ratings[] = $_vote->getPercent();   ?>
+                                    <?php //echo "Vote percent: " . $_vote->getPercent() . "<br />"; ?>
+                                <?php endforeach; ?>
+                            <?php endforeach;   
+                            $avg = array_sum($ratings)/count($ratings);  } 
+                            // echo "Average: " . $avg . "<br />";
+                            // echo "Rating summary: " . $summaryData['rating_summary'] . "<br />";
+                            $starNumber = ceil((float)((int)$summaryData['rating_summary'] / 20));
+                            // echo "starnumber: " . $starNumber . "<br />";
+                            $starP = $summaryData['rating_summary'];
+                        ?> 
+
+                            <div class='avgcustrating'><div class="rating-box">  
+                                <div class="rating modal" style="width: <?php echo $starP; ?>%;"></div></div><div class="openreviews"><strong>Reviews</strong> <span>(<?php echo $countReviews;//echo $reviewData->getTotalReviews($_product->getId()); ?>)</span></div>
+                            </div>
+                            <div class="review_drawer" id="#allreviews">
+                                <div class="reviewform">Write a review</div>
+                                <?php echo $this->getChildHtml('reviews') ?>
+                            </div>
+                        </div>
+                </div>
+
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <!-- <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>> -->
+
+            <div id="sidebar">
+
+                <div id="sidebar-block-1" class="product-sidebar-block clearfix">
+                    
+                    <div class="qty-social">
+                        <div class="quty">
+                            <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                            <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                        </div>
+
+                        <div class="social">
+                            <div class="likethis">
+                            <div class="rowtop">
+                                <div class="fb-like" data-href="<?php echo $_product->getProductUrl() ?>" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+                            </div>
+                            <span class="liketext">Like this!</span></div>
+                        
+                          <div class="shareit sharethisbutton"><div class="rowtop"><img src="<?php echo $this->getSkinUrl('images/shareicon.jpg'); ?>"></div><span class="sharetext ">Share this!</span></div>
+
+                        <div class="shareset">
+                            <h2>Share this product!</h2>
+                            <img src="//www.tataharperskincare.com/skin/frontend/enterprise/tatamobile/images/spreadword.jpg" style="max-width:100%;" />
+                            <div class="col1_social">
+                                <div class="social_area">
+                                    <a href="http://www.facebook.com/sharer.php?u=<?php echo $_product->getProductUrl() ?>&t;=<?php echo $this->htmlEscape($_product->getName()) ?>">
+                                    <img src="//www.tataharperskincare.com/skin/frontend/enterprise/tatamobile/images/facebook_icon.jpg" />
+                                    <span>Facebook</span>
+                                    </a>
+                                </div>
+                                <div class="social_area">
+                                    <a href="http://twitter.com/share?text=<?php echo $this->htmlEscape($_product->getName()) ?>&t;url=<?php echo $_product->getProductUrl() ?>">
+                                        <img src="//www.tataharperskincare.com/skin/frontend/enterprise/tatamobile/images/twitter_icon.jpg" />
+                                        <span>Twitter</span>
+                                    </a>
+                                </div>
+                            
+                                <div class="social_area">
+                                    <?php
+                                    $bodyText = $this->htmlEscape($_product->getName()) . " " . $_product->getProductUrl();
+                                    ?>
+                                    <a href="mailto:?Subject=Try%20this%20Tata%20Harper%20Skincare%20Product!&body=<?php echo $bodyText ?>"><img src="//www.tataharperskincare.com/skin/frontend/enterprise/tatamobile/images/email_icon.jpg" />
+                                    <span>Email</span>
+                                </a>
+                                </div>
+                                </div>
+                        </div>
+                        </div>
+                    </div>
+
+                   <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+                    <?php echo $this->getChildHtml('product_type_data') ?>
+                    
+                    <!--the above is the subscription form and the price field pulled from view/type/* -->
+
+                        <div class="product-shop">
+
+                            <?php if (!$this->hasOptions()):?>
+                                <div class="add-to-box">
+                                    <?php if($_product->isSaleable()): ?>
+                                        <?php echo $this->getChildHtml('options_configurable'); ?>
+                                        <?php echo $this->getChildHtml('addtocart') ?>
+                                    <?php endif; ?>
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                </div>
+                            <?php else:?>
+                                <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container2') ):?>
+                                    <div class="options-container-small">
+                                        <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                                    </div>
+                                <?php else: ?>
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                <?php endif;?>
+                            <?php endif; ?>
+
+                            <?php echo $this->getChildHtml('other');?>
+                        </div>
+                    </form>
+
+                </div> <!-- end sidebar-block-1 -->
+
+
+                <!-- Begin Mobile Tabbed Area -->
+                <div id="main">
+                    <div id="tabs">
+
+                    <ul>
+                        <li><a href="#tabs-1">Benefits</a></li>
+                        <li><a href="#tabs-2">Ingredients</a></li>
+                        <li><a href="#tabs-3">How To</a></li>
+                    </ul>
+
+                <div id="tabs-1">
+                    
+                    <?php if ($attributes = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                    <div class="prodcontent">
+                        <?php echo $attributes["description"] . "<br />"; ?>
+                    </div>
+                    <?php endif; ?>
+
+                </div>
+                <div id="tabs-2">
+                    <div class="ingred_info clearfix">
+                        
+                        <?php $actives = $_product->getActiveingredients() ?>
+                        <?php if($actives) { ?>
+
+                        <div id="sidebar-block-2" class="product-sidebar-block">
+
+                        <!--<div class="prod-ingred-left"><?php //echo "<span class='green'>" . $_product->getActiveingredients() . "</span>" . "<br />" . "<span class='active'>Active Ingredients</span>"; ?></div> -->
+
+                        <div class="prod-ingred-left">
+                            <span>100&#37;</span><div class="naturalnon">Natural <br />&amp; Nontoxic</div><p class="spr">&nbsp;</p>
+                        </div>
+                        <div class="prod-ingred-right">
+                            <?php //$organics = $_product->getPercentorganic() ?>
+                            <?php //if($organics) { ?><span><?php echo $_product->getPercentorganic(); ?>&#37;</span><div class="naturalnon">Certified Organic</div><?php //} ?>
+                            <!-- <div class="greenbuttonprodpage"><a href="/why-we-are-different">LEARN MORE</a></div> -->
+                        </div>
+                                    <!-- </div> -->  
+                            <?php //endif; ?>
+                        </div>
+                        
+                        <?php } ?>
+
+                    </div>
+
+                    <div class="badges clearfix">
+                        <div class="badge-1 badge"></div>
+                        <div class="badge-2 badge"></div>
+                        <div class="badge-3 badge"></div>
+                    </div>
+                    <?php if ($attributes = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                    <h2>Complete list of ingredients</h2>
+                    <?php
+                        echo "Ingredients: " . $_product->getIngredients() . "<br />";
+                    ?>
+                    <div style="margin-top:20px;">
+                    <div class="alignleft">
+                        <span class="green">100% of the Ingredients are 100% Natural<br />
+                        <?php echo $_product->getPercentorganic(); ?>&#37; of the Ingredients are Certified Organic</span>
+                    </div>
+                    <!-- <div class="alignright greenbutton"><a href="/why-we-are-different" target="_blank">Learn More</a></div> -->
+                    </div>
+
+                    <?php endif; ?>
+
+                </div>
+                <div id="tabs-3">
+
+                    <?php if ($_product->getResource()->getAttribute('use')->getFrontend()->getValue($_product)):?>
+                        <?php
+                            echo "<div class='useselector'><strong>Use:</strong> " . $_product->getResource()->getAttribute('use')->getFrontend()->getValue($_product) . "<img src='http://tataharperskincare.com/skin/frontend/enterprise/default/images/dailyimg.jpg' /></div><br />";
+                        ?>
+                    <?php endif; ?>
+                    <?php if ($attributes = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                        <?php
+                            echo $_product->getHowtouse() . "<br />";
+                        ?>
+                    <?php endif; ?>
+
+                </div>
+                
+                    </div>
+                </div>
+                <!-- /End Mobile Tabbed Area -->
+        </div>
+        <!-- </form> -->
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var productAddToCartForm = new VarienForm('product_addtocart_form');
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            try {
+                this.form.submit();
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+                if (methodName.match(/^validate-datetime-.*/i)) {
+                    delete Validation.methods[methodName];
+                }
+            }
+
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);
+//]]>
+</script>
+
+<?php
+
+function getPriceRange($productId) {
+
+$product = Mage::getModel('catalog/product')->load($productId);
+//load all children
+$childProducts = Mage::getModel('catalog/product_type_configurable')
+           ->getUsedProducts(null,$product);
+$childPrice = array();
+foreach($childProducts as $child){
+    $_child = Mage::getModel('catalog/product')->load($child->getId());
+    $childPrice[] =  $_child->getPrice();
+}
+//If you want to minimum price of product use this
+// echo min($childPrice);
+
+
+//If you want to maximum price of product use this
+return max($childPrice);
+
+} ?>

@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Axthsc_Moretemplates>
+      <version>0.1.0</version>
+    </Axthsc_Moretemplates>
+  </modules>
+  <global>
+    <page>
+      <layouts>
+        <category_tabbed translate="label">
+          <label>Category-Tabbed</label>
+          <template>page/category-tabbed.phtml</template>
+        </category_tabbed>
+        <twocol_custom translate="label">
+          <label>Two Column - Custom</label>
+          <template>page/twocol-custom.phtml</template>
+        </twocol_custom>
+        <tabbed_skintype translate="label">
+          <label>Tabbed - by Skintype</label>
+          <template>page/tabbed-byskintype.phtml</template>
+        </tabbed_skintype>
+        <onecol_custom_page translate="label">
+          <label>One Column - Custom Page</label>
+          <template>page/onecol-custom-page.phtml</template>
+        </onecol_custom_page>
+        <twocol_testimonials translate="label">
+           <label>Two Column - Testimonials</label>
+           <template>page/twocol-testimonials.phtml</template>
+        </twocol_testimonials>
+        <onecol_ingredients translate="label">
+           <label>One Column - Ingredients</label>
+           <template>page/onecol-ingredients.phtml</template>
+        </onecol_ingredients>
+        <twocol_home translate="label">
+          <label>Two Column - Home</label>
+          <template>page/twocol-home.phtml</template>
+        </twocol_home>
+        <twocol_reviews translate="label">
+          <label>Two Column - Reviews</label>
+          <template>page/2columns-productreview.phtml</template>
+        </twocol_reviews>
+        <onecol_storelocator translate="label">
+          <label>One Column - Store Locator</label>
+          <template>page/onecol-storelocator.phtml</template>
+        </onecol_storelocator>
+        <gift_guide translate="label">
+          <label>Gift Guide</label>
+          <template>page/gift-guide.phtml</template>
+        </gift_guide>
+        <homepage_two translate="label">
+          <label>Homepage 2.0</label>
+          <template>page/homepage-two.phtml</template>
+        </homepage_two>
+        <onecol_videopage translate="label">
+          <label>One Column - Video Page</label>
+          <template>page/onecol-custom-video-page.phtml</template>
+        </onecol_videopage>
+         <onecol_photopage translate="label">
+          <label>One Column - Photo Stream Page</label>
+          <template>page/onecol-custom-photostream-page.phtml</template>
+        </onecol_photopage>
+        <vintage translate="label">
+          <label>Vintage</label>
+          <template>page/vintage.phtml</template>
+        </vintage>
+        <release translate="label">
+          <label>Release</label>
+          <template>page/release.phtml</template>
+        </release>
+        <manufacturing translate="label">
+          <label>Manufacturing</label>
+          <template>page/manufacturing.phtml</template>
+        </manufacturing>
+        <press translate="label">
+          <label>Press</label>
+          <template>page/press.phtml</template>
+        </press>
+        <press_view translate="label">
+          <label>Press View</label>
+          <template>page/press-view.phtml</template>
+        </press_view>
+        <affiliate_banners translate="label">
+          <label>Affiliate Banners</label>
+          <template>page/affiliate-banners.phtml</template>
+        </affiliate_banners>
+        <customer_care translate="label">
+          <label>Customer Care</label>
+          <template>page/customer-care.phtml</template>
+        </customer_care>
+        <customer_care_content translate="label">
+          <label>Customer Care Content</label>
+          <template>page/customer-care-content.phtml</template>
+        </customer_care_content>
+        <new_mobile_home translate="label">
+          <label>New Mobile Home</label>
+          <template>page/new-mobile-home-build.phtml</template>
+        </new_mobile_home>
+        <!-- add more layouts here -->
+      </layouts>
+    </page>
+  </global>
+</config>

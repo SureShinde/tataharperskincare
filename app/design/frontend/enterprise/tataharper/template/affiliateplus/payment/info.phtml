@@ -1,0 +1,16 @@
+<?php
+/**
+ * Payment Method Info template
+ */
+?>
+<?php $paymentMethod = $this->getPaymentMethod() ?>
+<?php if ($paymentMethod && $paymentMethod->getDescription()): ?>
+<li class="fields">
+	<div class="field">
+		<label><?php echo $this->__('Withdrawal Description') ?></label>
+		<div class="input-box" style="padding-top:2px;">
+			<?php echo $paymentMethod->getDescription() ?>
+		</div>
+	</div>
+</li>
+<?php endif ?>

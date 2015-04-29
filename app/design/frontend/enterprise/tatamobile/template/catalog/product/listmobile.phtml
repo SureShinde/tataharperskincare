@@ -1,0 +1,339 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <?php echo $this->getLayout()->getBlock('breadcrumbs')->toHtml(); ?>
+<?php echo $this->getToolbarHtml() ?>
+<?php echo $this->getAdditionalHtml() ?>
+<div class="category-products">
+    <?php // List mode ?>
+    <?php if($this->getMode()!='grid'): ?>
+    <?php $_iterator = 0; ?>
+    <ol class="products-list" id="products-list">
+    <?php foreach ($_productCollection as $_product): ?>
+        <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
+            <?php // Product Image ?>
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(166); ?>" width="166" height="166" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <?php // Product description ?>
+            <div class="product-shop">
+                <div class="f-fix">
+                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
+                    <?php if($_product->getRatingSummary()): ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
+                    <?php endif; ?>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                    <div class="desc std">
+                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                    </div>
+                    <?php if($_product->isSaleable()): ?>
+                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+
+                    <?php else: ?>
+                        <?php if ($_product->getIsSalable()): ?>
+                            <p class="availability in-stock"><span><?php echo $this->__('In stock') ?></span></p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                        <ul class="add-to-links">
+                            <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                                <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
+                            <?php endif; ?>
+                            <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
+                                <li><a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
+                            <?php endif; ?>
+                        </ul>
+                </div>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ol>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+
+<?php else: ?>
+
+<?php // Grid Mode -- Used on all "Shop by" pages ?>
+<?php $pageId = Mage::getBlockSingleton('cms/page')->getPage()->getIdentifier(); ?>
+
+<?php $_collectionSize = $_productCollection->count() ?>
+<?php $_columnCount = $this->getColumnCount(); ?>
+<?php $i=0; foreach ($_productCollection as $_product): ?>
+    <?php if ($i++%$_columnCount==0): ?>
+    <?php endif ?>
+            <div class='prod-grid-shopby clearfix default_product_display group'>
+            <?php
+            $cur_product_id = $_product->getId();
+            $cur_product = Mage::getModel('catalog/product')->load($cur_product_id);
+            $classes = $_product->getImageClass();
+            ?>
+            <div class="imgcontain"><a href="<?php echo $_product->getProductUrl() ?>"><img src="<?php echo $this->helper('catalog/image')->init($cur_product, 'image'); ?>" class="<?php echo $classes; ?> firstimg" /></a></div>
+            <h2 class="prodtitle">
+                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                </a>
+            </h2>
+
+            <?php $pageId = Mage::getBlockSingleton('cms/page')->getPage()->getIdentifier(); ?>
+            
+            <!-- <a class="learn-more-click" href="<?php echo $_product->getProductUrl() ?>"> -->
+
+                <?php if ($pageId != "shop-all-skincare-2") { ?>
+
+                <div class="buy-buttons">
+                    <?php 
+                    if ($pageId == "shop-best-sellers" or "shop-online-exclusives") {?>
+                        <div class="price-box"><span class="regular-price">
+                <span class="price">
+                    <?php echo '$' . number_format($_product->getMaxPrice(), 2); ?>
+                </span></span></div>
+                <?php
+
+                        // echo $this->getPriceHtml($_product, true);
+                         if($_product->_data['type_id'] == 'subscription_configurable')
+                         {
+                            $attrs = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+                         }
+                    } ?>
+                <p class="proddesc"><?php echo $_product->getShortDescription(); ?><a href="<?php echo $_product->getProductUrl() ?>" class="learnmorebutt">Learn More</a> </p>
+
+                <?php 
+                $reviewData = Mage::getModel('review/review/summary'); 
+                ?>
+                <?php
+                    $_reviews = Mage::getModel('review/review')->getResourceCollection();  
+                    $_reviews->addEntityFilter('product', $_product->getId())
+                                ->addStatusFilter( Mage_Review_Model_Review::STATUS_APPROVED )  
+                                ->setDateOrder()  
+                                ->addRateVotes(); 
+                    $countReviews = count($_reviews);
+                    $avg = 0; 
+                    $ratings = array(); 
+                    $summaryData = Mage::getModel('review/review_summary')->load($_product->getId());
+                    $starP = $summaryData['rating_summary'];
+                    if (count($_reviews) > 0){
+                    foreach ($_reviews->getItems() as $_review): ?>
+                    <?php foreach( $_review->getRatingVotes() as $_vote ): ?>
+                            <?php $ratings[] = $_vote->getPercent();   ?>
+                        <?php endforeach; ?>
+                    <?php endforeach;   
+                    $avg = array_sum($ratings)/count($ratings);  } 
+                ?> 
+
+                    <div class='avgcustrating'>
+                        <div class="rating-box">  
+                        <div class="rating" style="width: <?php echo $starP ; ?>%;"></div></div>
+                        <a href="<?php echo $_product->getProductUrl() ?>#allreviews"><span>(<?php echo $countReviews; ?> Reviews)</span></a>
+                    </div>
+
+                    
+                <a class="learn-more-click" href="<?php echo $_product->getProductUrl() ?>">
+                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><button type="button" title="<?php echo $this->__('Shop') ?>" class='button btn-cart atc_pos addtocartlistall'><span><span><?php echo $this->__('Shop') ?></span></span></button></a></div></a>
+                <?php //echo "</div>";
+                } ?>
+            <!-- </a> -->
+            <div class="buy-buttons">
+           <!--  <div class="regular-price">
+                <div class="price">
+                    <?php echo '$' . number_format($_product->getMaxPrice()); ?>
+                </div></div> -->
+            <?php 
+            if ($pageId == "shop-all-skincare-2") {
+                // echo $this->getPriceHtml($_product, true);
+                 if($_product->_data['type_id'] == 'subscription_configurable')
+                 {
+                    $attrs = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+                 }
+            } ?>
+            <?php if ($pageId == "shop-all-skincare-2"): ?>
+                <?php $formkey = Mage::getSingleton('core/session')->getFormKey(); ?>
+                <?php $uenc = Mage::helper('core')->urlEncode(Mage::helper('core/url')->getCurrentUrl()); ?>
+                    
+                    <!-- <a href="#" class=""><button type="button" class='button btn-cart atc_pos addtocartlistall learn-more-click' href="<?php //echo $_product->getProductUrl() ?>"><span><span><?php //echo $this->__('Shop Now') ?></span></span></button></a> -->
+
+                     <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><button type="button" title="<?php echo $this->__('Shop Now') ?>" class='button btn-cart atc_pos addtocartlistall'><span><span><?php echo $this->__('Shop Now') ?></span></span></button></a>
+
+                    <button type="button" title="<?php echo  $this->__('Add to Wishlist') ?>" class='btn-wishlist button btn-cart' onclick="location.href=getFullWishLoc('<?php echo Mage::getUrl('wishlist/index/add', array('product'=>$_product->getId(), 'form_key'=>$formkey)) ?>')"><span><span><?php echo $this->__('Add to Wishlist') ?></span></span></button>
+            <?php endif; ?>
+            </div>
+            <?php if (1 == 2) { ?>
+            <div class='quickview-hidden'>
+                    <div class="imageleftpop">
+                    <div class="imgcontain"><a href="<?php echo $_product->getProductUrl() ?>"><img src="<?php echo $this->helper('catalog/image')->init($cur_product, 'image'); ?>" class='<?php echo $classes; ?>' /></a></div>
+                    </div>
+                    <div class="rightcontentpop">
+                    <h2 class="prodtitle">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                        </a>
+                    </h2>
+                    <?php   $product = Mage::getModel('catalog/product')->load('product_id');
+                            $attributeNames = array_keys($product->getData());
+                    ?>
+                    <?php if ($_helper->productAttribute($_product, $_product->getShopBySkintypeShort())) {
+                        echo "<span class='productshort'>" . $_helper->productAttribute($_product, $_product->getShopBySkintypeShort(), 'shop_by_skintype_short') . "<br /></span>";
+                        }
+                    ?>
+ 
+                    <div class="desc std">
+                        <p><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></p>
+                        <a href="<?php echo $_product->getProductUrl() ?>">Learn more</a>
+                    </div>
+                    <?php echo $this->getPriceHtml($_product, true); ?>
+                    <!-- Product attributes -->
+                    <?php 
+
+                         if(strstr($_product->_data['type_id'],'configurable'))
+                         {
+                            $attrs = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+                         }
+                         if ($attrs)
+                         {
+                            echo "<div class='pricebottom'>";
+
+                            $attr_name = $attrs[0]["label"];
+                            $attr_id = $attrs[0]["attribute_id"];
+                            echo "<label for='" . $attr_name . "'>" . "Choose a " . $attr_name . ": </label>";
+                            echo "<select class='custom_attribute_select' name='" . $attr_name . "' attrid='" . $attr_id . "' >";
+                            
+                            foreach ($attrs[0]["values"] as $value)
+                            {
+                                $valindex = $value["value_index"];
+                                $label = $value["label"];
+                                echo "<option value='" . $valindex . "' >" . $label . "</option>";
+                            }
+
+                            echo "</select>";
+                            echo "</div>";
+                            
+                            $attrs=null;
+                         }
+                    ?>
+                    <!-- End of Product Attributes -->
+                    <?php if($_product->isSaleable()): ?>
+                    <?php $formkey = Mage::getSingleton('core/session')->getFormKey(); ?>
+                    <?php $uenc = Mage::helper('core')->urlEncode(Mage::helper('core/url')->getCurrentUrl()); ?>
+                    <div class='pricebottom clearfix'>
+                        <label for="qty">Quantity: </label>
+                        <input type="text" title="qty" class="qty" name="qty" value="1"></input>
+                        <?php 
+                    /*
+                     *  AX 4.27.13 - displays recurring subscription choices from AW_Sarp_Periods
+                    */
+                        if ($periods = $_product->getAwSarpPeriod()) // product has recurring subscriptions activated - display options
+                        {
+                            $periods = explode(",", $periods);
+                            $periodsArray = array();
+
+                            $regprice = number_format($_product->getPrice(),2);
+                            if ($_product->getAwSarpFirstPeriodPrice())
+                            {
+                                $first_period_price = number_format($_product->getAwSarpFirstPeriodPrice(), 2);
+                            }
+                            if ($_product->getAwSarpSubscriptionPrice())
+                            {
+                                $subscription_price = number_format($_product->getAwSarpSubscriptionPrice(), 2);
+                            }
+
+                            foreach ($periods as $key=>$period_id)
+                            {
+                                if ($period_id == "-1") // option to purchase product without a subscription
+                                {
+                                    $periodArray[$period_id]["name"] = "Purchase Once";
+                                    $periodArray[$period_id]["payment_offset"] = 0;
+                                }
+                                else // recurring subscription option
+                                {
+                                    $periodObj = Mage::getModel('sarp/period')->load($period_id);
+
+                                    $periodArray[$period_id]["name"] = $periodObj->name;
+                                    $periodArray[$period_id]["payment_offset"] = $periodObj->payment_offset;
+                                }
+                            }
+
+                            // display select box with recurring options
+                            echo "<p class='replen-pop'>Replenishment Service:</p>";
+                            echo "<select name='aw_sarp_subscription_type' class='qv_recurring'>";
+                            
+                            foreach ($periodArray as $key=>$item) 
+                            {
+                                echo "<option regprice='" . $regprice . "' value='" . $key . "' poffset='" . $item["payment_offset"];
+
+                                if ($first_period_price && (1==5))
+                                {
+                                    echo "' fpp='" . $first_period_price;
+                                }
+                                if ($subscription_price)
+                                {
+                                    echo "' sp='" . $subscription_price;
+                                }
+                                echo "'>" . $item["name"] . "</option>";
+                            }
+
+                            echo "</select>";
+
+                            echo " <span class='autoship-learnmore ourway'>What's this?</span>";
+                            // end of display select box
+                        }
+                        else // product is not recurring - display normal price
+                        {
+                            //echo $this->getPriceHtml($_product, true);
+                        }
+                    
+                    // END RECURRING SUBSCRIPTIONS SECTION
+                    ?>
+                    <div class="buy-buttons-popup">
+                       <button type="button" title="<?php echo $this->__('Add to Cart') ?>" id="add-to-cart" class='button atc_pos btn-cart' onclick="location.href=getFullLoc('<?php echo Mage::getUrl('checkout/cart/add', array('uenc'=>$uenc, 'product'=>$_product->getId(), 'form_key'=>$formkey)) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                       <button type="button" title="<?php echo  $this->__('Add to Wishlist') ?>" class='btn-wishlist button btn-cart' id="add-to-wishlist" onclick="location.href=getFullWishLoc('<?php echo Mage::getUrl('wishlist/index/add', array('product'=>$_product->getId(), 'form_key'=>$formkey)) ?>')"><span><span><?php echo $this->__('Add to Wishlist') ?></span></span></button>
+                   </div>
+                    </div>
+                    <?php endif; ?>
+                    </div>
+            </div>
+            <?php } ?>
+            </div>
+    <?php endforeach ?>
+    <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+<?php endif; ?>
+</div>
+<p style="clear:both">&nbsp;</p>
+<?php $pageTitle = Mage::getSingleton('cms/page')->getIdentifier(); ?>
+<?php if ($pageTitle=='shop-all-skincare-2'):?>
+</div>
+<?php endif; ?>
+<?php endif; ?>
